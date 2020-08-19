@@ -27,6 +27,8 @@ describe('with object props', () => {
     ddd: string[]
     eee: () => { a: string }
     fff: (a: number, b: string) => { a: boolean }
+    fnWithDefault: (a: number) => number
+    fnWithoutDefault?: (a: number) => number
     hhh: boolean
     ggg: 'foo' | 'bar'
     validated?: string
@@ -80,6 +82,15 @@ describe('with object props', () => {
         type: Function as PropType<(a: number, b: string) => { a: boolean }>,
         required: true
       },
+      // with default
+      fnWithDefault: {
+        type: Function as PropType<(a: number) => number>,
+        default: (a: number) => a * 2
+      },
+      // without default
+      fnWithoutDefault: {
+        type: Function as PropType<(a: number) => number>
+      },
       hhh: {
         type: Boolean,
         required: true
@@ -113,6 +124,8 @@ describe('with object props', () => {
       expectType<ExpectedProps['hhh']>(props.hhh)
       expectType<ExpectedProps['ggg']>(props.ggg)
       expectType<ExpectedProps['validated']>(props.validated)
+      expectType<ExpectedProps['fnWithDefault']>(props.fnWithDefault)
+      expectType<ExpectedProps['fnWithoutDefault']>(props.fnWithoutDefault)
 
       // @ts-expect-error props should be readonly
       expectError((props.a = 1))
