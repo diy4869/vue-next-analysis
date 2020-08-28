@@ -370,6 +370,109 @@ describe('SFC compile <script setup>', () => {
     })
   })
 
+  describe('reactive let bindings', () => {
+    test('convert let values', () => {
+      const { content } = compile(`<script setup>
+      export let a = 1
+      let b = {
+        count: 0
+      }
+      let c = () => {}
+      let d
+      </script>`)
+      expect(content).toMatch(`import { ref as __ref__ } from 'vue'`)
+      expect(content).not.toMatch(`export let a`)
+      expect(content).toMatch(`let a = __ref__(1)`)
+      expect(content).toMatch(`
+      let b = __ref__({
+        count: 0
+      })
+      `)
+      expect(content).toMatch(`let c = __ref__(() => {})`)
+      expect(content).toMatch(`let d = __ref__()`)
+      assertCode(content)
+    })
+
+    test('multi let declarations', () => {
+      const { content } = compile(`<script setup>
+      export let a = 1, b = 2, c = {
+        count: 0
+      }
+      </script>`)
+      expect(content).toMatch(`
+      let a = __ref__(1), b = __ref__(2), c = __ref__({
+        count: 0
+      })
+      `)
+      assertCode(content)
+    })
+
+    test('should not convert const values', () => {
+      const { content } = compile(`<script setup>
+      export const a = 1
+      const b = 2
+      </script>`)
+      expect(content).toMatch(`const a = 1`)
+      expect(content).toMatch(`b = 2`)
+    })
+
+    test('accessing let binding', () => {
+      const { content } = compile(`<script setup>
+      let a = 1
+      console.log(a)
+      function get() {
+        return a + 1
+      }
+      </script>`)
+      expect(content).toMatch(`console.log(a.value)`)
+      expect(content).toMatch(`return a.value + 1`)
+      assertCode(content)
+    })
+
+    test('cases that should not append .value', () => {
+      const { content } = compile(`<script setup>
+      let a = 1
+      console.log(b.a)
+      function get(a) {
+        return a + 1
+      }
+      </script>`)
+      expect(content).not.toMatch(`a.value`)
+    })
+
+    test('mutating let binding', () => {
+      const { content } = compile(`<script setup>
+      let a = 1
+      let b = { count: 0 }
+      function inc() {
+        a++
+        a = a + 1
+        b.count++
+        b.count = b.count + 1
+      }
+      </script>`)
+      expect(content).toMatch(`a.value++`)
+      expect(content).toMatch(`a.value = a.value + 1`)
+      expect(content).toMatch(`b.value.count++`)
+      expect(content).toMatch(`b.value.count = b.value.count + 1`)
+      assertCode(content)
+    })
+
+    test('using let binding in property shorthand', () => {
+      const { content } = compile(`<script setup>
+      let a = 1
+      const b = { a }
+      function test() {
+        const { a } = b
+      }
+      </script>`)
+      expect(content).toMatch(`const b = { a: a.value }`)
+      // should not convert destructure
+      expect(content).toMatch(`const { a } = b`)
+      assertCode(content)
+    })
+  })
+
   describe('errors', () => {
     test('<script> and <script setup> must have same lang', () => {
       expect(() =>

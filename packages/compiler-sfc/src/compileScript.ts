@@ -31,6 +31,7 @@ export interface SFCScriptCompileOptions {
    * https://babeljs.io/docs/en/babel-parser#plugins
    */
   babelParserPlugins?: ParserPlugin[]
+  reactiveLet?: boolean
 }
 
 let hasWarned = false
@@ -96,10 +97,13 @@ export function compileScript(
   }
 
   const defaultTempVar = `__default__`
+  const helperImports: Set<string> = new Set()
   const bindings: BindingMetadata = {}
-  const imports: Record<string, string> = {}
-  const setupScopeVars: Record<string, boolean> = {}
-  const setupExports: Record<string, boolean> = {}
+  const imports: Record<string, string> = Object.create(null)
+  const setupScopeVars: Record<string, boolean> = Object.create(null)
+  const setupExports: Record<string, boolean> = Object.create(null)
+  const letBindings: Record<string, boolean> = Object.create(null)
+  const reactiveLet = options.reactiveLet !== false
   let exportAllIndex = 0
   let defaultExport: Node | undefined
   let needDefaultExportRefCheck = false
@@ -256,6 +260,44 @@ export function compileScript(
     sourceType: 'module'
   }).program.body
 
+  const processLetBinding = (node: Node) => {
+    if (!reactiveLet) {
+      return
+    }
+    // process `export let x` bindings (convert to refs)
+    if (node.type === 'VariableDeclaration' && node.kind === 'let') {
+      node.declarations.forEach(d => {
+        letBindings[(d.id as Identifier).name] = true
+        if (d.init) {
+          if (
+            d.init.type === 'CallExpression' &&
+            d.init.callee.type === 'Identifier'
+          ) {
+            const callee = d.init.callee.name
+            // TODO more strict check by actually tracing user imports?
+            // This doesn't have to be complete since shallowRef() already early
+            // returns if raw value is a ref, just need to cover common cases
+            // to avoid some overhead.
+            if (
+              callee === 'ref' ||
+              callee === 'computed' ||
+              callee === 'shallowRef' ||
+              callee === 'customRef'
+            ) {
+              return
+            }
+          }
+          helperImports.add('ref')
+          s.prependRight(d.init.start! + startOffset, `__ref__(`)
+          s.appendLeft(d.init.end! + startOffset, `)`)
+        } else {
+          helperImports.add('ref')
+          s.appendLeft(d.id.end! + startOffset, ` = __ref__()`)
+        }
+      })
+    }
+  }
+
   for (const node of scriptSetupAst) {
     const start = node.start! + startOffset
     let end = node.end! + startOffset
@@ -267,6 +309,8 @@ export function compileScript(
       }
       end++
     }
+
+    processLetBinding(node)
 
     if (node.type === 'ImportDeclaration') {
       // import declarations are moved to top
@@ -299,6 +343,7 @@ export function compileScript(
         // remove leading `export ` keyword
         s.remove(start, start + 7)
         walkDeclaration(node.declaration, setupExports)
+        processLetBinding(node.declaration)
       }
       if (node.specifiers.length) {
         // named export with specifiers
@@ -486,7 +531,30 @@ export function compileScript(
     }
   }
 
-  // 4. check default export to make sure it doesn't reference setup scope
+  // 4. Do a full walk to rewrite identifiers referencing let exports with ref
+  // value access
+  if (reactiveLet && Object.keys(letBindings).length) {
+    for (const node of scriptSetupAst) {
+      if (node.type !== 'ImportDeclaration') {
+        walkIdentifiers(node, (id, parent) => {
+          if (letBindings[id.name]) {
+            if (isStaticProperty(parent) && parent.shorthand) {
+              // let binding used in a property shorthand
+              // { foo } -> { foo: foo.value }
+              // skip for destructure patterns
+              if (!(parent as any).inPattern) {
+                s.appendLeft(id.end! + startOffset, `: ${id.name}.value`)
+              }
+            } else {
+              s.appendLeft(id.end! + startOffset, '.value')
+            }
+          }
+        })
+      }
+    }
+  }
+
+  // 5. check default export to make sure it doesn't reference setup scope
   // variables
   if (needDefaultExportRefCheck) {
     checkDefaultExport(
@@ -499,7 +567,7 @@ export function compileScript(
     )
   }
 
-  // 5. remove non-script content
+  // 6. remove non-script content
   if (script) {
     if (startOffset < scriptStartOffset!) {
       // <script setup> before <script>
@@ -517,11 +585,11 @@ export function compileScript(
     s.remove(endOffset, source.length)
   }
 
-  // 5. finalize setup argument signature.
+  // 7. finalize setup argument signature.
   let args = ``
   if (isTS) {
     if (slotsType === '__Slots__') {
-      s.prepend(`import { Slots as __Slots__ } from 'vue'\n`)
+      helperImports.add('Slots')
     }
     const ctxType = `{
   emit: ${emitType},
@@ -545,7 +613,7 @@ export function compileScript(
     args = hasExplicitSignature ? (setupValue as string) : ``
   }
 
-  // 6. wrap setup code with function.
+  // 8. wrap setup code with function.
   // export the content of <script setup> as a named export, `setup`.
   // this allows `import { setup } from '*.vue'` for testing purposes.
   s.prependLeft(
@@ -559,7 +627,7 @@ export function compileScript(
   // handle `export * from`. We need to call `toRefs` on the imported module
   // object before merging.
   if (exportAllIndex > 0) {
-    s.prepend(`import { toRefs as __toRefs__ } from 'vue'\n`)
+    helperImports.add(`toRefs`)
     for (let i = 0; i < exportAllIndex; i++) {
       returned += `,\n  __toRefs__(__export_all_${i}__)`
     }
@@ -568,7 +636,7 @@ export function compileScript(
 
   // inject `useCssVars` calls
   if (hasCssVars) {
-    s.prepend(`import { useCssVars as __useCssVars__ } from 'vue'\n`)
+    helperImports.add(`useCssVars`)
     for (const style of styles) {
       const vars = style.attrs.vars
       if (typeof vars === 'string') {
@@ -582,18 +650,18 @@ export function compileScript(
 
   s.appendRight(endOffset, `\nreturn ${returned}\n}\n\n`)
 
-  // 7. finalize default export
+  // 9. finalize default export
   if (isTS) {
     // for TS, make sure the exported type is still valid type with
     // correct props information
-    s.prepend(`import { defineComponent as __define__ } from 'vue'\n`)
+    helperImports.add(`defineComponent`)
     // we have to use object spread for types to be merged properly
     // user's TS setting should compile it down to proper targets
     const def = defaultExport ? `\n  ...${defaultTempVar},` : ``
     const runtimeProps = genRuntimeProps(typeDeclaredProps)
     const runtimeEmits = genRuntimeEmits(typeDeclaredEmits)
     s.append(
-      `export default __define__({${def}${runtimeProps}${runtimeEmits}\n  setup\n})`
+      `export default __defineComponent__({${def}${runtimeProps}${runtimeEmits}\n  setup\n})`
     )
   } else {
     if (defaultExport) {
@@ -605,7 +673,17 @@ export function compileScript(
     }
   }
 
-  // 8. expose bindings for template compiler optimization
+  // 10. finalize Vue helper imports
+  const helpers = [...helperImports]
+  if (helpers.length) {
+    s.prepend(
+      `import { ${helpers
+        .map(i => `${i} as __${i}__`)
+        .join(', ')} } from 'vue'\n`
+    )
+  }
+
+  // 11. expose bindings for template compiler optimization
   if (scriptAst) {
     Object.assign(bindings, analyzeScriptBindings(scriptAst))
   }
@@ -899,27 +977,36 @@ function checkDefaultExport(
   source: string,
   offset: number
 ) {
+  walkIdentifiers(root, id => {
+    if (scopeVars[id.name] || (!imports[id.name] && exports[id.name])) {
+      throw new Error(
+        `\`export default\` in <script setup> cannot reference locally ` +
+          `declared variables because it will be hoisted outside of the ` +
+          `setup() function. If your component options requires initialization ` +
+          `in the module scope, use a separate normal <script> to export ` +
+          `the options instead.\n\n` +
+          generateCodeFrame(source, id.start! + offset, id.end! + offset)
+      )
+    }
+  })
+}
+
+/**
+ * Walk an AST and find identifiers that are variable references.
+ * This is largely the same logic with `transformExpressions` in compiler-core
+ * but with some subtle differences as this needs to handle a wider range of
+ * possible syntax.
+ */
+function walkIdentifiers(
+  root: Node,
+  onIdentifier: (node: Identifier, parent: Node) => void
+) {
   const knownIds: Record<string, number> = Object.create(null)
   ;(walk as any)(root, {
     enter(node: Node & { scopeIds?: Set<string> }, parent: Node) {
       if (node.type === 'Identifier') {
-        if (
-          !knownIds[node.name] &&
-          !isStaticPropertyKey(node, parent) &&
-          (scopeVars[node.name] || (!imports[node.name] && exports[node.name]))
-        ) {
-          throw new Error(
-            `\`export default\` in <script setup> cannot reference locally ` +
-              `declared variables because it will be hoisted outside of the ` +
-              `setup() function. If your component options requires initialization ` +
-              `in the module scope, use a separate normal <script> to export ` +
-              `the options instead.\n\n` +
-              generateCodeFrame(
-                source,
-                node.start! + offset,
-                node.end! + offset
-              )
-          )
+        if (!knownIds[node.name] && isRefIdentifier(node, parent)) {
+          onIdentifier(node, parent)
         }
       } else if (isFunction(node)) {
         // walk function expressions and add its arguments to known identifiers
@@ -953,6 +1040,12 @@ function checkDefaultExport(
             }
           })
         )
+      } else if (
+        node.type === 'ObjectProperty' &&
+        parent.type === 'ObjectPattern'
+      ) {
+        // mark property in destructure pattern
+        ;(node as any).inPattern = true
       }
     },
     leave(node: Node & { scopeIds?: Set<string> }) {
@@ -968,14 +1061,63 @@ function checkDefaultExport(
   })
 }
 
-function isStaticPropertyKey(node: Node, parent: Node): boolean {
-  return (
-    parent &&
-    (parent.type === 'ObjectProperty' || parent.type === 'ObjectMethod') &&
-    !parent.computed &&
-    parent.key === node
-  )
+function isRefIdentifier(id: Identifier, parent: Node) {
+  // declaration id
+  if (
+    (parent.type === 'VariableDeclarator' ||
+      parent.type === 'ClassDeclaration') &&
+    parent.id === id
+  ) {
+    return false
+  }
+
+  if (isFunction(parent)) {
+    // function decalration/expression id
+    if ((parent as any).id === id) {
+      return false
+    }
+    // params list
+    if (parent.params.includes(id)) {
+      return false
+    }
+  }
+
+  // property key
+  // this also covers object destructure pattern
+  if (isStaticPropertyKey(id, parent)) {
+    return false
+  }
+
+  // array destructure pattern
+  if (parent.type === 'ArrayPattern') {
+    return false
+  }
+
+  // member expression property
+  if (
+    (parent.type === 'MemberExpression' ||
+      parent.type === 'OptionalMemberExpression') &&
+    parent.property === id &&
+    !parent.computed
+  ) {
+    return false
+  }
+
+  // is a special keyword but parsed as identifier
+  if (id.name === 'arguments') {
+    return false
+  }
+
+  return true
 }
+
+const isStaticProperty = (node: Node): node is ObjectProperty =>
+  node &&
+  (node.type === 'ObjectProperty' || node.type === 'ObjectMethod') &&
+  !node.computed
+
+const isStaticPropertyKey = (node: Node, parent: Node) =>
+  isStaticProperty(parent) && parent.key === node
 
 function isFunction(node: Node): node is FunctionNode {
   return /Function(?:Expression|Declaration)$|Method$/.test(node.type)

@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SFC compile <script setup> <script setup lang="ts"> extract emits 1`] = `
-"import { defineComponent as __define__ } from 'vue'
-import { Slots as __Slots__ } from 'vue'
+"import { Slots as __Slots__, defineComponent as __defineComponent__ } from 'vue'
 declare function __emit__(e: 'foo' | 'bar'): void
       declare function __emit__(e: 'baz', id: number): void
       
@@ -16,15 +15,14 @@ export function setup(_: {}, { emit: myEmit }: {
 return {  }
 }
 
-export default __define__({
+export default __defineComponent__({
   emits: [\\"foo\\", \\"bar\\", \\"baz\\"] as unknown as undefined,
   setup
 })"
 `;
 
 exports[`SFC compile <script setup> <script setup lang="ts"> extract props 1`] = `
-"import { defineComponent as __define__ } from 'vue'
-import { Slots as __Slots__ } from 'vue'
+"import { Slots as __Slots__, defineComponent as __defineComponent__ } from 'vue'
 interface Test {}
 
       type Alias = number[]
@@ -59,7 +57,7 @@ export function setup(myProps: {
 return {  }
 }
 
-export default __define__({
+export default __defineComponent__({
   props: {
     string: { type: String, required: true },
     number: { type: Number, required: true },
@@ -88,8 +86,7 @@ export default __define__({
 `;
 
 exports[`SFC compile <script setup> <script setup lang="ts"> hoist type declarations 1`] = `
-"import { defineComponent as __define__ } from 'vue'
-import { Slots as __Slots__ } from 'vue'
+"import { Slots as __Slots__, defineComponent as __defineComponent__ } from 'vue'
 export interface Foo {}
         type Bar = {}
         
@@ -100,7 +97,7 @@ export function setup() {
 return { a }
 }
 
-export default __define__({
+export default __defineComponent__({
   setup
 })"
 `;
@@ -372,6 +369,93 @@ exports[`SFC compile <script setup> import dedupe between <script> and <script s
 export function setup() {
 
       x()
+      
+return {  }
+}
+
+export default { setup }"
+`;
+
+exports[`SFC compile <script setup> reactive let bindings accessing let binding 1`] = `
+"import { ref as __ref__ } from 'vue'
+
+export function setup() {
+
+      let a = __ref__(1)
+      console.log(a.value)
+      function get() {
+        return a.value + 1
+      }
+      
+return {  }
+}
+
+export default { setup }"
+`;
+
+exports[`SFC compile <script setup> reactive let bindings convert let values 1`] = `
+"import { ref as __ref__ } from 'vue'
+
+export function setup() {
+
+      let a = __ref__(1)
+      let b = __ref__({
+        count: 0
+      })
+      let c = __ref__(() => {})
+      let d = __ref__()
+      
+return { a }
+}
+
+export default { setup }"
+`;
+
+exports[`SFC compile <script setup> reactive let bindings multi let declarations 1`] = `
+"import { ref as __ref__ } from 'vue'
+
+export function setup() {
+
+      let a = __ref__(1), b = __ref__(2), c = __ref__({
+        count: 0
+      })
+      
+return { a, b, c }
+}
+
+export default { setup }"
+`;
+
+exports[`SFC compile <script setup> reactive let bindings mutating let binding 1`] = `
+"import { ref as __ref__ } from 'vue'
+
+export function setup() {
+
+      let a = __ref__(1)
+      let b = __ref__({ count: 0 })
+      function inc() {
+        a.value++
+        a.value = a.value + 1
+        b.value.count++
+        b.value.count = b.value.count + 1
+      }
+      
+return {  }
+}
+
+export default { setup }"
+`;
+
+exports[`SFC compile <script setup> reactive let bindings using let binding in property shorthand 1`] = `
+"import { ref as __ref__ } from 'vue'
+
+export function setup() {
+
+      let a = __ref__(1)
+      const b = { a: a.value }
+      function test() {
+        const { a } = b
+      }
       
 return {  }
 }
