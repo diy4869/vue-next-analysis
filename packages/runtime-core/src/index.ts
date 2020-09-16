@@ -40,6 +40,7 @@ export {
   onErrorCaptured
 } from './apiLifecycle'
 export { provide, inject } from './apiInject'
+export { expose } from './apiExpose'
 export { nextTick } from './scheduler'
 export { defineComponent } from './apiDefineComponent'
 export { defineAsyncComponent } from './apiAsyncComponent'

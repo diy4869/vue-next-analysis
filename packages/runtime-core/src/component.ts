@@ -270,6 +270,9 @@ export interface ComponentInternalInstance {
   // main proxy that serves as the public instance (`this`)
   proxy: ComponentPublicInstance | null
 
+  // exposed properties via expose()
+  exposed: Record<string, any> | null
+
   /**
    * alternative proxy used only for runtime-compiled render functions using
    * `with` block
@@ -416,6 +419,7 @@ export function createComponentInstance(
     render: null,
     proxy: null,
     withProxy: null,
+    exposed: null,
     effects: null,
     provides: parent ? parent.provides : Object.create(appContext.provides),
     accessCache: null!,
