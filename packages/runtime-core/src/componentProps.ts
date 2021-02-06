@@ -97,7 +97,9 @@ type InferPropType<T> = T extends null
       ? Record<string, any>
       : T extends BooleanConstructor | { type: BooleanConstructor }
         ? boolean
-        : T extends Prop<infer V, infer D> ? (unknown extends V ? D : V) : T
+        : T extends DateConstructor | { type: DateConstructor }
+          ? Date
+          : T extends Prop<infer V, infer D> ? (unknown extends V ? D : V) : T
 
 export type ExtractPropTypes<O> = O extends object
   ? { [K in RequiredKeys<O>]: InferPropType<O[K]> } &
@@ -510,7 +512,7 @@ function validateProp(
 }
 
 const isSimpleType = /*#__PURE__*/ makeMap(
-  'String,Number,Boolean,Function,Symbol'
+  'String,Number,Boolean,Function,Symbol,BigInt'
 )
 
 type AssertionResult = {
