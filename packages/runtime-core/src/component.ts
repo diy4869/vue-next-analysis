@@ -148,7 +148,7 @@ export type Component<
 
 export { ComponentOptions }
 
-type LifecycleHook = Function[] | null
+type LifecycleHook<TFn = Function> = TFn[] | null
 
 export const enum LifecycleHooks {
   BEFORE_CREATE = 'bc',
@@ -163,7 +163,8 @@ export const enum LifecycleHooks {
   ACTIVATED = 'a',
   RENDER_TRIGGERED = 'rtg',
   RENDER_TRACKED = 'rtc',
-  ERROR_CAPTURED = 'ec'
+  ERROR_CAPTURED = 'ec',
+  SERVER_PREFETCH = 'sp'
 }
 
 export interface SetupContext<E = EmitsOptions> {
@@ -395,6 +396,10 @@ export interface ComponentInternalInstance {
    * @internal
    */
   [LifecycleHooks.ERROR_CAPTURED]: LifecycleHook
+  /**
+   * @internal
+   */
+  [LifecycleHooks.SERVER_PREFETCH]: LifecycleHook<() => Promise<unknown>>
 }
 
 const emptyAppContext = createAppContext()
@@ -475,7 +480,8 @@ export function createComponentInstance(
     a: null,
     rtg: null,
     rtc: null,
-    ec: null
+    ec: null,
+    sp: null
   }
   if (__DEV__) {
     instance.ctx = createRenderContext(instance)

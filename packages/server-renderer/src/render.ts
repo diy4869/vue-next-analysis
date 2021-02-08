@@ -2,7 +2,6 @@ import {
   Comment,
   Component,
   ComponentInternalInstance,
-  ComponentOptions,
   DirectiveBinding,
   Fragment,
   mergeProps,
@@ -85,17 +84,19 @@ export function renderComponentVNode(
   const instance = createComponentInstance(vnode, parentComponent, null)
   const res = setupComponent(instance, true /* isSSR */)
   const hasAsyncSetup = isPromise(res)
-  const prefetch = (vnode.type as ComponentOptions).serverPrefetch
-  if (hasAsyncSetup || prefetch) {
-    let p = hasAsyncSetup
+  const prefetches = instance.sp
+  if (hasAsyncSetup || prefetches) {
+    let p: Promise<unknown> = hasAsyncSetup
       ? (res as Promise<void>).catch(err => {
           warn(`[@vue/server-renderer]: Uncaught error in async setup:\n`, err)
         })
       : Promise.resolve()
-    if (prefetch) {
-      p = p.then(() => prefetch.call(instance.proxy)).catch(err => {
-        warn(`[@vue/server-renderer]: Uncaught error in serverPrefetch:\n`, err)
-      })
+    if (prefetches) {
+      p = p
+        .then(() =>
+          Promise.all(prefetches.map(prefetch => prefetch.call(instance.proxy)))
+        )
+        .catch(() => {})
     }
     return p.then(() => renderComponentSubTree(instance))
   } else {
