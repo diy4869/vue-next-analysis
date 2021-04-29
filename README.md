@@ -2,6 +2,10 @@
 
 This is the repository for Vue 3.0.
 
+## 源码解析
+
+该仓库[ vue-next ](https://github.com/vuejs/vue-next)的版本为3.0.11，佛系更新源码解析，会给代码加上注释，文档不一定会写（大概）
+
 ## Quickstart
 
 - Via CDN: `<script src="https://unpkg.com/vue@next"></script>`
@@ -9,7 +13,11 @@ This is the repository for Vue 3.0.
 - Scaffold via [Vite](https://github.com/vitejs/vite):
 
   ```bash
-  npm init vite-app hello-vue3 # OR yarn create vite-app hello-vue3
+  # npm
+  npm init @vitejs/app
+  # yarn
+  yarn create @vitejs/app
+  # select vue template
   ```
 
 - Scaffold via [vue-cli](https://cli.vuejs.org/):
@@ -24,7 +32,7 @@ This is the repository for Vue 3.0.
 
 Please consult the [Migration Guide](https://v3.vuejs.org/guide/migration/introduction.html).
 
-- Note: IE11 support is still pending.
+Also note: Vue 3 does not support IE11 ([RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0038-vue3-ie11-support.md) | [Discussion](https://github.com/vuejs/rfcs/discussions/296)).
 
 ## Supporting Libraries
 
@@ -61,18 +69,27 @@ We are working on a new version of the Devtools with a new UI and refactored int
 
 ### IDE Support
 
-It is recommended to use [VSCode](https://code.visualstudio.com/) with our official extension [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur), which provides comprehensive IDE support for Vue 3.
+It is recommended to use [VSCode](https://code.visualstudio.com/). There are currently two viable extensions for Single-File Components (SFCs) support:
+
+- [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) (recommended if you are used to Vetur features)
+- [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (recommended if using TypeScript with SFCs, or `<script setup>` syntax)
+
+### TypeScript Support
+
+- All Vue 3 packages ship with types.
+- [vue-tsc](https://github.com/johnsoncodehk/vue-tsc) perform TypeScript type checks / diagnostics on Vue SFCs via the command line.
+- [vue-dts-gen](https://github.com/egoist/vue-dts-gen): generate TypeScript definitions from Vue SFCs.
 
 ### Other Projects
 
-| Project               | NPM                           | Repo                 |
-| --------------------- | ----------------------------- | -------------------- |
-| @vue/babel-plugin-jsx | [![rc][jsx-badge]][jsx-npm]   | [[GitHub][jsx-code]] |
+| Project               | NPM                             | Repo                 |
+| --------------------- | ------------------------------- | -------------------- |
+| @vue/babel-plugin-jsx | [![rc][jsx-badge]][jsx-npm]     | [[GitHub][jsx-code]] |
 | eslint-plugin-vue     | [![stable][epv-badge]][epv-npm] | [[GitHub][epv-code]] |
-| @vue/test-utils       | [![beta][vtu-badge]][vtu-npm] | [[GitHub][vtu-code]] |
-| vue-class-component   | [![beta][vcc-badge]][vcc-npm] | [[GitHub][vcc-code]] |
-| vue-loader            | [![beta][vl-badge]][vl-npm]   | [[GitHub][vl-code]]  |
-| rollup-plugin-vue     | [![beta][rpv-badge]][rpv-npm] | [[GitHub][rpv-code]] |
+| @vue/test-utils       | [![beta][vtu-badge]][vtu-npm]   | [[GitHub][vtu-code]] |
+| vue-class-component   | [![beta][vcc-badge]][vcc-npm]   | [[GitHub][vcc-code]] |
+| vue-loader            | [![beta][vl-badge]][vl-npm]     | [[GitHub][vl-code]]  |
+| rollup-plugin-vue     | [![beta][rpv-badge]][rpv-npm]   | [[GitHub][rpv-code]] |
 
 [jsx-badge]: https://img.shields.io/npm/v/@vue/babel-plugin-jsx.svg
 [jsx-npm]: https://www.npmjs.com/package/@vue/babel-plugin-jsx

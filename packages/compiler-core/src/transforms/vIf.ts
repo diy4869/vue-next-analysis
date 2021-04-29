@@ -31,7 +31,8 @@ import {
   CREATE_BLOCK,
   FRAGMENT,
   CREATE_COMMENT,
-  OPEN_BLOCK
+  OPEN_BLOCK,
+  CREATE_VNODE
 } from '../runtimeHelpers'
 import { injectProp, findDir, findProp } from '../utils'
 import { PatchFlags, PatchFlagNames } from '@vue/shared'
@@ -109,7 +110,7 @@ export function processIf(
   }
 
   if (dir.name === 'if') {
-    const branch = createIfBranch(node, dir)
+    const branch = createIfBranch(node, dir, context)
     const ifNode: IfNode = {
       type: NodeTypes.IF,
       loc: node.loc,
@@ -144,7 +145,7 @@ export function processIf(
       if (sibling && sibling.type === NodeTypes.IF) {
         // move the node to the if node's branches
         context.removeNode()
-        const branch = createIfBranch(node, dir)
+        const branch = createIfBranch(node, dir, context)
         if (__DEV__ && comments.length) {
           branch.children = [...comments, ...branch.children]
         }
@@ -186,7 +187,16 @@ export function processIf(
   }
 }
 
-function createIfBranch(node: ElementNode, dir: DirectiveNode): IfBranchNode {
+function createIfBranch(
+  node: ElementNode,
+  dir: DirectiveNode,
+  context: TransformContext
+): IfBranchNode {
+  const userKey = findProp(node, `key`)
+  if (__DEV__ && userKey) {
+    context.onWarn(createCompilerError(ErrorCodes.X_V_IF_KEY, userKey.loc))
+  }
+
   return {
     type: NodeTypes.IF_BRANCH,
     loc: node.loc,
@@ -195,7 +205,7 @@ function createIfBranch(node: ElementNode, dir: DirectiveNode): IfBranchNode {
       node.tagType === ElementTypes.TEMPLATE && !findDir(node, 'for')
         ? node.children
         : [node],
-    userKey: findProp(node, `key`)
+    userKey
   }
 }
 
@@ -225,7 +235,7 @@ function createChildrenCodegenNode(
   keyIndex: number,
   context: TransformContext
 ): BlockCodegenNode {
-  const { helper } = context
+  const { helper, removeHelper } = context
   const keyProperty = createObjectProperty(
     `key`,
     createSimpleExpression(
@@ -246,15 +256,24 @@ function createChildrenCodegenNode(
       injectProp(vnodeCall, keyProperty, context)
       return vnodeCall
     } else {
+      let patchFlag = PatchFlags.STABLE_FRAGMENT
+      let patchFlagText = PatchFlagNames[PatchFlags.STABLE_FRAGMENT]
+      // check if the fragment actually contains a single valid child with
+      // the rest being comments
+      if (
+        __DEV__ &&
+        children.filter(c => c.type !== NodeTypes.COMMENT).length === 1
+      ) {
+        patchFlag |= PatchFlags.DEV_ROOT_FRAGMENT
+        patchFlagText += `, ${PatchFlagNames[PatchFlags.DEV_ROOT_FRAGMENT]}`
+      }
+
       return createVNodeCall(
         context,
         helper(FRAGMENT),
         createObjectExpression([keyProperty]),
         children,
-        PatchFlags.STABLE_FRAGMENT +
-          (__DEV__
-            ? ` /* ${PatchFlagNames[PatchFlags.STABLE_FRAGMENT]} */`
-            : ``),
+        patchFlag + (__DEV__ ? ` /* ${patchFlagText} */` : ``),
         undefined,
         undefined,
         true,
@@ -266,7 +285,8 @@ function createChildrenCodegenNode(
     const vnodeCall = (firstChild as ElementNode)
       .codegenNode as BlockCodegenNode
     // Change createVNode to createBlock.
-    if (vnodeCall.type === NodeTypes.VNODE_CALL) {
+    if (vnodeCall.type === NodeTypes.VNODE_CALL && !vnodeCall.isBlock) {
+      removeHelper(CREATE_VNODE)
       vnodeCall.isBlock = true
       helper(OPEN_BLOCK)
       helper(CREATE_BLOCK)

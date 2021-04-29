@@ -12,7 +12,8 @@ module.exports = {
     __NODE_JS__: true,
     __FEATURE_OPTIONS_API__: true,
     __FEATURE_SUSPENSE__: true,
-    __FEATURE_PROD_DEVTOOLS__: false
+    __FEATURE_PROD_DEVTOOLS__: false,
+    __COMPAT__: true
   },
   coverageDirectory: 'coverage',
   coverageReporters: ['html', 'lcov', 'text'],
@@ -20,6 +21,7 @@ module.exports = {
     'packages/*/src/**/*.ts',
     '!packages/runtime-test/src/utils/**',
     '!packages/template-explorer/**',
+    '!packages/sfc-playground/**',
     '!packages/size-check/**',
     '!packages/runtime-core/src/profiling.ts',
     '!packages/runtime-core/src/customFormatter.ts',
@@ -33,6 +35,7 @@ module.exports = {
   watchPathIgnorePatterns: ['/node_modules/', '/dist/', '/.git/'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
   moduleNameMapper: {
+    '@vue/compat': '<rootDir>/packages/vue-compat/src',
     '^@vue/(.*?)$': '<rootDir>/packages/$1/src',
     vue: '<rootDir>/packages/vue/src'
   },
