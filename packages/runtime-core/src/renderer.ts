@@ -435,15 +435,21 @@ function baseCreateRenderer(
   options: RendererOptions,
   createHydrationFns?: typeof createHydrationFunctions
 ): any {
+  console.log('baseCreateRenderer')
+  console.log(options, createHydrationFns)
   // compile-time feature flags check
+
   if (__ESM_BUNDLER__ && !__TEST__) {
     initFeatureFlags()
   }
 
   if (__DEV__ || __FEATURE_PROD_DEVTOOLS__) {
+    // 获取当前this
     const target = getGlobalThis()
     target.__VUE__ = true
+    // 设置vue Devtools钩子
     setDevtoolsHook(target.__VUE_DEVTOOLS_GLOBAL_HOOK__)
+    console.log(target.__VUE_DEVTOOLS_GLOBAL_HOOK__)
   }
 
   const {
@@ -2261,6 +2267,8 @@ function baseCreateRenderer(
   }
 
   const render: RootRenderFunction = (vnode, container, isSVG) => {
+    console.log('renderFn', vnode, container)
+
     if (vnode == null) {
       if (container._vnode) {
         unmount(container._vnode, null, null, true)
@@ -2293,7 +2301,9 @@ function baseCreateRenderer(
       Element
     >)
   }
+  console.log('createHydrationFns', createHydrationFns)
 
+  // console.log('------', render, hydrate)
   return {
     render,
     hydrate,

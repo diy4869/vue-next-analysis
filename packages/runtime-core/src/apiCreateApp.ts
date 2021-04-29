@@ -99,10 +99,14 @@ export function createAppContext(): AppContext {
   return {
     app: null as any,
     config: {
+      // 是否原生标签
       isNativeTag: NO,
       performance: false,
+      // 全局属性
       globalProperties: {},
+      // 合并策略
       optionMergeStrategies: {},
+      // 是否自定义标签： false
       isCustomElement: NO,
       errorHandler: undefined,
       warnHandler: undefined
@@ -130,10 +134,13 @@ export function createAppAPI<HostElement>(
       __DEV__ && warn(`root props passed to app.mount() must be an object.`)
       rootProps = null
     }
-
+    console.log('createApp', rootComponent, rootProps)
+    // 创建AppContext
     const context = createAppContext()
+    // 已安装的插件
     const installedPlugins = new Set()
 
+    // 是否渲染
     let isMounted = false
 
     const app: App = (context.app = {

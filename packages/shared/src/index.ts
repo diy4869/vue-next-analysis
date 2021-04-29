@@ -170,12 +170,16 @@ export const getGlobalThis = (): any => {
     _globalThis ||
     (_globalThis =
       typeof globalThis !== 'undefined'
-        ? globalThis
-        : typeof self !== 'undefined'
+        ? // globalThis es2020支持
+          globalThis
+        : // worker环境
+          typeof self !== 'undefined'
           ? self
-          : typeof window !== 'undefined'
+          : // 浏览器环境
+            typeof window !== 'undefined'
             ? window
-            : typeof global !== 'undefined'
+            : // node环境
+              typeof global !== 'undefined'
               ? global
               : {})
   )

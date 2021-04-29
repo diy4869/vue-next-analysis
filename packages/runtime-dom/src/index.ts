@@ -31,6 +31,10 @@ let renderer: Renderer<Element> | HydrationRenderer
 let enabledHydration = false
 
 function ensureRenderer() {
+  console.log(
+    'render',
+    renderer || (renderer = createRenderer<Node, Element>(rendererOptions))
+  )
   return renderer || (renderer = createRenderer<Node, Element>(rendererOptions))
 }
 
@@ -52,21 +56,30 @@ export const hydrate = ((...args) => {
 }) as RootHydrateFunction
 
 export const createApp = ((...args) => {
+  console.log('args', args)
   const app = ensureRenderer().createApp(...args)
 
   if (__DEV__) {
+    // 检查是否原生标签
     injectNativeTagCheck(app)
+    // 检查是否自定义标签
     injectCustomElementCheck(app)
+
+    console.log(app)
   }
 
   const { mount } = app
   app.mount = (containerOrSelector: Element | ShadowRoot | string): any => {
+    // 获取mount所挂载的节点
     const container = normalizeContainer(containerOrSelector)
     if (!container) return
+
     const component = app._component
+    //
     if (!isFunction(component) && !component.render && !component.template) {
       component.template = container.innerHTML
     }
+    return
     // clear content before mounting
     container.innerHTML = ''
     const proxy = mount(container, false, container instanceof SVGElement)
@@ -132,22 +145,27 @@ function normalizeContainer(
 ): Element | null {
   if (isString(container)) {
     const res = document.querySelector(container)
+
     if (__DEV__ && !res) {
+      // 确保el元素存在
       warn(
         `Failed to mount app: mount target selector "${container}" returned null.`
       )
     }
     return res
   }
+
   if (
     __DEV__ &&
     container instanceof window.ShadowRoot &&
     container.mode === 'closed'
   ) {
+    // 如果是ShadowRoot并且mode为mode可能会导致未知的bug
     warn(
       `mounting on a ShadowRoot with \`{mode: "closed"}\` may lead to unpredictable bugs`
     )
   }
+
   return container as any
 }
 

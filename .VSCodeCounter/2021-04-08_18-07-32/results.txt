@@ -1,0 +1,534 @@
+Date : 2021-04-08 18:07:32
+Directory : d:\code\source code\vue-next
+Total : 432 files,  77307 codes, 28867 comments, 8815 blanks, all 114989 lines
+
+Languages
++------------------+------------+------------+------------+------------+------------+
+| language         | files      | code       | comment    | blank      | total      |
++------------------+------------+------------+------------+------------+------------+
+| TypeScript       |        332 |     69,086 |      4,848 |      7,395 |     81,329 |
+| JSON             |         32 |      2,963 |     23,655 |         37 |     26,655 |
+| HTML             |         18 |      1,757 |         26 |        185 |      1,968 |
+| Markdown         |         18 |      1,599 |          0 |        934 |      2,533 |
+| TypeScript React |          4 |        867 |        204 |        113 |      1,184 |
+| JavaScript       |         21 |        852 |        134 |        119 |      1,105 |
+| YAML             |          5 |        101 |          0 |         15 |        116 |
+| CSS              |          1 |         79 |          0 |         16 |         95 |
+| SCSS             |          1 |          3 |          0 |          1 |          4 |
++------------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                    | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                       |        432 |     77,307 |     28,867 |      8,815 |    114,989 |
+| .circleci                                                                                               |          1 |         45 |          0 |          8 |         53 |
+| .github                                                                                                 |          6 |        278 |          0 |        143 |        421 |
+| .github\ISSUE_TEMPLATE                                                                                  |          1 |         11 |          0 |          1 |         12 |
+| .github\workflows                                                                                       |          2 |         42 |          0 |          5 |         47 |
+| example                                                                                                 |          1 |         33 |          0 |          2 |         35 |
+| packages                                                                                                |        391 |     73,055 |      4,707 |      7,581 |     85,343 |
+| packages\compiler-core                                                                                  |         48 |     16,349 |        850 |      1,285 |     18,484 |
+| packages\compiler-core\__tests__                                                                        |         20 |     10,165 |        122 |        721 |     11,008 |
+| packages\compiler-core\__tests__\transforms                                                             |         13 |      6,116 |         77 |        405 |      6,598 |
+| packages\compiler-core\src                                                                              |         24 |      6,130 |        728 |        559 |      7,417 |
+| packages\compiler-core\src\transforms                                                                   |         13 |      2,630 |        326 |        213 |      3,169 |
+| packages\compiler-dom                                                                                   |         31 |      4,762 |        128 |        261 |      5,151 |
+| packages\compiler-dom\__tests__                                                                         |         11 |      1,494 |         23 |        161 |      1,678 |
+| packages\compiler-dom\__tests__\transforms                                                              |          9 |      1,064 |         18 |        100 |      1,182 |
+| packages\compiler-dom\src                                                                               |         16 |      3,212 |        105 |         96 |      3,413 |
+| packages\compiler-dom\src\transforms                                                                    |          9 |        633 |         92 |         57 |        782 |
+| packages\compiler-sfc                                                                                   |         30 |      5,292 |        415 |        489 |      6,196 |
+| packages\compiler-sfc\__tests__                                                                         |         11 |      2,112 |        116 |        206 |      2,434 |
+| packages\compiler-sfc\__tests__\fixture                                                                 |          1 |          3 |          0 |          1 |          4 |
+| packages\compiler-sfc\src                                                                               |         15 |      3,050 |        299 |        252 |      3,601 |
+| packages\compiler-ssr                                                                                   |         33 |      3,187 |        176 |        356 |      3,719 |
+| packages\compiler-ssr\__tests__                                                                         |         13 |      1,621 |         13 |        224 |      1,858 |
+| packages\compiler-ssr\src                                                                               |         16 |      1,518 |        163 |        128 |      1,809 |
+| packages\compiler-ssr\src\transforms                                                                    |         12 |      1,196 |        131 |         99 |      1,426 |
+| packages\reactivity                                                                                     |         23 |      4,328 |        225 |        619 |      5,172 |
+| packages\reactivity\__tests__                                                                           |         11 |      3,034 |        111 |        446 |      3,591 |
+| packages\reactivity\__tests__\collections                                                               |          4 |      1,042 |          9 |        145 |      1,196 |
+| packages\reactivity\src                                                                                 |          8 |      1,229 |        114 |        160 |      1,503 |
+| packages\runtime-core                                                                                   |         85 |     23,941 |      2,055 |      2,949 |     28,945 |
+| packages\runtime-core\__tests__                                                                         |         39 |     13,448 |        586 |      2,000 |     16,034 |
+| packages\runtime-core\__tests__\components                                                              |          4 |      2,876 |        170 |        417 |      3,463 |
+| packages\runtime-core\__tests__\helpers                                                                 |          5 |        358 |         13 |         60 |        431 |
+| packages\runtime-core\src                                                                               |         41 |     10,413 |      1,465 |        934 |     12,812 |
+| packages\runtime-core\src\components                                                                    |          4 |      1,684 |        186 |        132 |      2,002 |
+| packages\runtime-core\src\helpers                                                                       |          7 |        264 |         61 |         33 |        358 |
+| packages\runtime-core\types                                                                             |          1 |          9 |          4 |          2 |         15 |
+| packages\runtime-dom                                                                                    |         35 |      4,468 |        409 |        570 |      5,447 |
+| packages\runtime-dom\__tests__                                                                          |         14 |      1,850 |         47 |        283 |      2,180 |
+| packages\runtime-dom\__tests__\directives                                                               |          4 |      1,178 |         15 |        177 |      1,370 |
+| packages\runtime-dom\__tests__\helpers                                                                  |          2 |        166 |          6 |         25 |        197 |
+| packages\runtime-dom\src                                                                                |         15 |      1,500 |        146 |        180 |      1,826 |
+| packages\runtime-dom\src\components                                                                     |          2 |        485 |         30 |         55 |        570 |
+| packages\runtime-dom\src\directives                                                                     |          3 |        385 |         26 |         32 |        443 |
+| packages\runtime-dom\src\helpers                                                                        |          2 |         73 |          7 |          9 |         89 |
+| packages\runtime-dom\src\modules                                                                        |          5 |        276 |         45 |         31 |        352 |
+| packages\runtime-dom\types                                                                              |          2 |      1,053 |        216 |         99 |      1,368 |
+| packages\runtime-test                                                                                   |         10 |        603 |          8 |         76 |        687 |
+| packages\runtime-test\__tests__                                                                         |          1 |        188 |          2 |         27 |        217 |
+| packages\runtime-test\src                                                                               |          5 |        350 |          6 |         38 |        394 |
+| packages\server-renderer                                                                                |         28 |      2,685 |         69 |        271 |      3,025 |
+| packages\server-renderer\__tests__                                                                      |         11 |      1,827 |         24 |        186 |      2,037 |
+| packages\server-renderer\src                                                                            |         13 |        795 |         45 |         77 |        917 |
+| packages\server-renderer\src\helpers                                                                    |          9 |        325 |         12 |         36 |        373 |
+| packages\shared                                                                                         |         22 |        885 |        212 |        135 |      1,232 |
+| packages\shared\__tests__                                                                               |          5 |        333 |         32 |         42 |        407 |
+| packages\shared\src                                                                                     |         13 |        512 |        180 |         89 |        781 |
+| packages\size-check                                                                                     |          3 |         17 |          1 |          5 |         23 |
+| packages\size-check\src                                                                                 |          1 |          4 |          1 |          2 |          7 |
+| packages\template-explorer                                                                              |          8 |        772 |         13 |         65 |        850 |
+| packages\template-explorer\src                                                                          |          3 |        636 |         13 |         37 |        686 |
+| packages\vue                                                                                            |         34 |      5,747 |        143 |        497 |      6,387 |
+| packages\vue\__tests__                                                                                  |          6 |      2,747 |         79 |        195 |      3,021 |
+| packages\vue\examples                                                                                   |         21 |      2,800 |         50 |        263 |      3,113 |
+| packages\vue\examples\__tests__                                                                         |          7 |      1,162 |         24 |         88 |      1,274 |
+| packages\vue\examples\classic                                                                           |          6 |        721 |         11 |         66 |        798 |
+| packages\vue\examples\composition                                                                       |          6 |        729 |         11 |         85 |        825 |
+| packages\vue\examples\transition                                                                        |          2 |        188 |          4 |         24 |        216 |
+| packages\vue\src                                                                                        |          3 |         99 |         14 |         19 |        132 |
+| scripts                                                                                                 |          8 |        594 |         53 |         78 |        725 |
+| test-dts                                                                                                |         15 |      1,678 |        374 |        259 |      2,311 |
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| filename                                                                                                | language         | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| d:\code\source code\vue-next\.circleci\config.yml                                                       | YAML             |         45 |          0 |          8 |         53 |
+| d:\code\source code\vue-next\.eslintrc.js                                                               | JavaScript       |         22 |         44 |          1 |         67 |
+| d:\code\source code\vue-next\.github\FUNDING.yml                                                        | YAML             |          3 |          0 |          1 |          4 |
+| d:\code\source code\vue-next\.github\ISSUE_TEMPLATE\config.yml                                          | YAML             |         11 |          0 |          1 |         12 |
+| d:\code\source code\vue-next\.github\commit-convention.md                                               | Markdown         |         56 |          0 |         36 |         92 |
+| d:\code\source code\vue-next\.github\contributing.md                                                    | Markdown         |        166 |          0 |        100 |        266 |
+| d:\code\source code\vue-next\.github\workflows\release-tag.yml                                          | YAML             |         21 |          0 |          3 |         24 |
+| d:\code\source code\vue-next\.github\workflows\size-check.yml                                           | YAML             |         21 |          0 |          2 |         23 |
+| d:\code\source code\vue-next\.prettierrc                                                                | JSON             |          3 |          0 |          1 |          4 |
+| d:\code\source code\vue-next\CHANGELOG.md                                                               | Markdown         |      1,115 |          0 |        675 |      1,790 |
+| d:\code\source code\vue-next\README.md                                                                  | Markdown         |         71 |          0 |         30 |        101 |
+| d:\code\source code\vue-next\api-extractor.json                                                         | JSON             |         40 |          1 |         10 |         51 |
+| d:\code\source code\vue-next\example\index.html                                                         | HTML             |         33 |          0 |          2 |         35 |
+| d:\code\source code\vue-next\jest.config.js                                                             | JavaScript       |         27 |         19 |          1 |         47 |
+| d:\code\source code\vue-next\package-lock.json                                                          | JSON             |         11 |     23,645 |          0 |     23,656 |
+| d:\code\source code\vue-next\package.json                                                               | JSON             |         75 |          5 |          1 |         81 |
+| d:\code\source code\vue-next\packages\compiler-core\README.md                                           | Markdown         |          1 |          0 |          1 |          2 |
+| d:\code\source code\vue-next\packages\compiler-core\__tests__\codegen.spec.ts                           | TypeScript       |        736 |          7 |         38 |        781 |
+| d:\code\source code\vue-next\packages\compiler-core\__tests__\compile.spec.ts                           | TypeScript       |        211 |          4 |         47 |        262 |
+| d:\code\source code\vue-next\packages\compiler-core\__tests__\parse.spec.ts                             | TypeScript       |      2,579 |         11 |        172 |      2,762 |
+| d:\code\source code\vue-next\packages\compiler-core\__tests__\scopeId.spec.ts                           | TypeScript       |         76 |          5 |          6 |         87 |
+| d:\code\source code\vue-next\packages\compiler-core\__tests__\testUtils.ts                              | TypeScript       |         72 |          5 |          5 |         82 |
+| d:\code\source code\vue-next\packages\compiler-core\__tests__\transform.spec.ts                         | TypeScript       |        317 |         13 |         36 |        366 |
+| d:\code\source code\vue-next\packages\compiler-core\__tests__\transforms\hoistStatic.spec.ts            | TypeScript       |        579 |          3 |         32 |        614 |
+| d:\code\source code\vue-next\packages\compiler-core\__tests__\transforms\noopDirectiveTransform.spec.ts | TypeScript       |         21 |          2 |          2 |         25 |
+| d:\code\source code\vue-next\packages\compiler-core\__tests__\transforms\transformElement.spec.ts       | TypeScript       |        814 |         20 |         68 |        902 |
+| d:\code\source code\vue-next\packages\compiler-core\__tests__\transforms\transformExpressions.spec.ts   | TypeScript       |        475 |          2 |         32 |        509 |
+| d:\code\source code\vue-next\packages\compiler-core\__tests__\transforms\transformSlotOutlet.spec.ts    | TypeScript       |        358 |          2 |         15 |        375 |
+| d:\code\source code\vue-next\packages\compiler-core\__tests__\transforms\transformText.spec.ts          | TypeScript       |        183 |          5 |          9 |        197 |
+| d:\code\source code\vue-next\packages\compiler-core\__tests__\transforms\vBind.spec.ts                  | TypeScript       |        160 |          0 |          8 |        168 |
+| d:\code\source code\vue-next\packages\compiler-core\__tests__\transforms\vFor.spec.ts                   | TypeScript       |        919 |         10 |         73 |      1,002 |
+| d:\code\source code\vue-next\packages\compiler-core\__tests__\transforms\vIf.spec.ts                    | TypeScript       |        651 |          4 |         54 |        709 |
+| d:\code\source code\vue-next\packages\compiler-core\__tests__\transforms\vModel.spec.ts                 | TypeScript       |        470 |          8 |         48 |        526 |
+| d:\code\source code\vue-next\packages\compiler-core\__tests__\transforms\vOn.spec.ts                    | TypeScript       |        541 |         13 |         27 |        581 |
+| d:\code\source code\vue-next\packages\compiler-core\__tests__\transforms\vOnce.spec.ts                  | TypeScript       |        127 |          3 |          9 |        139 |
+| d:\code\source code\vue-next\packages\compiler-core\__tests__\transforms\vSlot.spec.ts                  | TypeScript       |        818 |          5 |         28 |        851 |
+| d:\code\source code\vue-next\packages\compiler-core\__tests__\utils.spec.ts                             | TypeScript       |         58 |          0 |         12 |         70 |
+| d:\code\source code\vue-next\packages\compiler-core\api-extractor.json                                  | JSON             |          7 |          0 |          1 |          8 |
+| d:\code\source code\vue-next\packages\compiler-core\index.js                                            | JavaScript       |          6 |          0 |          2 |          8 |
+| d:\code\source code\vue-next\packages\compiler-core\package.json                                        | JSON             |         40 |          0 |          1 |         41 |
+| d:\code\source code\vue-next\packages\compiler-core\src\ast.ts                                          | TypeScript       |        642 |         49 |         94 |        785 |
+| d:\code\source code\vue-next\packages\compiler-core\src\codegen.ts                                      | TypeScript       |        863 |         40 |         62 |        965 |
+| d:\code\source code\vue-next\packages\compiler-core\src\compile.ts                                      | TypeScript       |         97 |          4 |          7 |        108 |
+| d:\code\source code\vue-next\packages\compiler-core\src\errors.ts                                       | TypeScript       |        144 |         11 |         14 |        169 |
+| d:\code\source code\vue-next\packages\compiler-core\src\index.ts                                        | TypeScript       |         55 |          1 |          4 |         60 |
+| d:\code\source code\vue-next\packages\compiler-core\src\options.ts                                      | TypeScript       |         74 |        174 |          9 |        257 |
+| d:\code\source code\vue-next\packages\compiler-core\src\parse.ts                                        | TypeScript       |        807 |         56 |         99 |        962 |
+| d:\code\source code\vue-next\packages\compiler-core\src\runtimeHelpers.ts                               | TypeScript       |         67 |          3 |          3 |         73 |
+| d:\code\source code\vue-next\packages\compiler-core\src\transform.ts                                    | TypeScript       |        402 |         44 |         22 |        468 |
+| d:\code\source code\vue-next\packages\compiler-core\src\transforms\hoistStatic.ts                       | TypeScript       |        258 |         29 |         17 |        304 |
+| d:\code\source code\vue-next\packages\compiler-core\src\transforms\noopDirectiveTransform.ts            | TypeScript       |          2 |          0 |          2 |          4 |
+| d:\code\source code\vue-next\packages\compiler-core\src\transforms\transformElement.ts                  | TypeScript       |        556 |         74 |         40 |        670 |
+| d:\code\source code\vue-next\packages\compiler-core\src\transforms\transformExpression.ts               | TypeScript       |        363 |         82 |         29 |        474 |
+| d:\code\source code\vue-next\packages\compiler-core\src\transforms\transformSlotOutlet.ts               | TypeScript       |         97 |          0 |         13 |        110 |
+| d:\code\source code\vue-next\packages\compiler-core\src\transforms\transformText.ts                     | TypeScript       |         87 |         14 |          5 |        106 |
+| d:\code\source code\vue-next\packages\compiler-core\src\transforms\vBind.ts                             | TypeScript       |         39 |          5 |          6 |         50 |
+| d:\code\source code\vue-next\packages\compiler-core\src\transforms\vFor.ts                              | TypeScript       |        351 |         25 |         32 |        408 |
+| d:\code\source code\vue-next\packages\compiler-core\src\transforms\vIf.ts                               | TypeScript       |        285 |         23 |         16 |        324 |
+| d:\code\source code\vue-next\packages\compiler-core\src\transforms\vModel.ts                            | TypeScript       |        123 |          9 |         13 |        145 |
+| d:\code\source code\vue-next\packages\compiler-core\src\transforms\vOn.ts                               | TypeScript       |        126 |         30 |         12 |        168 |
+| d:\code\source code\vue-next\packages\compiler-core\src\transforms\vOnce.ts                             | TypeScript       |         20 |          0 |          3 |         23 |
+| d:\code\source code\vue-next\packages\compiler-core\src\transforms\vSlot.ts                             | TypeScript       |        323 |         35 |         25 |        383 |
+| d:\code\source code\vue-next\packages\compiler-core\src\utils.ts                                        | TypeScript       |        298 |         10 |         25 |        333 |
+| d:\code\source code\vue-next\packages\compiler-core\src\validateExpression.ts                           | TypeScript       |         51 |         10 |          7 |         68 |
+| d:\code\source code\vue-next\packages\compiler-dom\README.md                                            | Markdown         |          1 |          0 |          0 |          1 |
+| d:\code\source code\vue-next\packages\compiler-dom\__tests__\index.spec.ts                              | TypeScript       |         11 |          0 |          3 |         14 |
+| d:\code\source code\vue-next\packages\compiler-dom\__tests__\parse.spec.ts                              | TypeScript       |        419 |          5 |         58 |        482 |
+| d:\code\source code\vue-next\packages\compiler-dom\__tests__\transforms\ignoreSideEffectTags.spec.ts    | TypeScript       |         25 |          0 |          3 |         28 |
+| d:\code\source code\vue-next\packages\compiler-dom\__tests__\transforms\stringifyStatic.spec.ts         | TypeScript       |        270 |         11 |         17 |        298 |
+| d:\code\source code\vue-next\packages\compiler-dom\__tests__\transforms\transformStyle.spec.ts          | TypeScript       |         70 |          1 |          4 |         75 |
+| d:\code\source code\vue-next\packages\compiler-dom\__tests__\transforms\vHtml.spec.ts                   | TypeScript       |         66 |          0 |          5 |         71 |
+| d:\code\source code\vue-next\packages\compiler-dom\__tests__\transforms\vModel.spec.ts                  | TypeScript       |        131 |          0 |         31 |        162 |
+| d:\code\source code\vue-next\packages\compiler-dom\__tests__\transforms\vOn.spec.ts                     | TypeScript       |        268 |          6 |         16 |        290 |
+| d:\code\source code\vue-next\packages\compiler-dom\__tests__\transforms\vShow.spec.ts                   | TypeScript       |         36 |          0 |          6 |         42 |
+| d:\code\source code\vue-next\packages\compiler-dom\__tests__\transforms\vText.spec.ts                   | TypeScript       |         70 |          0 |          5 |         75 |
+| d:\code\source code\vue-next\packages\compiler-dom\__tests__\transforms\warnTransitionChildren.spec.ts  | TypeScript       |        128 |          0 |         13 |        141 |
+| d:\code\source code\vue-next\packages\compiler-dom\api-extractor.json                                   | JSON             |          7 |          0 |          1 |          8 |
+| d:\code\source code\vue-next\packages\compiler-dom\index.js                                             | JavaScript       |          6 |          0 |          2 |          8 |
+| d:\code\source code\vue-next\packages\compiler-dom\package.json                                         | JSON             |         42 |          0 |          1 |         43 |
+| d:\code\source code\vue-next\packages\compiler-dom\src\decodeHtml.ts                                    | TypeScript       |        119 |          7 |          8 |        134 |
+| d:\code\source code\vue-next\packages\compiler-dom\src\decodeHtmlBrowser.ts                             | TypeScript       |          5 |          1 |          3 |          9 |
+| d:\code\source code\vue-next\packages\compiler-dom\src\errors.ts                                        | TypeScript       |         46 |          0 |          5 |         51 |
+| d:\code\source code\vue-next\packages\compiler-dom\src\index.ts                                         | TypeScript       |         63 |          3 |          7 |         73 |
+| d:\code\source code\vue-next\packages\compiler-dom\src\namedChars.json                                  | JSON             |      2,233 |          0 |          1 |      2,234 |
+| d:\code\source code\vue-next\packages\compiler-dom\src\parserOptions.ts                                 | TypeScript       |         90 |          2 |          9 |        101 |
+| d:\code\source code\vue-next\packages\compiler-dom\src\runtimeHelpers.ts                                | TypeScript       |         23 |          0 |          6 |         29 |
+| d:\code\source code\vue-next\packages\compiler-dom\src\transforms\ignoreSideEffectTags.ts               | TypeScript       |         14 |          0 |          2 |         16 |
+| d:\code\source code\vue-next\packages\compiler-dom\src\transforms\stringifyStatic.ts                    | TypeScript       |        235 |         63 |         21 |        319 |
+| d:\code\source code\vue-next\packages\compiler-dom\src\transforms\transformStyle.ts                     | TypeScript       |         37 |          7 |          3 |         47 |
+| d:\code\source code\vue-next\packages\compiler-dom\src\transforms\vHtml.ts                              | TypeScript       |         28 |          0 |          2 |         30 |
+| d:\code\source code\vue-next\packages\compiler-dom\src\transforms\vModel.ts                             | TypeScript       |        107 |         12 |          7 |        126 |
+| d:\code\source code\vue-next\packages\compiler-dom\src\transforms\vOn.ts                                | TypeScript       |        117 |          9 |         14 |        140 |
+| d:\code\source code\vue-next\packages\compiler-dom\src\transforms\vShow.ts                              | TypeScript       |         15 |          0 |          3 |         18 |
+| d:\code\source code\vue-next\packages\compiler-dom\src\transforms\vText.ts                              | TypeScript       |         36 |          0 |          2 |         38 |
+| d:\code\source code\vue-next\packages\compiler-dom\src\transforms\warnTransitionChildren.ts             | TypeScript       |         44 |          1 |          3 |         48 |
+| d:\code\source code\vue-next\packages\compiler-sfc\README.md                                            | Markdown         |         57 |          0 |         27 |         84 |
+| d:\code\source code\vue-next\packages\compiler-sfc\__tests__\compileScript.spec.ts                      | TypeScript       |      1,046 |         42 |         74 |      1,162 |
+| d:\code\source code\vue-next\packages\compiler-sfc\__tests__\compileStyle.spec.ts                       | TypeScript       |        336 |          5 |         30 |        371 |
+| d:\code\source code\vue-next\packages\compiler-sfc\__tests__\compileTemplate.spec.ts                    | TypeScript       |        115 |          4 |         21 |        140 |
+| d:\code\source code\vue-next\packages\compiler-sfc\__tests__\cssVars.spec.ts                            | TypeScript       |        126 |          5 |         10 |        141 |
+| d:\code\source code\vue-next\packages\compiler-sfc\__tests__\fixture\import.scss                        | SCSS             |          3 |          0 |          1 |          4 |
+| d:\code\source code\vue-next\packages\compiler-sfc\__tests__\parse.spec.ts                              | TypeScript       |        220 |          4 |         31 |        255 |
+| d:\code\source code\vue-next\packages\compiler-sfc\__tests__\rewriteDefault.spec.ts                     | TypeScript       |         70 |          2 |          9 |         81 |
+| d:\code\source code\vue-next\packages\compiler-sfc\__tests__\templateTransformAssetUrl.spec.ts          | TypeScript       |        105 |          8 |         19 |        132 |
+| d:\code\source code\vue-next\packages\compiler-sfc\__tests__\templateTransformSrcset.spec.ts            | TypeScript       |         57 |          0 |          6 |         63 |
+| d:\code\source code\vue-next\packages\compiler-sfc\__tests__\templateUtils.spec.ts                      | TypeScript       |          8 |         45 |          1 |         54 |
+| d:\code\source code\vue-next\packages\compiler-sfc\__tests__\utils.ts                                   | TypeScript       |         26 |          1 |          4 |         31 |
+| d:\code\source code\vue-next\packages\compiler-sfc\api-extractor.json                                   | JSON             |          7 |          0 |          1 |          8 |
+| d:\code\source code\vue-next\packages\compiler-sfc\index.js                                             | JavaScript       |          6 |          0 |          2 |          8 |
+| d:\code\source code\vue-next\packages\compiler-sfc\package.json                                         | JSON             |         60 |          0 |          1 |         61 |
+| d:\code\source code\vue-next\packages\compiler-sfc\src\compileScript.ts                                 | TypeScript       |      1,411 |        170 |         91 |      1,672 |
+| d:\code\source code\vue-next\packages\compiler-sfc\src\compileStyle.ts                                  | TypeScript       |        208 |         14 |         20 |        242 |
+| d:\code\source code\vue-next\packages\compiler-sfc\src\compileTemplate.ts                               | TypeScript       |        258 |         19 |         27 |        304 |
+| d:\code\source code\vue-next\packages\compiler-sfc\src\cssVars.ts                                       | TypeScript       |        104 |          4 |         10 |        118 |
+| d:\code\source code\vue-next\packages\compiler-sfc\src\index.ts                                         | TypeScript       |         30 |          2 |          2 |         34 |
+| d:\code\source code\vue-next\packages\compiler-sfc\src\parse.ts                                         | TypeScript       |        344 |          9 |         24 |        377 |
+| d:\code\source code\vue-next\packages\compiler-sfc\src\rewriteDefault.ts                                | TypeScript       |         57 |          6 |          7 |         70 |
+| d:\code\source code\vue-next\packages\compiler-sfc\src\shims.d.ts                                       | TypeScript       |          3 |          0 |          1 |          4 |
+| d:\code\source code\vue-next\packages\compiler-sfc\src\stylePluginScoped.ts                             | TypeScript       |        164 |         29 |         15 |        208 |
+| d:\code\source code\vue-next\packages\compiler-sfc\src\stylePluginTrim.ts                               | TypeScript       |         16 |          0 |          3 |         19 |
+| d:\code\source code\vue-next\packages\compiler-sfc\src\stylePreprocessors.ts                            | TypeScript       |        123 |          3 |         17 |        143 |
+| d:\code\source code\vue-next\packages\compiler-sfc\src\templateTransformAssetUrl.ts                     | TypeScript       |        142 |         29 |         13 |        184 |
+| d:\code\source code\vue-next\packages\compiler-sfc\src\templateTransformSrcset.ts                       | TypeScript       |        141 |          5 |         12 |        158 |
+| d:\code\source code\vue-next\packages\compiler-sfc\src\templateUtils.ts                                 | TypeScript       |         25 |          9 |          6 |         40 |
+| d:\code\source code\vue-next\packages\compiler-sfc\src\warn.ts                                          | TypeScript       |         24 |          0 |          4 |         28 |
+| d:\code\source code\vue-next\packages\compiler-ssr\README.md                                            | Markdown         |          1 |          0 |          0 |          1 |
+| d:\code\source code\vue-next\packages\compiler-ssr\__tests__\ssrComponent.spec.ts                       | TypeScript       |        340 |          2 |         38 |        380 |
+| d:\code\source code\vue-next\packages\compiler-ssr\__tests__\ssrElement.spec.ts                         | TypeScript       |        253 |          3 |         36 |        292 |
+| d:\code\source code\vue-next\packages\compiler-ssr\__tests__\ssrInjectCssVars.spec.ts                   | TypeScript       |        103 |          0 |         12 |        115 |
+| d:\code\source code\vue-next\packages\compiler-ssr\__tests__\ssrPortal.spec.ts                          | TypeScript       |         35 |          0 |          7 |         42 |
+| d:\code\source code\vue-next\packages\compiler-ssr\__tests__\ssrScopeId.spec.ts                         | TypeScript       |        114 |          1 |         13 |        128 |
+| d:\code\source code\vue-next\packages\compiler-ssr\__tests__\ssrSlotOutlet.spec.ts                      | TypeScript       |        100 |          0 |         18 |        118 |
+| d:\code\source code\vue-next\packages\compiler-ssr\__tests__\ssrSuspense.spec.ts                        | TypeScript       |         45 |          0 |          7 |         52 |
+| d:\code\source code\vue-next\packages\compiler-ssr\__tests__\ssrText.spec.ts                            | TypeScript       |         59 |          3 |         11 |         73 |
+| d:\code\source code\vue-next\packages\compiler-ssr\__tests__\ssrVFor.spec.ts                            | TypeScript       |        120 |          0 |         15 |        135 |
+| d:\code\source code\vue-next\packages\compiler-ssr\__tests__\ssrVIf.spec.ts                             | TypeScript       |        145 |          1 |         19 |        165 |
+| d:\code\source code\vue-next\packages\compiler-ssr\__tests__\ssrVModel.spec.ts                          | TypeScript       |        190 |          0 |         30 |        220 |
+| d:\code\source code\vue-next\packages\compiler-ssr\__tests__\ssrVShow.spec.ts                           | TypeScript       |        106 |          0 |         14 |        120 |
+| d:\code\source code\vue-next\packages\compiler-ssr\__tests__\utils.ts                                   | TypeScript       |         11 |          3 |          4 |         18 |
+| d:\code\source code\vue-next\packages\compiler-ssr\api-extractor.json                                   | JSON             |          7 |          0 |          1 |          8 |
+| d:\code\source code\vue-next\packages\compiler-ssr\index.js                                             | JavaScript       |          6 |          0 |          2 |          8 |
+| d:\code\source code\vue-next\packages\compiler-ssr\package.json                                         | JSON             |         34 |          0 |          1 |         35 |
+| d:\code\source code\vue-next\packages\compiler-ssr\src\errors.ts                                        | TypeScript       |         27 |          0 |          5 |         32 |
+| d:\code\source code\vue-next\packages\compiler-ssr\src\index.ts                                         | TypeScript       |         71 |         10 |          7 |         88 |
+| d:\code\source code\vue-next\packages\compiler-ssr\src\runtimeHelpers.ts                                | TypeScript       |         36 |          2 |          4 |         42 |
+| d:\code\source code\vue-next\packages\compiler-ssr\src\ssrCodegenTransform.ts                           | TypeScript       |        188 |         20 |         13 |        221 |
+| d:\code\source code\vue-next\packages\compiler-ssr\src\transforms\ssrInjectCssVars.ts                   | TypeScript       |         60 |          4 |          6 |         70 |
+| d:\code\source code\vue-next\packages\compiler-ssr\src\transforms\ssrInjectFallthroughAttrs.ts          | TypeScript       |         44 |          3 |          6 |         53 |
+| d:\code\source code\vue-next\packages\compiler-ssr\src\transforms\ssrTransformComponent.ts              | TypeScript       |        251 |         49 |         23 |        323 |
+| d:\code\source code\vue-next\packages\compiler-ssr\src\transforms\ssrTransformElement.ts                | TypeScript       |        335 |         36 |         25 |        396 |
+| d:\code\source code\vue-next\packages\compiler-ssr\src\transforms\ssrTransformSlotOutlet.ts             | TypeScript       |         51 |          5 |          9 |         65 |
+| d:\code\source code\vue-next\packages\compiler-ssr\src\transforms\ssrTransformSuspense.ts               | TypeScript       |         71 |          4 |          5 |         80 |
+| d:\code\source code\vue-next\packages\compiler-ssr\src\transforms\ssrTransformTeleport.ts               | TypeScript       |         66 |          1 |          5 |         72 |
+| d:\code\source code\vue-next\packages\compiler-ssr\src\transforms\ssrTransformTransitionGroup.ts        | TypeScript       |         30 |          9 |          3 |         42 |
+| d:\code\source code\vue-next\packages\compiler-ssr\src\transforms\ssrVFor.ts                            | TypeScript       |         47 |          4 |          3 |         54 |
+| d:\code\source code\vue-next\packages\compiler-ssr\src\transforms\ssrVIf.ts                             | TypeScript       |         65 |          6 |          6 |         77 |
+| d:\code\source code\vue-next\packages\compiler-ssr\src\transforms\ssrVModel.ts                          | TypeScript       |        142 |         10 |          6 |        158 |
+| d:\code\source code\vue-next\packages\compiler-ssr\src\transforms\ssrVShow.ts                           | TypeScript       |         34 |          0 |          2 |         36 |
+| d:\code\source code\vue-next\packages\global.d.ts                                                       | TypeScript       |         19 |          3 |          3 |         25 |
+| d:\code\source code\vue-next\packages\reactivity\README.md                                              | Markdown         |         11 |          0 |          9 |         20 |
+| d:\code\source code\vue-next\packages\reactivity\__tests__\collections\Map.spec.ts                      | TypeScript       |        414 |          8 |         56 |        478 |
+| d:\code\source code\vue-next\packages\reactivity\__tests__\collections\Set.spec.ts                      | TypeScript       |        407 |          1 |         57 |        465 |
+| d:\code\source code\vue-next\packages\reactivity\__tests__\collections\WeakMap.spec.ts                  | TypeScript       |        127 |          0 |         16 |        143 |
+| d:\code\source code\vue-next\packages\reactivity\__tests__\collections\WeakSet.spec.ts                  | TypeScript       |         94 |          0 |         16 |        110 |
+| d:\code\source code\vue-next\packages\reactivity\__tests__\computed.spec.ts                             | TypeScript       |        164 |          7 |         26 |        197 |
+| d:\code\source code\vue-next\packages\reactivity\__tests__\effect.spec.ts                               | TypeScript       |        698 |         21 |         96 |        815 |
+| d:\code\source code\vue-next\packages\reactivity\__tests__\reactive.spec.ts                             | TypeScript       |        215 |         25 |         36 |        276 |
+| d:\code\source code\vue-next\packages\reactivity\__tests__\reactiveArray.spec.ts                        | TypeScript       |        147 |         11 |         17 |        175 |
+| d:\code\source code\vue-next\packages\reactivity\__tests__\readonly.spec.ts                             | TypeScript       |        397 |         24 |         45 |        466 |
+| d:\code\source code\vue-next\packages\reactivity\__tests__\ref.spec.ts                                  | TypeScript       |        271 |         13 |         56 |        340 |
+| d:\code\source code\vue-next\packages\reactivity\__tests__\shallowReactive.spec.ts                      | TypeScript       |        100 |          1 |         25 |        126 |
+| d:\code\source code\vue-next\packages\reactivity\api-extractor.json                                     | JSON             |          7 |          0 |          1 |          8 |
+| d:\code\source code\vue-next\packages\reactivity\index.js                                               | JavaScript       |          6 |          0 |          2 |          8 |
+| d:\code\source code\vue-next\packages\reactivity\package.json                                           | JSON             |         41 |          0 |          1 |         42 |
+| d:\code\source code\vue-next\packages\reactivity\src\baseHandlers.ts                                    | TypeScript       |        199 |         15 |         25 |        239 |
+| d:\code\source code\vue-next\packages\reactivity\src\collectionHandlers.ts                              | TypeScript       |        315 |         11 |         34 |        360 |
+| d:\code\source code\vue-next\packages\reactivity\src\computed.ts                                        | TypeScript       |         77 |          0 |         15 |         92 |
+| d:\code\source code\vue-next\packages\reactivity\src\effect.ts                                          | TypeScript       |        223 |         10 |         25 |        258 |
+| d:\code\source code\vue-next\packages\reactivity\src\index.ts                                           | TypeScript       |         51 |          0 |          1 |         52 |
+| d:\code\source code\vue-next\packages\reactivity\src\operations.ts                                      | TypeScript       |         11 |          2 |          3 |         16 |
+| d:\code\source code\vue-next\packages\reactivity\src\reactive.ts                                        | TypeScript       |        168 |         43 |         19 |        230 |
+| d:\code\source code\vue-next\packages\reactivity\src\ref.ts                                             | TypeScript       |        185 |         33 |         38 |        256 |
+| d:\code\source code\vue-next\packages\runtime-core\README.md                                            | Markdown         |         20 |          0 |          9 |         29 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\apiAsyncComponent.spec.ts                  | TypeScript       |        596 |         34 |        118 |        748 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\apiCreateApp.spec.ts                       | TypeScript       |        410 |         10 |         65 |        485 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\apiExpose.spec.ts                          | TypeScript       |        160 |          0 |         13 |        173 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\apiInject.spec.ts                          | TypeScript       |        259 |          9 |         54 |        322 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\apiLifecycle.spec.ts                       | TypeScript       |        318 |         13 |         47 |        378 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\apiOptions.spec.ts                         | TypeScript       |      1,197 |         14 |        100 |      1,311 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\apiSetupContext.spec.ts                    | TypeScript       |        168 |         12 |         30 |        210 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\apiSetupHelpers.spec.ts                    | TypeScript       |         45 |          0 |          5 |         50 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\apiTemplateRef.spec.ts                     | TypeScript       |        313 |          7 |         49 |        369 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\apiWatch.spec.ts                           | TypeScript       |        739 |         41 |        101 |        881 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\componentEmits.spec.ts                     | TypeScript       |        259 |         12 |         35 |        306 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\componentProps.spec.ts                     | TypeScript       |        347 |          9 |         51 |        407 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\componentPublicInstance.spec.ts            | TypeScript       |        209 |         14 |         23 |        246 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\componentSlots.spec.ts                     | TypeScript       |        196 |          4 |         42 |        242 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\components\BaseTransition.spec.ts          | TypeScript       |        903 |         92 |        100 |      1,095 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\components\KeepAlive.spec.ts               | TypeScript       |        693 |         21 |        113 |        827 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\components\Suspense.spec.ts                | TypeScript       |        926 |         50 |        153 |      1,129 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\components\Teleport.spec.ts                | TypeScript       |        354 |          7 |         51 |        412 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\directives.spec.ts                         | TypeScript       |        277 |         23 |         71 |        371 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\errorHandling.spec.ts                      | TypeScript       |        462 |          3 |         76 |        541 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\h.spec.ts                                  | TypeScript       |         62 |         15 |          7 |         84 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\helpers\createSlots.spec.ts                | TypeScript       |         42 |          0 |         15 |         57 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\helpers\renderList.spec.ts                 | TypeScript       |         49 |          0 |          9 |         58 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\helpers\renderSlot.spec.ts                 | TypeScript       |         66 |          5 |          9 |         80 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\helpers\resolveAssets.spec.ts              | TypeScript       |        183 |          8 |         22 |        213 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\helpers\toHandlers.spec.ts                 | TypeScript       |         18 |          0 |          5 |         23 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\hmr.spec.ts                                | TypeScript       |        273 |         13 |         50 |        336 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\hydration.spec.ts                          | TypeScript       |        595 |         34 |         96 |        725 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\misc.spec.ts                               | TypeScript       |         17 |          0 |          2 |         19 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\rendererAttrsFallthrough.spec.ts           | TypeScript       |        545 |         13 |        103 |        661 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\rendererChildren.spec.ts                   | TypeScript       |        531 |          7 |         91 |        629 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\rendererComponent.spec.ts                  | TypeScript       |        238 |          8 |         33 |        279 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\rendererElement.spec.ts                    | TypeScript       |         41 |          0 |         11 |         52 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\rendererFragment.spec.ts                   | TypeScript       |        283 |         11 |         25 |        319 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\rendererOptimizedMode.spec.ts              | TypeScript       |        439 |         16 |         66 |        521 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\scheduler.spec.ts                          | TypeScript       |        469 |         29 |         64 |        562 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\scopeId.spec.ts                            | TypeScript       |        146 |         19 |         16 |        181 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\vnode.spec.ts                              | TypeScript       |        532 |         31 |         70 |        633 |
+| d:\code\source code\vue-next\packages\runtime-core\__tests__\vnodeHooks.spec.ts                         | TypeScript       |         88 |          2 |          9 |         99 |
+| d:\code\source code\vue-next\packages\runtime-core\api-extractor.json                                   | JSON             |          7 |          0 |          1 |          8 |
+| d:\code\source code\vue-next\packages\runtime-core\index.js                                             | JavaScript       |          6 |          0 |          2 |          8 |
+| d:\code\source code\vue-next\packages\runtime-core\package.json                                         | JSON             |         38 |          0 |          1 |         39 |
+| d:\code\source code\vue-next\packages\runtime-core\src\apiAsyncComponent.ts                             | TypeScript       |        183 |          4 |         20 |        207 |
+| d:\code\source code\vue-next\packages\runtime-core\src\apiComputed.ts                                   | TypeScript       |         19 |          0 |          2 |         21 |
+| d:\code\source code\vue-next\packages\runtime-core\src\apiCreateApp.ts                                  | TypeScript       |        255 |         18 |         32 |        305 |
+| d:\code\source code\vue-next\packages\runtime-core\src\apiDefineComponent.ts                            | TypeScript       |        160 |         17 |          9 |        186 |
+| d:\code\source code\vue-next\packages\runtime-core\src\apiInject.ts                                     | TypeScript       |         55 |         12 |          5 |         72 |
+| d:\code\source code\vue-next\packages\runtime-core\src\apiLifecycle.ts                                  | TypeScript       |         81 |          9 |          8 |         98 |
+| d:\code\source code\vue-next\packages\runtime-core\src\apiSetupHelpers.ts                               | TypeScript       |         53 |          9 |          4 |         66 |
+| d:\code\source code\vue-next\packages\runtime-core\src\apiWatch.ts                                      | TypeScript       |        306 |         24 |         32 |        362 |
+| d:\code\source code\vue-next\packages\runtime-core\src\component.ts                                     | TypeScript       |        556 |        223 |         70 |        849 |
+| d:\code\source code\vue-next\packages\runtime-core\src\componentEmits.ts                                | TypeScript       |        185 |          8 |         18 |        211 |
+| d:\code\source code\vue-next\packages\runtime-core\src\componentOptions.ts                              | TypeScript       |        844 |         83 |         64 |        991 |
+| d:\code\source code\vue-next\packages\runtime-core\src\componentProps.ts                                | TypeScript       |        492 |         69 |         46 |        607 |
+| d:\code\source code\vue-next\packages\runtime-core\src\componentPublicInstance.ts                       | TypeScript       |        449 |         61 |         32 |        542 |
+| d:\code\source code\vue-next\packages\runtime-core\src\componentRenderContext.ts                        | TypeScript       |         35 |         18 |          5 |         58 |
+| d:\code\source code\vue-next\packages\runtime-core\src\componentRenderUtils.ts                          | TypeScript       |        331 |         38 |         22 |        391 |
+| d:\code\source code\vue-next\packages\runtime-core\src\componentSlots.ts                                | TypeScript       |        138 |         24 |         13 |        175 |
+| d:\code\source code\vue-next\packages\runtime-core\src\components\BaseTransition.ts                     | TypeScript       |        397 |         48 |         38 |        483 |
+| d:\code\source code\vue-next\packages\runtime-core\src\components\KeepAlive.ts                          | TypeScript       |        314 |         44 |         37 |        395 |
+| d:\code\source code\vue-next\packages\runtime-core\src\components\Suspense.ts                           | TypeScript       |        668 |         69 |         36 |        773 |
+| d:\code\source code\vue-next\packages\runtime-core\src\components\Teleport.ts                           | TypeScript       |        305 |         25 |         21 |        351 |
+| d:\code\source code\vue-next\packages\runtime-core\src\customFormatter.ts                               | TypeScript       |        182 |          4 |         13 |        199 |
+| d:\code\source code\vue-next\packages\runtime-core\src\devtools.ts                                      | TypeScript       |         76 |          1 |         13 |         90 |
+| d:\code\source code\vue-next\packages\runtime-core\src\directives.ts                                    | TypeScript       |        108 |         16 |         14 |        138 |
+| d:\code\source code\vue-next\packages\runtime-core\src\errorHandling.ts                                 | TypeScript       |        150 |          7 |          9 |        166 |
+| d:\code\source code\vue-next\packages\runtime-core\src\featureFlags.ts                                  | TypeScript       |         20 |          7 |          5 |         32 |
+| d:\code\source code\vue-next\packages\runtime-core\src\h.ts                                             | TypeScript       |        117 |         49 |         19 |        185 |
+| d:\code\source code\vue-next\packages\runtime-core\src\helpers\createSlots.ts                           | TypeScript       |         25 |          6 |          3 |         34 |
+| d:\code\source code\vue-next\packages\runtime-core\src\helpers\renderList.ts                            | TypeScript       |         62 |         19 |          7 |         88 |
+| d:\code\source code\vue-next\packages\runtime-core\src\helpers\renderSlot.ts                            | TypeScript       |         62 |         10 |          6 |         78 |
+| d:\code\source code\vue-next\packages\runtime-core\src\helpers\resolveAssets.ts                         | TypeScript       |         80 |         22 |         11 |        113 |
+| d:\code\source code\vue-next\packages\runtime-core\src\helpers\toHandlers.ts                            | TypeScript       |         13 |          4 |          2 |         19 |
+| d:\code\source code\vue-next\packages\runtime-core\src\helpers\typeUtils.ts                             | TypeScript       |          5 |          0 |          1 |          6 |
+| d:\code\source code\vue-next\packages\runtime-core\src\helpers\useSsrContext.ts                         | TypeScript       |         17 |          0 |          3 |         20 |
+| d:\code\source code\vue-next\packages\runtime-core\src\hmr.ts                                           | TypeScript       |        129 |         20 |         16 |        165 |
+| d:\code\source code\vue-next\packages\runtime-core\src\hydration.ts                                     | TypeScript       |        445 |         29 |         23 |        497 |
+| d:\code\source code\vue-next\packages\runtime-core\src\index.ts                                         | TypeScript       |        221 |         35 |         21 |        277 |
+| d:\code\source code\vue-next\packages\runtime-core\src\profiling.ts                                     | TypeScript       |         37 |          2 |          5 |         44 |
+| d:\code\source code\vue-next\packages\runtime-core\src\renderer.ts                                      | TypeScript       |      2,014 |        238 |        141 |      2,393 |
+| d:\code\source code\vue-next\packages\runtime-core\src\scheduler.ts                                     | TypeScript       |        203 |         41 |         34 |        278 |
+| d:\code\source code\vue-next\packages\runtime-core\src\vnode.ts                                         | TypeScript       |        487 |        142 |         55 |        684 |
+| d:\code\source code\vue-next\packages\runtime-core\src\warning.ts                                       | TypeScript       |        134 |         10 |         19 |        163 |
+| d:\code\source code\vue-next\packages\runtime-core\types\refBail.d.ts                                   | TypeScript       |          9 |          4 |          2 |         15 |
+| d:\code\source code\vue-next\packages\runtime-dom\README.md                                             | Markdown         |         10 |          0 |          4 |         14 |
+| d:\code\source code\vue-next\packages\runtime-dom\__tests__\createApp.spec.ts                           | TypeScript       |         13 |          1 |          2 |         16 |
+| d:\code\source code\vue-next\packages\runtime-dom\__tests__\customizedBuiltIn.spec.ts                   | TypeScript       |         17 |          1 |          3 |         21 |
+| d:\code\source code\vue-next\packages\runtime-dom\__tests__\directives\vCloak.spec.ts                   | TypeScript       |         11 |          0 |          2 |         13 |
+| d:\code\source code\vue-next\packages\runtime-dom\__tests__\directives\vModel.spec.ts                   | TypeScript       |        898 |          9 |        126 |      1,033 |
+| d:\code\source code\vue-next\packages\runtime-dom\__tests__\directives\vOn.spec.ts                      | TypeScript       |        118 |          4 |         13 |        135 |
+| d:\code\source code\vue-next\packages\runtime-dom\__tests__\directives\vShow.spec.ts                    | TypeScript       |        151 |          2 |         36 |        189 |
+| d:\code\source code\vue-next\packages\runtime-dom\__tests__\helpers\useCssModule.spec.ts                | TypeScript       |         46 |          0 |          7 |         53 |
+| d:\code\source code\vue-next\packages\runtime-dom\__tests__\helpers\useCssVars.spec.ts                  | TypeScript       |        120 |          6 |         18 |        144 |
+| d:\code\source code\vue-next\packages\runtime-dom\__tests__\patchAttrs.spec.ts                          | TypeScript       |         32 |          1 |          5 |         38 |
+| d:\code\source code\vue-next\packages\runtime-dom\__tests__\patchClass.spec.ts                          | TypeScript       |         28 |          0 |          4 |         32 |
+| d:\code\source code\vue-next\packages\runtime-dom\__tests__\patchEvents.spec.ts                         | TypeScript       |        154 |          5 |         24 |        183 |
+| d:\code\source code\vue-next\packages\runtime-dom\__tests__\patchProps.spec.ts                          | TypeScript       |        125 |         14 |         21 |        160 |
+| d:\code\source code\vue-next\packages\runtime-dom\__tests__\patchStyle.spec.ts                          | TypeScript       |         95 |          3 |         14 |        112 |
+| d:\code\source code\vue-next\packages\runtime-dom\__tests__\rendererStaticNode.spec.ts                  | TypeScript       |         42 |          1 |          8 |         51 |
+| d:\code\source code\vue-next\packages\runtime-dom\api-extractor.json                                    | JSON             |          7 |          0 |          1 |          8 |
+| d:\code\source code\vue-next\packages\runtime-dom\index.js                                              | JavaScript       |          6 |          0 |          2 |          8 |
+| d:\code\source code\vue-next\packages\runtime-dom\package.json                                          | JSON             |         42 |          0 |          1 |         43 |
+| d:\code\source code\vue-next\packages\runtime-dom\src\components\Transition.ts                          | TypeScript       |        320 |         15 |         33 |        368 |
+| d:\code\source code\vue-next\packages\runtime-dom\src\components\TransitionGroup.ts                     | TypeScript       |        165 |         15 |         22 |        202 |
+| d:\code\source code\vue-next\packages\runtime-dom\src\directives\vModel.ts                              | TypeScript       |        287 |         16 |         20 |        323 |
+| d:\code\source code\vue-next\packages\runtime-dom\src\directives\vOn.ts                                 | TypeScript       |         50 |          9 |          7 |         66 |
+| d:\code\source code\vue-next\packages\runtime-dom\src\directives\vShow.ts                               | TypeScript       |         48 |          1 |          5 |         54 |
+| d:\code\source code\vue-next\packages\runtime-dom\src\helpers\useCssModule.ts                           | TypeScript       |         28 |          1 |          2 |         31 |
+| d:\code\source code\vue-next\packages\runtime-dom\src\helpers\useCssVars.ts                             | TypeScript       |         45 |          6 |          7 |         58 |
+| d:\code\source code\vue-next\packages\runtime-dom\src\index.ts                                          | TypeScript       |        141 |         14 |         24 |        179 |
+| d:\code\source code\vue-next\packages\runtime-dom\src\modules\attrs.ts                                  | TypeScript       |         23 |          2 |          3 |         28 |
+| d:\code\source code\vue-next\packages\runtime-dom\src\modules\class.ts                                  | TypeScript       |         18 |          5 |          2 |         25 |
+| d:\code\source code\vue-next\packages\runtime-dom\src\modules\events.ts                                 | TypeScript       |        110 |         20 |         13 |        143 |
+| d:\code\source code\vue-next\packages\runtime-dom\src\modules\props.ts                                  | TypeScript       |         52 |         13 |          6 |         71 |
+| d:\code\source code\vue-next\packages\runtime-dom\src\modules\style.ts                                  | TypeScript       |         73 |          5 |          7 |         85 |
+| d:\code\source code\vue-next\packages\runtime-dom\src\nodeOps.ts                                        | TypeScript       |         53 |          4 |         17 |         74 |
+| d:\code\source code\vue-next\packages\runtime-dom\src\patchProp.ts                                      | TypeScript       |         87 |         20 |         12 |        119 |
+| d:\code\source code\vue-next\packages\runtime-dom\types\jsx.d.ts                                        | TypeScript       |      1,048 |        214 |         97 |      1,359 |
+| d:\code\source code\vue-next\packages\runtime-dom\types\refBail.d.ts                                    | TypeScript       |          5 |          2 |          2 |          9 |
+| d:\code\source code\vue-next\packages\runtime-test\README.md                                            | Markdown         |         21 |          0 |          7 |         28 |
+| d:\code\source code\vue-next\packages\runtime-test\__tests__\testRuntime.spec.ts                        | TypeScript       |        188 |          2 |         27 |        217 |
+| d:\code\source code\vue-next\packages\runtime-test\api-extractor.json                                   | JSON             |          7 |          0 |          1 |          8 |
+| d:\code\source code\vue-next\packages\runtime-test\index.js                                             | JavaScript       |          6 |          0 |          2 |          8 |
+| d:\code\source code\vue-next\packages\runtime-test\package.json                                         | JSON             |         31 |          0 |          1 |         32 |
+| d:\code\source code\vue-next\packages\runtime-test\src\index.ts                                         | TypeScript       |         24 |          1 |          5 |         30 |
+| d:\code\source code\vue-next\packages\runtime-test\src\nodeOps.ts                                       | TypeScript       |        219 |          5 |         24 |        248 |
+| d:\code\source code\vue-next\packages\runtime-test\src\patchProp.ts                                     | TypeScript       |         21 |          0 |          2 |         23 |
+| d:\code\source code\vue-next\packages\runtime-test\src\serialize.ts                                     | TypeScript       |         65 |          0 |          5 |         70 |
+| d:\code\source code\vue-next\packages\runtime-test\src\triggerEvent.ts                                  | TypeScript       |         21 |          0 |          2 |         23 |
+| d:\code\source code\vue-next\packages\server-renderer\README.md                                         | Markdown         |         13 |          0 |          4 |         17 |
+| d:\code\source code\vue-next\packages\server-renderer\__tests__\render.spec.ts                          | TypeScript       |        637 |         13 |         68 |        718 |
+| d:\code\source code\vue-next\packages\server-renderer\__tests__\ssrAttrFallthrough.spec.ts              | TypeScript       |         72 |          1 |          6 |         79 |
+| d:\code\source code\vue-next\packages\server-renderer\__tests__\ssrDirectives.spec.ts                   | TypeScript       |        359 |          1 |         34 |        394 |
+| d:\code\source code\vue-next\packages\server-renderer\__tests__\ssrDynamicComponent.spec.ts             | TypeScript       |         59 |          0 |          5 |         64 |
+| d:\code\source code\vue-next\packages\server-renderer\__tests__\ssrInterpolate.spec.ts                  | TypeScript       |         27 |          1 |          2 |         30 |
+| d:\code\source code\vue-next\packages\server-renderer\__tests__\ssrRenderAttrs.spec.ts                  | TypeScript       |        157 |          0 |         20 |        177 |
+| d:\code\source code\vue-next\packages\server-renderer\__tests__\ssrRenderList.spec.ts                   | TypeScript       |         50 |          0 |         11 |         61 |
+| d:\code\source code\vue-next\packages\server-renderer\__tests__\ssrScopeId.spec.ts                      | TypeScript       |        139 |          7 |         12 |        158 |
+| d:\code\source code\vue-next\packages\server-renderer\__tests__\ssrSuspense.spec.ts                     | TypeScript       |        108 |          0 |         15 |        123 |
+| d:\code\source code\vue-next\packages\server-renderer\__tests__\ssrTeleport.spec.ts                     | TypeScript       |        111 |          0 |          6 |        117 |
+| d:\code\source code\vue-next\packages\server-renderer\__tests__\ssrVModelHelpers.spec.ts                | TypeScript       |        108 |          1 |          7 |        116 |
+| d:\code\source code\vue-next\packages\server-renderer\api-extractor.json                                | JSON             |          7 |          0 |          1 |          8 |
+| d:\code\source code\vue-next\packages\server-renderer\index.js                                          | JavaScript       |          6 |          0 |          2 |          8 |
+| d:\code\source code\vue-next\packages\server-renderer\package.json                                      | JSON             |         37 |          0 |          1 |         38 |
+| d:\code\source code\vue-next\packages\server-renderer\src\helpers\ssrCompile.ts                         | TypeScript       |         42 |          0 |          5 |         47 |
+| d:\code\source code\vue-next\packages\server-renderer\src\helpers\ssrInterpolate.ts                     | TypeScript       |          4 |          0 |          2 |          6 |
+| d:\code\source code\vue-next\packages\server-renderer\src\helpers\ssrRenderAttrs.ts                     | TypeScript       |         85 |          4 |          8 |         97 |
+| d:\code\source code\vue-next\packages\server-renderer\src\helpers\ssrRenderComponent.ts                 | TypeScript       |         16 |          0 |          2 |         18 |
+| d:\code\source code\vue-next\packages\server-renderer\src\helpers\ssrRenderList.ts                      | TypeScript       |         33 |          0 |          2 |         35 |
+| d:\code\source code\vue-next\packages\server-renderer\src\helpers\ssrRenderSlot.ts                      | TypeScript       |         60 |          4 |          4 |         68 |
+| d:\code\source code\vue-next\packages\server-renderer\src\helpers\ssrRenderSuspense.ts                  | TypeScript       |         11 |          0 |          2 |         13 |
+| d:\code\source code\vue-next\packages\server-renderer\src\helpers\ssrRenderTeleport.ts                  | TypeScript       |         32 |          0 |          6 |         38 |
+| d:\code\source code\vue-next\packages\server-renderer\src\helpers\ssrVModelHelpers.ts                   | TypeScript       |         42 |          4 |          5 |         51 |
+| d:\code\source code\vue-next\packages\server-renderer\src\index.ts                                      | TypeScript       |         23 |          3 |          3 |         29 |
+| d:\code\source code\vue-next\packages\server-renderer\src\render.ts                                     | TypeScript       |        318 |         16 |         20 |        354 |
+| d:\code\source code\vue-next\packages\server-renderer\src\renderToStream.ts                             | TypeScript       |         63 |          6 |          9 |         78 |
+| d:\code\source code\vue-next\packages\server-renderer\src\renderToString.ts                             | TypeScript       |         66 |          8 |          9 |         83 |
+| d:\code\source code\vue-next\packages\shared\README.md                                                  | Markdown         |          2 |          0 |          2 |          4 |
+| d:\code\source code\vue-next\packages\shared\__tests__\codeframe.spec.ts                                | TypeScript       |         39 |          1 |          7 |         47 |
+| d:\code\source code\vue-next\packages\shared\__tests__\escapeHtml.spec.ts                               | TypeScript       |         10 |          0 |          2 |         12 |
+| d:\code\source code\vue-next\packages\shared\__tests__\looseEqual.spec.ts                               | TypeScript       |        170 |         31 |         21 |        222 |
+| d:\code\source code\vue-next\packages\shared\__tests__\normalizeProp.spec.ts                            | TypeScript       |         14 |          0 |          4 |         18 |
+| d:\code\source code\vue-next\packages\shared\__tests__\toDisplayString.spec.ts                          | TypeScript       |        100 |          0 |          8 |        108 |
+| d:\code\source code\vue-next\packages\shared\api-extractor.json                                         | JSON             |          7 |          0 |          0 |          7 |
+| d:\code\source code\vue-next\packages\shared\index.js                                                   | JavaScript       |          6 |          0 |          2 |          8 |
+| d:\code\source code\vue-next\packages\shared\package.json                                               | JSON             |         25 |          0 |          0 |         25 |
+| d:\code\source code\vue-next\packages\shared\src\codeframe.ts                                           | TypeScript       |         41 |          1 |          2 |         44 |
+| d:\code\source code\vue-next\packages\shared\src\domAttrConfig.ts                                       | TypeScript       |         54 |         24 |          8 |         86 |
+| d:\code\source code\vue-next\packages\shared\src\domTagConfig.ts                                        | TypeScript       |         27 |          4 |          5 |         36 |
+| d:\code\source code\vue-next\packages\shared\src\escapeHtml.ts                                          | TypeScript       |         43 |          1 |          9 |         53 |
+| d:\code\source code\vue-next\packages\shared\src\globalsWhitelist.ts                                    | TypeScript       |          6 |          0 |          3 |          9 |
+| d:\code\source code\vue-next\packages\shared\src\index.ts                                               | TypeScript       |        130 |         24 |         29 |        183 |
+| d:\code\source code\vue-next\packages\shared\src\looseEqual.ts                                          | TypeScript       |         49 |          1 |          4 |         54 |
+| d:\code\source code\vue-next\packages\shared\src\makeMap.ts                                             | TypeScript       |         11 |          7 |          1 |         19 |
+| d:\code\source code\vue-next\packages\shared\src\normalizeProp.ts                                       | TypeScript       |         71 |          1 |          7 |         79 |
+| d:\code\source code\vue-next\packages\shared\src\patchFlags.ts                                          | TypeScript       |         32 |         94 |         15 |        141 |
+| d:\code\source code\vue-next\packages\shared\src\shapeFlags.ts                                          | TypeScript       |         13 |          0 |          1 |         14 |
+| d:\code\source code\vue-next\packages\shared\src\slotFlags.ts                                           | TypeScript       |         10 |         19 |          2 |         31 |
+| d:\code\source code\vue-next\packages\shared\src\toDisplayString.ts                                     | TypeScript       |         25 |          4 |          3 |         32 |
+| d:\code\source code\vue-next\packages\size-check\README.md                                              | Markdown         |          2 |          0 |          2 |          4 |
+| d:\code\source code\vue-next\packages\size-check\package.json                                           | JSON             |         11 |          0 |          1 |         12 |
+| d:\code\source code\vue-next\packages\size-check\src\index.ts                                           | TypeScript       |          4 |          1 |          2 |          7 |
+| d:\code\source code\vue-next\packages\template-explorer\README.md                                       | Markdown         |          6 |          0 |          5 |         11 |
+| d:\code\source code\vue-next\packages\template-explorer\index.html                                      | HTML             |         18 |          0 |          3 |         21 |
+| d:\code\source code\vue-next\packages\template-explorer\local.html                                      | HTML             |         18 |          0 |          3 |         21 |
+| d:\code\source code\vue-next\packages\template-explorer\package.json                                    | JSON             |         15 |          0 |          1 |         16 |
+| d:\code\source code\vue-next\packages\template-explorer\src\index.ts                                    | TypeScript       |        219 |          5 |         22 |        246 |
+| d:\code\source code\vue-next\packages\template-explorer\src\options.ts                                  | TypeScript       |        173 |          8 |         14 |        195 |
+| d:\code\source code\vue-next\packages\template-explorer\src\theme.ts                                    | TypeScript       |        244 |          0 |          1 |        245 |
+| d:\code\source code\vue-next\packages\template-explorer\style.css                                       | CSS              |         79 |          0 |         16 |         95 |
+| d:\code\source code\vue-next\packages\vue\README.md                                                     | Markdown         |         39 |          0 |         16 |         55 |
+| d:\code\source code\vue-next\packages\vue\__tests__\Transition.spec.ts                                  | TypeScript       |      1,746 |         62 |        104 |      1,912 |
+| d:\code\source code\vue-next\packages\vue\__tests__\TransitionGroup.spec.ts                             | TypeScript       |        481 |          7 |         24 |        512 |
+| d:\code\source code\vue-next\packages\vue\__tests__\e2eUtils.ts                                         | TypeScript       |        147 |          0 |         29 |        176 |
+| d:\code\source code\vue-next\packages\vue\__tests__\index.spec.ts                                       | TypeScript       |        272 |          2 |         31 |        305 |
+| d:\code\source code\vue-next\packages\vue\__tests__\svgNamespace.spec.ts                                | TypeScript       |         51 |          8 |          5 |         64 |
+| d:\code\source code\vue-next\packages\vue\__tests__\transition.html                                     | HTML             |         50 |          0 |          2 |         52 |
+| d:\code\source code\vue-next\packages\vue\api-extractor.json                                            | JSON             |          7 |          0 |          1 |          8 |
+| d:\code\source code\vue-next\packages\vue\examples\__tests__\commits.mock.ts                            | TypeScript       |        575 |          0 |          1 |        576 |
+| d:\code\source code\vue-next\packages\vue\examples\__tests__\commits.spec.ts                            | TypeScript       |         57 |          1 |          7 |         65 |
+| d:\code\source code\vue-next\packages\vue\examples\__tests__\grid.spec.ts                               | TypeScript       |        107 |          0 |         15 |        122 |
+| d:\code\source code\vue-next\packages\vue\examples\__tests__\markdown.spec.ts                           | TypeScript       |         41 |          1 |          7 |         49 |
+| d:\code\source code\vue-next\packages\vue\examples\__tests__\svg.spec.ts                                | TypeScript       |        135 |          3 |         20 |        158 |
+| d:\code\source code\vue-next\packages\vue\examples\__tests__\todomvc.spec.ts                            | TypeScript       |        146 |         16 |         26 |        188 |
+| d:\code\source code\vue-next\packages\vue\examples\__tests__\tree.spec.ts                               | TypeScript       |        101 |          3 |         12 |        116 |
+| d:\code\source code\vue-next\packages\vue\examples\classic\commits.html                                 | HTML             |         69 |          0 |          8 |         77 |
+| d:\code\source code\vue-next\packages\vue\examples\classic\grid.html                                    | HTML             |        151 |          4 |         13 |        168 |
+| d:\code\source code\vue-next\packages\vue\examples\classic\markdown.html                                | HTML             |         57 |          0 |          8 |         65 |
+| d:\code\source code\vue-next\packages\vue\examples\classic\svg.html                                     | HTML             |        146 |          4 |         13 |        163 |
+| d:\code\source code\vue-next\packages\vue\examples\classic\todomvc.html                                 | HTML             |        180 |          0 |         17 |        197 |
+| d:\code\source code\vue-next\packages\vue\examples\classic\tree.html                                    | HTML             |        118 |          3 |          7 |        128 |
+| d:\code\source code\vue-next\packages\vue\examples\composition\commits.html                             | HTML             |         67 |          0 |          9 |         76 |
+| d:\code\source code\vue-next\packages\vue\examples\composition\grid.html                                | HTML             |        152 |          4 |         18 |        174 |
+| d:\code\source code\vue-next\packages\vue\examples\composition\markdown.html                            | HTML             |         55 |          0 |          9 |         64 |
+| d:\code\source code\vue-next\packages\vue\examples\composition\svg.html                                 | HTML             |        152 |          4 |         17 |        173 |
+| d:\code\source code\vue-next\packages\vue\examples\composition\todomvc.html                             | HTML             |        187 |          0 |         20 |        207 |
+| d:\code\source code\vue-next\packages\vue\examples\composition\tree.html                                | HTML             |        116 |          3 |         12 |        131 |
+| d:\code\source code\vue-next\packages\vue\examples\transition\list.html                                 | HTML             |         78 |          0 |          6 |         84 |
+| d:\code\source code\vue-next\packages\vue\examples\transition\modal.html                                | HTML             |        110 |          4 |         18 |        132 |
+| d:\code\source code\vue-next\packages\vue\index.js                                                      | JavaScript       |          6 |          0 |          2 |          8 |
+| d:\code\source code\vue-next\packages\vue\package.json                                                  | JSON             |         49 |          0 |          1 |         50 |
+| d:\code\source code\vue-next\packages\vue\src\dev.ts                                                    | TypeScript       |         12 |          0 |          3 |         15 |
+| d:\code\source code\vue-next\packages\vue\src\index.ts                                                  | TypeScript       |         67 |         12 |         12 |         91 |
+| d:\code\source code\vue-next\packages\vue\src\runtime.ts                                                | TypeScript       |         20 |          2 |          4 |         26 |
+| d:\code\source code\vue-next\rollup.config.js                                                           | JavaScript       |        229 |         18 |         24 |        271 |
+| d:\code\source code\vue-next\scripts\bootstrap.js                                                       | JavaScript       |         88 |          1 |         11 |        100 |
+| d:\code\source code\vue-next\scripts\build.js                                                           | JavaScript       |        150 |         20 |         20 |        190 |
+| d:\code\source code\vue-next\scripts\checkYarn.js                                                       | JavaScript       |          6 |          0 |          1 |          7 |
+| d:\code\source code\vue-next\scripts\dev.js                                                             | JavaScript       |         25 |         17 |          3 |         45 |
+| d:\code\source code\vue-next\scripts\release.js                                                         | JavaScript       |        179 |         14 |         28 |        221 |
+| d:\code\source code\vue-next\scripts\setupJestEnv.ts                                                    | TypeScript       |         86 |          0 |          7 |         93 |
+| d:\code\source code\vue-next\scripts\utils.js                                                           | JavaScript       |         37 |          0 |          4 |         41 |
+| d:\code\source code\vue-next\scripts\verifyCommit.js                                                    | JavaScript       |         23 |          1 |          4 |         28 |
+| d:\code\source code\vue-next\test-dts\README.md                                                         | Markdown         |          7 |          0 |          7 |         14 |
+| d:\code\source code\vue-next\test-dts\component.test-d.ts                                               | TypeScript       |        332 |         54 |         45 |        431 |
+| d:\code\source code\vue-next\test-dts\componentTypeExtensions.test-d.tsx                                | TypeScript React |         41 |          7 |         10 |         58 |
+| d:\code\source code\vue-next\test-dts\defineComponent.test-d.tsx                                        | TypeScript React |        738 |        168 |         79 |        985 |
+| d:\code\source code\vue-next\test-dts\functionalComponent.test-d.tsx                                    | TypeScript React |         47 |         16 |         12 |         75 |
+| d:\code\source code\vue-next\test-dts\h.test-d.ts                                                       | TypeScript       |        149 |         62 |         25 |        236 |
+| d:\code\source code\vue-next\test-dts\index.d.ts                                                        | TypeScript       |          5 |          5 |          4 |         14 |
+| d:\code\source code\vue-next\test-dts\inject.test-d.ts                                                  | TypeScript       |         10 |          1 |          5 |         16 |
+| d:\code\source code\vue-next\test-dts\reactivity.test-d.ts                                              | TypeScript       |          6 |          2 |          2 |         10 |
+| d:\code\source code\vue-next\test-dts\ref.test-d.ts                                                     | TypeScript       |        147 |         24 |         35 |        206 |
+| d:\code\source code\vue-next\test-dts\setupHelpers.test-d.ts                                            | TypeScript       |         68 |         12 |         10 |         90 |
+| d:\code\source code\vue-next\test-dts\tsconfig.build.json                                               | JSON             |         21 |          1 |          1 |         23 |
+| d:\code\source code\vue-next\test-dts\tsconfig.json                                                     | JSON             |          7 |          2 |          0 |          9 |
+| d:\code\source code\vue-next\test-dts\tsx.test-d.tsx                                                    | TypeScript React |         41 |         13 |         12 |         66 |
+| d:\code\source code\vue-next\test-dts\watch.test-d.ts                                                   | TypeScript       |         59 |          7 |         12 |         78 |
+| d:\code\source code\vue-next\tsconfig.json                                                              | JSON             |         31 |          1 |          1 |         33 |
+| Total                                                                                                   |                  |     77,307 |     28,867 |      8,815 |    114,989 |
++---------------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
