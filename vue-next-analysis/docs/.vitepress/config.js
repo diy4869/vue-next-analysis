@@ -1,6 +1,7 @@
 const path = require('path')
 
 module.exports = {
+  base: '/vue-next-analysis/',
   title: 'vue-next源码解析',
   themeConfig: {
     nav: [

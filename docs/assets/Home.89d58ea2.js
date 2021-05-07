@@ -17,12 +17,12 @@ import {
   w as p,
   j as h,
   k
-} from './app.44bd8f0e.js'
+} from './app.9fcbf8b2.js'
 u('data-v-1d68b262')
 const x = { key: 0, class: 'home-hero' },
   y = { key: 0, class: 'figure' },
-  g = { key: 1, id: 'main-title', class: 'title' },
-  b = { key: 2, class: 'description' }
+  b = { key: 1, id: 'main-title', class: 'title' },
+  g = { key: 2, class: 'description' }
 d()
 var $ = e({
   expose: [],
@@ -56,8 +56,8 @@ var $ = e({
                   )
                 ]))
               : n('v-if', !0),
-            l(m) ? (i(), o('h1', g, c(l(p)), 1)) : n('v-if', !0),
-            l(h) ? (i(), o('p', b, c(l(k)), 1)) : n('v-if', !0),
+            l(m) ? (i(), o('h1', b, c(l(p)), 1)) : n('v-if', !0),
+            l(h) ? (i(), o('p', g, c(l(k)), 1)) : n('v-if', !0),
             l($)
               ? (i(),
                 o(

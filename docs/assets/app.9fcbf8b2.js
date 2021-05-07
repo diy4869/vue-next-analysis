@@ -47,7 +47,7 @@ function l(e, t) {
       })),
       (self[t].moduleMap = {})
   }
-})('/assets/')
+})('/vue-next-analysis/assets/')
 const i = l(
     'Infinity,undefined,NaN,isFinite,isNaN,parseFloat,parseInt,decodeURI,decodeURIComponent,encodeURI,encodeURIComponent,Math,Number,Date,Array,Object,Boolean,String,RegExp,Map,Set,JSON,Intl,BigInt'
   ),
@@ -3173,7 +3173,7 @@ function Er(e, t) {
 function Or(e) {
   let t = e.replace(/\.html$/, '')
   if ((t.endsWith('/') && (t += 'index'), Cr)) {
-    const e = '/'
+    const e = '/vue-next-analysis/'
     t = t.slice(e.length).replace(/\//g, '_') + '.md'
     const n = __VP_HASH_MAP__[t.toLowerCase()]
     t = `${e}assets/${t}.${n}.js`
@@ -3220,7 +3220,7 @@ const Pr = Kn({
   })
 const Fr = it(
   ((Ar =
-    '{"lang":"en-US","title":"vue-next源码解析","description":"A VitePress site","base":"/","head":[],"themeConfig":{"nav":[{"text":"Github","link":"https://github.com/diy4869/vue-next-analysis"}],"sidebar":[{"text":"个人介绍","link":"/components/my"},{"text":"准备工作","children":[{"text":"一些基本知识","link":""},{"text":"Rollup","link":""},{"text":"Typescript","link":""},{"text":"项目目录","link":""}]},{"text":"初始化渲染","children":[{"text":"createApp","link":""},{"text":"render","link":""},{"text":"...","link":""}]},{"text":"响应式","children":[{"text":"reactive","link":""},{"text":"ref","link":""},{"text":"...","link":""}]},{"text":"编译","children":[{"text":"diff","link":""},{"text":"...","link":""}]},{"text":"服务端渲染","children":[{"text":"serverRender","link":""},{"text":"...","link":""}]}]},"locales":{},"customData":{}}'),
+    '{"lang":"en-US","title":"vue-next源码解析","description":"A VitePress site","base":"/vue-next-analysis/","head":[],"themeConfig":{"nav":[{"text":"Github","link":"https://github.com/diy4869/vue-next-analysis"}],"sidebar":[{"text":"个人介绍","link":"/components/my"},{"text":"准备工作","children":[{"text":"一些基本知识","link":""},{"text":"Rollup","link":""},{"text":"Typescript","link":""},{"text":"项目目录","link":""}]},{"text":"初始化渲染","children":[{"text":"createApp","link":""},{"text":"render","link":""},{"text":"...","link":""}]},{"text":"响应式","children":[{"text":"reactive","link":""},{"text":"ref","link":""},{"text":"...","link":""}]},{"text":"编译","children":[{"text":"diff","link":""},{"text":"...","link":""}]},{"text":"服务端渲染","children":[{"text":"serverRender","link":""},{"text":"...","link":""}]}]},"locales":{},"customData":{}}'),
   Ze(JSON.parse(Ar)))
 )
 var Ar
@@ -4205,7 +4205,7 @@ const yl = { key: 0, id: 'ads-container' }
 var bl = Kn({
   expose: [],
   setup(e) {
-    const t = Gn(() => import('./Home.02491af4.js')),
+    const t = Gn(() => import('./Home.89d58ea2.js')),
       n = () => null,
       o = n,
       r = n,

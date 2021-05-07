@@ -4,7 +4,11 @@ This is the repository for Vue 3.0.
 
 ## 源码解析
 
-该仓库[ vue-next ](https://github.com/vuejs/vue-next)的版本为3.0.11，佛系更新源码解析，会给代码加上注释，文档不一定会写（大概）
+该仓库[ vue-next ](https://github.com/vuejs/vue-next)的版本为3.0.11
+
+## 文档地址
+
+[vue-next-analysis](https://diy4869.github.io/vue-next-analysis/)部署于github pages
 
 ## Quickstart
 
