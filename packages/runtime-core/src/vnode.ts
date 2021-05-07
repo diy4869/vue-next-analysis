@@ -310,6 +310,7 @@ export function transformVNodeArgs(transformer?: typeof vnodeArgsTransformer) {
 const createVNodeWithArgsTransform = (
   ...args: Parameters<typeof _createVNode>
 ): VNode => {
+  console.log('args', vnodeArgsTransformer, currentRenderingInstance)
   return _createVNode(
     ...(vnodeArgsTransformer
       ? vnodeArgsTransformer(args, currentRenderingInstance)
@@ -342,6 +343,9 @@ function _createVNode(
   dynamicProps: string[] | null = null,
   isBlockNode = false
 ): VNode {
+  console.log('_createVNode')
+  console.log(type, props, children, patchFlag, dynamicProps, isBlockNode)
+
   if (!type || type === NULL_DYNAMIC_COMPONENT) {
     if (__DEV__ && !type) {
       warn(`Invalid vnode type when creating vnode: ${type}.`)

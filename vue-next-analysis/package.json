@@ -1,0 +1,16 @@
+{
+  "name": "vitepress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev:docs": "vitepress dev docs",
+    "build:docs": "vitepress build docs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vitepress": "^0.13.2"
+  }
+}

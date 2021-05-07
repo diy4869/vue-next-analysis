@@ -64,8 +64,10 @@ export const createApp = ((...args) => {
   if (__DEV__) {
     // 检查是否原生标签
     injectNativeTagCheck(app)
+    // 检查是否自定义标签
     injectCompilerOptionsCheck(app)
   }
+  console.log(app)
 
   const { mount } = app
   app.mount = (containerOrSelector: Element | ShadowRoot | string): any => {
@@ -75,6 +77,9 @@ export const createApp = ((...args) => {
 
     const component = app._component
     //
+    // console.log(!isFunction(component), !component.render, !component.template)
+
+    // return
     if (!isFunction(component) && !component.render && !component.template) {
       // __UNSAFE__
       // Reason: potential execution of JS expressions in in-DOM template.
@@ -82,6 +87,11 @@ export const createApp = ((...args) => {
       // rendered by the server, the template should not contain any user data.
       component.template = container.innerHTML
       // 2.x compat check
+      console.log('兼容', __COMPAT__)
+      /**
+       * __COMPAT__ 是启动的时候通过rollup去注入进去的
+       * 用来判断是否向下兼容
+       */
       if (__COMPAT__ && __DEV__) {
         for (let i = 0; i < container.attributes.length; i++) {
           const attr = container.attributes[i]
@@ -95,10 +105,12 @@ export const createApp = ((...args) => {
         }
       }
     }
-    // clear content before mounting
+    // 渲染前清空html
     container.innerHTML = ''
+    // 挂载元素进行渲染
     const proxy = mount(container, false, container instanceof SVGElement)
     if (container instanceof Element) {
+      // vue2的话，会给#app设置一个v-cloak属性，在render的时候清空掉
       container.removeAttribute('v-cloak')
       container.setAttribute('data-v-app', '')
     }

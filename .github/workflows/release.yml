@@ -1,0 +1,15 @@
+on:
+  push:
+    branches:
+     - master
+
+name: Release docs
+
+jobs:
+  build:
+    name: Release docs
+    runs-on: ubuntu-latest
+    steps:
+     - name: Build Docs
+       run: npm run buid
+       shell: bash

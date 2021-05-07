@@ -266,12 +266,15 @@ export function createAppAPI<HostElement>(
         isSVG?: boolean
       ): any {
         if (!isMounted) {
+          // 创建Vnode
           const vnode = createVNode(
             rootComponent as ConcreteComponent,
             rootProps
           )
           // store app context on the root VNode.
           // this will be set on the root instance on initial mount.
+          console.log('vnode', vnode)
+
           vnode.appContext = context
 
           // HMR root reload

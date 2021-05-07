@@ -5,6 +5,8 @@
     "packages/*"
   ],
   "scripts": {
+    "dev:docs": "cd vue-next-analysis && npm install && npm run dev:docs",
+    "build:docs": "cd vue-next-analysis && npm run build:docs",
     "dev": "node scripts/dev.js",
     "build": "node scripts/build.js",
     "size": "node scripts/build.js vue runtime-dom size-check -p -f global",
@@ -79,5 +81,6 @@
     "ts-jest": "^26.2.0",
     "typescript": "^4.2.2",
     "yorkie": "^2.0.0"
-  }
+  },
+  "dependencies": {}
 }
