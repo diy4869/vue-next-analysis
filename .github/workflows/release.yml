@@ -18,5 +18,5 @@ jobs:
       with:
         node-version: '14.12'
     - name: Build Docs
-      run: npm run buid:docs
+      run: npm run build:docs
       shell: bash
