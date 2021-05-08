@@ -346,6 +346,7 @@ function _createVNode(
   console.log('_createVNode')
   console.log(type, props, children, patchFlag, dynamicProps, isBlockNode)
 
+  return
   if (!type || type === NULL_DYNAMIC_COMPONENT) {
     if (__DEV__ && !type) {
       warn(`Invalid vnode type when creating vnode: ${type}.`)

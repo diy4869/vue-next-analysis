@@ -12,7 +12,7 @@ module.exports = {
     ],
     sidebar: [
       {
-        text: '个人介绍',
+        text: '*个人介绍',
         link: '/components/my'
       },
       {
@@ -20,6 +20,14 @@ module.exports = {
         children: [
           {
             text: '一些基本知识',
+            link: '/components/base'
+          },
+          {
+            text: '如何debug',
+            link: '/components/debug'
+          },
+          {
+            text: '位运算',
             link: ''
           },
           {
@@ -29,10 +37,6 @@ module.exports = {
           {
             text: 'Typescript',
             link: ''
-          },
-          {
-            text: '项目目录',
-            link: ''
           }
         ]
       },
@@ -41,8 +45,16 @@ module.exports = {
         text: '初始化渲染',
         children: [
           {
-            text: 'createApp',
-            link: ''
+            text: '*createApp',
+            link: '/components/createApp'
+          },
+          {
+            text: 'vnode',
+            link: '/components/vnode'
+          },
+          {
+            text: 'compiler',
+            link: '/components/compiler'
           },
           {
             text: 'render',

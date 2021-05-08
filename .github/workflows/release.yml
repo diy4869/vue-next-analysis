@@ -11,5 +11,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
      - name: Build Docs
-       run: npm run buid
+       run: npm run buid:docs
        shell: bash

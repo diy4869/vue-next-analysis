@@ -33,10 +33,7 @@ let renderer: Renderer<Element> | HydrationRenderer
 let enabledHydration = false
 
 function ensureRenderer() {
-  console.log(
-    'render',
-    renderer || (renderer = createRenderer<Node, Element>(rendererOptions))
-  )
+  console.log('render', rendererOptions)
   return renderer || (renderer = createRenderer<Node, Element>(rendererOptions))
 }
 
@@ -58,7 +55,6 @@ export const hydrate = ((...args) => {
 }) as RootHydrateFunction
 
 export const createApp = ((...args) => {
-  console.log('args', args)
   const app = ensureRenderer().createApp(...args)
 
   if (__DEV__) {
@@ -80,11 +76,13 @@ export const createApp = ((...args) => {
     // console.log(!isFunction(component), !component.render, !component.template)
 
     // return
+    // component不是函数，且不存在render和template
     if (!isFunction(component) && !component.render && !component.template) {
       // __UNSAFE__
       // Reason: potential execution of JS expressions in in-DOM template.
       // The user must make sure the in-DOM template is trusted. If it's
       // rendered by the server, the template should not contain any user data.
+      // 临时保存需要渲染的内容
       component.template = container.innerHTML
       // 2.x compat check
       console.log('兼容', __COMPAT__)

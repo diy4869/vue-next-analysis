@@ -275,6 +275,7 @@ export function createAppAPI<HostElement>(
           // this will be set on the root instance on initial mount.
           console.log('vnode', vnode)
 
+          return
           vnode.appContext = context
 
           // HMR root reload
