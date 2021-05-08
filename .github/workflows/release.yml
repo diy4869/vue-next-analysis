@@ -20,7 +20,7 @@ jobs:
     - name: Build Docs
       run: cd vue-next-analysis
       run: npm install
-      run: cd ..
+      run: cd ../
       run: ls
       run: npm run build:docs
       shell: bash
