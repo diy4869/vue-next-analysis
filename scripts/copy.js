@@ -120,7 +120,7 @@ const copy = (fromPath, toPath) => {
 ;(async () => {
   const dir = path.resolve(__dirname, '../docs')
   exec(
-    ['cd ../', 'ls', 'rm -rf docs'].join(' && '),
+    ['ls', 'cd ../', 'ls', 'rm -rf docs', 'ls'].join(' && '),
     {
       shell: 'bash.exe'
     },
