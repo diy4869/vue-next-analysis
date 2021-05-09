@@ -28,7 +28,7 @@ module.exports = {
           },
           {
             text: '位运算',
-            link: ''
+            link: '/components/bitOperators'
           },
           {
             text: 'Rollup',

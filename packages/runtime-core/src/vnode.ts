@@ -131,7 +131,7 @@ export interface VNode<
   /**
    * @internal
    */
-  __v_isVNode: true
+  __v_isVNode: true // 标记为vnode
 
   /**
    * @internal
@@ -274,6 +274,7 @@ export function createBlock(
   return vnode
 }
 
+// 判断是否为vnode
 export function isVNode(value: any): value is VNode {
   return value ? value.__v_isVNode === true : false
 }
@@ -346,7 +347,7 @@ function _createVNode(
   console.log('_createVNode')
   console.log(type, props, children, patchFlag, dynamicProps, isBlockNode)
 
-  return
+  // return
   if (!type || type === NULL_DYNAMIC_COMPONENT) {
     if (__DEV__ && !type) {
       warn(`Invalid vnode type when creating vnode: ${type}.`)
@@ -366,6 +367,7 @@ function _createVNode(
   }
 
   // class component normalization.
+  // 是否为class组件，如果为class组件会多一个__vccOpts 属性
   if (isClassComponent(type)) {
     type = type.__vccOpts
   }

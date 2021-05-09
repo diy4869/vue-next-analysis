@@ -275,7 +275,6 @@ export function createAppAPI<HostElement>(
           // this will be set on the root instance on initial mount.
           console.log('vnode', vnode)
 
-          return
           vnode.appContext = context
 
           // HMR root reload
@@ -288,8 +287,10 @@ export function createAppAPI<HostElement>(
           if (isHydrate && hydrate) {
             hydrate(vnode as VNode<Node, Element>, rootContainer as any)
           } else {
+            console.log('else')
             render(vnode, rootContainer, isSVG)
           }
+          return
           isMounted = true
           app._container = rootContainer
           // for devtools and telemetry
