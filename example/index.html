@@ -23,6 +23,15 @@
         
         <button @click="add">增加</button>
         <test :count="count"></test>
+        <ul>
+            <li v-for="item in 10">{{ item }}</li>
+        </ul>
+        <suspense>
+            <div id="suspense">supense组件</div>
+        </suspense>
+        <teleport to="body #suspense">
+            <div>telport组件</div>
+        </teleport>
     </div>
 
 </body>

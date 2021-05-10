@@ -3220,7 +3220,7 @@ const Pr = Kn({
   })
 const Fr = it(
   ((Ar =
-    '{"lang":"en-US","title":"vue-next源码解析","description":"A VitePress site","base":"/vue-next-analysis/","head":[],"themeConfig":{"nav":[{"text":"Github","link":"https://github.com/diy4869/vue-next-analysis"}],"sidebar":[{"text":"*个人介绍","link":"/components/my"},{"text":"准备工作","children":[{"text":"一些基本知识","link":"/components/base"},{"text":"如何debug","link":"/components/debug"},{"text":"位运算","link":"/components/bitOperators"},{"text":"Rollup","link":""},{"text":"Typescript","link":""}]},{"text":"初始化渲染","children":[{"text":"*createApp","link":"/components/createApp"},{"text":"vnode","link":"/components/vnode"},{"text":"compiler","link":"/components/compiler"},{"text":"render","link":""},{"text":"...","link":""}]},{"text":"响应式","children":[{"text":"reactive","link":""},{"text":"ref","link":""},{"text":"...","link":""}]},{"text":"编译","children":[{"text":"diff","link":""},{"text":"...","link":""}]},{"text":"服务端渲染","children":[{"text":"serverRender","link":""},{"text":"...","link":""}]}]},"locales":{},"customData":{}}'),
+    '{"lang":"en-US","title":"vue-next源码解析","description":"A VitePress site","base":"/vue-next-analysis/","head":[],"themeConfig":{"nav":[{"text":"Github","link":"https://github.com/diy4869/vue-next-analysis"}],"sidebar":[{"text":"☆ 个人介绍","link":"/components/my"},{"text":"准备工作","children":[{"text":"一些基本知识","link":"/components/base"},{"text":"☆ 如何debug","link":"/components/debug"},{"text":"☆ 位运算","link":"/components/bitOperators"},{"text":"Rollup","link":""},{"text":"Typescript","link":""}]},{"text":"初始化渲染","children":[{"text":"☆ createApp","link":"/components/createApp"},{"text":"vnode","link":"/components/vnode"},{"text":"compiler","link":"/components/compiler"},{"text":"render","link":""},{"text":"...","link":""}]},{"text":"响应式","children":[{"text":"reactive","link":""},{"text":"ref","link":""},{"text":"...","link":""}]},{"text":"编译","children":[{"text":"diff","link":""},{"text":"...","link":""}]},{"text":"服务端渲染","children":[{"text":"serverRender","link":""},{"text":"...","link":""}]}]},"locales":{},"customData":{}}'),
   Ze(JSON.parse(Ar)))
 )
 var Ar
@@ -4205,7 +4205,7 @@ const yl = { key: 0, id: 'ads-container' }
 var bl = Kn({
   expose: [],
   setup(e) {
-    const t = Gn(() => import('./Home.6d29bb46.js')),
+    const t = Gn(() => import('./Home.58093936.js')),
       n = () => null,
       o = n,
       r = n,
@@ -4649,11 +4649,11 @@ if (Cr) {
 export {
   so as F,
   ps as _,
-  _o as a,
-  wo as b,
+  ko as a,
+  _o as b,
   ho as c,
   Rl as createApp,
-  ko as d,
+  wo as d,
   Kn as e,
   Br as f,
   Zo as g,

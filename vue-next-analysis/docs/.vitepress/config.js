@@ -12,7 +12,7 @@ module.exports = {
     ],
     sidebar: [
       {
-        text: '*个人介绍',
+        text: '☆ 个人介绍',
         link: '/components/my'
       },
       {
@@ -23,11 +23,11 @@ module.exports = {
             link: '/components/base'
           },
           {
-            text: '如何debug',
+            text: '☆ 如何debug',
             link: '/components/debug'
           },
           {
-            text: '位运算',
+            text: '☆ 位运算',
             link: '/components/bitOperators'
           },
           {
@@ -45,7 +45,7 @@ module.exports = {
         text: '初始化渲染',
         children: [
           {
-            text: '*createApp',
+            text: '☆ createApp',
             link: '/components/createApp'
           },
           {

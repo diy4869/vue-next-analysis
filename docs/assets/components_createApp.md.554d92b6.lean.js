@@ -1,4 +1,4 @@
-import { o as n, c as s, d as a } from './app.bbc322cf.js'
+import { o as n, c as s, a } from './app.c706ff80.js'
 const p =
     '{"title":"createApp","description":"","frontmatter":{},"headers":[{"level":2,"title":"createApp","slug":"createapp"},{"level":3,"title":"createAppAPI","slug":"createappapi"},{"level":2,"title":"mount 挂载","slug":"mount-挂载"},{"level":2,"title":"总结","slug":"总结"}],"relativePath":"components/createApp.md","lastUpdated":1620466390171}',
   t = {},

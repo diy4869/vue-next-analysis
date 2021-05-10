@@ -6,7 +6,7 @@ import {
   h as l,
   o as i,
   c as o,
-  a as r,
+  b as r,
   i as n,
   t as c,
   _ as v,
@@ -17,7 +17,7 @@ import {
   w as p,
   k as h,
   l as k
-} from './app.bbc322cf.js'
+} from './app.c706ff80.js'
 u('data-v-1d68b262')
 const x = { key: 0, class: 'home-hero' },
   y = { key: 0, class: 'figure' },

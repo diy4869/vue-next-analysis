@@ -397,7 +397,19 @@ function _createVNode(
     }
   }
 
-  // encode the vnode type information into a bitmap
+  // encode the vnode type information into a bitmap 将vnode类型进行位运算编码
+  /**
+   * 注：
+   *  suspence组件会多__isSuspense属性
+   *  teleport会多一个__isTeleport属性
+   *
+   * if 如果是string 则为1
+   * else if 如果__FEATURE_SUSPENSE__ 并且是suspense组件 则为 128 __FEATURE_SUSPENSE__不知道是啥，没找到，只翻到一个类型定义为boolean
+   * else if 如果是teleport组件为64
+   * else if 如果是对象，则为4
+   * else if 如果是函数，则为2
+   * else 否则为0
+   */
   const shapeFlag = isString(type)
     ? ShapeFlags.ELEMENT
     : __FEATURE_SUSPENSE__ && isSuspense(type)
