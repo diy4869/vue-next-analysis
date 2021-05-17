@@ -209,6 +209,7 @@ function createReactiveObject(
   return proxy
 }
 
+// 是否reactive
 export function isReactive(value: unknown): boolean {
   if (isReadonly(value)) {
     return isReactive((value as Target)[ReactiveFlags.RAW])
@@ -216,10 +217,12 @@ export function isReactive(value: unknown): boolean {
   return !!(value && (value as Target)[ReactiveFlags.IS_REACTIVE])
 }
 
+// 是否只读
 export function isReadonly(value: unknown): boolean {
   return !!(value && (value as Target)[ReactiveFlags.IS_READONLY])
 }
 
+// 是否代理
 export function isProxy(value: unknown): boolean {
   return isReactive(value) || isReadonly(value)
 }

@@ -93,7 +93,7 @@ export interface AppConfig {
 }
 
 export interface AppContext {
-  app: App // for devtools
+  app: App // for devtools 应用于 vue devtools
   config: AppConfig
   mixins: ComponentOptions[]
   components: Record<string, Component>

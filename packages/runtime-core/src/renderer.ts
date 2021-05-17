@@ -1271,6 +1271,7 @@ function baseCreateRenderer(
   ) => {
     n2.slotScopeIds = slotScopeIds
     if (n1 == null) {
+      // 是否keepAlive组件
       if (n2.shapeFlag & ShapeFlags.COMPONENT_KEPT_ALIVE) {
         ;(parentComponent!.ctx as KeepAliveContext).activate(
           n2,
@@ -1280,6 +1281,7 @@ function baseCreateRenderer(
           optimized
         )
       } else {
+        // 挂载组件
         mountComponent(
           n2,
           container,
@@ -1304,6 +1306,7 @@ function baseCreateRenderer(
     isSVG,
     optimized
   ) => {
+    // 2.x 在实际创建组件之前，预先创建了组件实例
     // 2.x compat may pre-creaate the component instance before actually
     // mounting
     const compatMountInstance = __COMPAT__ && initialVNode.component
@@ -2355,7 +2358,9 @@ function baseCreateRenderer(
   const render: RootRenderFunction = (vnode, container, isSVG) => {
     console.log('renderFn', vnode, container)
 
+    // 如果vnode不存在
     if (vnode == null) {
+      // 该container
       if (container._vnode) {
         unmount(container._vnode, null, null, true)
       }

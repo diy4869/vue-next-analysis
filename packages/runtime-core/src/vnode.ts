@@ -172,12 +172,12 @@ export interface VNode<
   ssFallback: VNode | null
 
   // optimization only
-  shapeFlag: number
-  patchFlag: number
+  shapeFlag: number // 类型标记
+  patchFlag: number // diff标记
   dynamicProps: string[] | null
   dynamicChildren: VNode[] | null
 
-  // application root node only
+  // application root node only 只限于根节点
   appContext: AppContext | null
 }
 
@@ -218,6 +218,7 @@ export function closeBlock() {
 // Only tracks when this value is > 0
 // We are not using a simple boolean because this value may need to be
 // incremented/decremented by nested usage of v-once (see below)
+// 是否跟踪动态子节点，只有大于0才跟踪
 let shouldTrack = 1
 
 /**
@@ -342,7 +343,7 @@ function _createVNode(
   children: unknown = null,
   patchFlag: number = 0,
   dynamicProps: string[] | null = null,
-  isBlockNode = false
+  isBlockNode = false // 是否为块节点
 ): VNode {
   console.log('_createVNode')
   console.log(type, props, children, patchFlag, dynamicProps, isBlockNode)
@@ -355,6 +356,7 @@ function _createVNode(
     type = Comment
   }
 
+  // 判断是否为Vnode，Vnode会存在__v_isVNode属性标识该节点为vnode
   if (isVNode(type)) {
     // createVNode receiving an existing vnode. This happens in cases like
     // <component :is="vnode"/>
@@ -469,7 +471,7 @@ function _createVNode(
 
   normalizeChildren(vnode, children)
 
-  // normalize suspense children
+  // normalize suspense children __FEATURE_SUSPENSE__ 暂不清楚不知道是啥
   if (__FEATURE_SUSPENSE__ && shapeFlag & ShapeFlags.SUSPENSE) {
     const { content, fallback } = normalizeSuspenseChildren(vnode)
     vnode.ssContent = content
@@ -477,10 +479,13 @@ function _createVNode(
   }
 
   if (
+    // 当shouldTrack 大于0
     shouldTrack > 0 &&
     // avoid a block node from tracking itself
+    // 并且不是块节点
     !isBlockNode &&
     // has current parent block
+    // 是否是当前父级块节点
     currentBlock &&
     // presence of a patch flag indicates this node needs patching on updates.
     // component nodes also should always be patched, because even if the
@@ -494,6 +499,7 @@ function _createVNode(
     currentBlock.push(vnode)
   }
 
+  // 兼容vue2
   if (__COMPAT__) {
     convertLegacyVModelProps(vnode)
     convertLegacyRefInFor(vnode)
@@ -647,6 +653,7 @@ export function normalizeChildren(vnode: VNode, children: unknown) {
   if (children == null) {
     children = null
   } else if (isArray(children)) {
+    // 如果是数组，type = 16
     type = ShapeFlags.ARRAY_CHILDREN
   } else if (typeof children === 'object') {
     if (shapeFlag & ShapeFlags.ELEMENT || shapeFlag & ShapeFlags.TELEPORT) {
@@ -692,7 +699,9 @@ export function normalizeChildren(vnode: VNode, children: unknown) {
       type = ShapeFlags.TEXT_CHILDREN
     }
   }
+  // 如果不是数组，则vnode.children就为null
   vnode.children = children as VNodeNormalizedChildren
+  // vnode.shapeFlag = vnode.shapeFlag | type
   vnode.shapeFlag |= type
 }
 

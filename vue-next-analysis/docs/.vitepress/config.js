@@ -19,16 +19,16 @@ module.exports = {
         text: '准备工作',
         children: [
           {
-            text: '一些基本知识',
-            link: '/components/base'
+            text: '☆ 一些基本知识',
+            link: '/page/base'
           },
           {
             text: '☆ 如何debug',
-            link: '/components/debug'
+            link: '/page/debug'
           },
           {
             text: '☆ 位运算',
-            link: '/components/bitOperators'
+            link: '/page/bitOperators'
           },
           {
             text: 'Rollup',
@@ -46,15 +46,15 @@ module.exports = {
         children: [
           {
             text: '☆ createApp',
-            link: '/components/createApp'
+            link: '/page/createApp'
           },
           {
             text: 'vnode',
-            link: '/components/vnode'
+            link: '/page/vnode'
           },
           {
             text: 'compiler',
-            link: '/components/compiler'
+            link: '/page/compiler'
           },
           {
             text: 'render',
@@ -67,6 +67,44 @@ module.exports = {
         ]
       },
       {
+        text: '指令 directive',
+        children: [
+          {
+            text: 'v-if',
+            link: '/directive/v-if'
+          },
+          {
+            text: 'v-show',
+            link: '/directive/v-show'
+          },
+          {
+            text: 'v-for',
+            link: '/directive/v-for'
+          },
+          {
+            text: 'v-on',
+            link: '/directive/v-on'
+          }
+        ]
+      },
+      {
+        text: '内置组件 components',
+        children: [
+          {
+            text: 'keepAlive',
+            link: '/components/keepAlive'
+          },
+          {
+            text: 'suspense',
+            link: '/components/suspense'
+          },
+          {
+            text: 'teleport',
+            link: '/components/teleport'
+          }
+        ]
+      },
+      {
         text: '响应式',
         children: [
           {
@@ -75,19 +113,6 @@ module.exports = {
           },
           {
             text: 'ref',
-            link: ''
-          },
-          {
-            text: '...',
-            link: ''
-          }
-        ]
-      },
-      {
-        text: '编译',
-        children: [
-          {
-            text: 'diff',
             link: ''
           },
           {
