@@ -44,7 +44,7 @@ export function compile(
   }
 
   const ast = baseParse(template, options)
-
+  console.log('ast', ast)
   // Save raw options for AST. This is needed when performing sub-transforms
   // on slot vnode branches.
   rawOptionsMap.set(ast, options)

@@ -17,6 +17,7 @@ function compileToFunction(
   template: string | HTMLElement,
   options?: CompilerOptions
 ): RenderFunction {
+  // 如果template不是string
   if (!isString(template)) {
     if (template.nodeType) {
       template = template.innerHTML
@@ -27,6 +28,7 @@ function compileToFunction(
   }
 
   const key = template
+  // 保存编译结果，如果已经编译过则直接返回
   const cached = compileCache[key]
   if (cached) {
     return cached
@@ -44,6 +46,7 @@ function compileToFunction(
     template = el ? el.innerHTML : ``
   }
 
+  // 编译模板，生成代码
   const { code } = compile(
     template,
     extend(
@@ -74,6 +77,7 @@ function compileToFunction(
   // with keys that cannot be mangled, and can be quite heavy size-wise.
   // In the global build we know `Vue` is available globally so we can avoid
   // the wildcard object.
+  // 生成的代码通过new Function进行包装
   const render = (__GLOBAL__
     ? new Function(code)()
     : new Function('Vue', code)(runtimeDom)) as RenderFunction

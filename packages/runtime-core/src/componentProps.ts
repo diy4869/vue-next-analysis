@@ -160,6 +160,7 @@ export function initProps(
     validateProps(rawProps || {}, props, instance)
   }
 
+  // 如果有状态
   if (isStateful) {
     // stateful
     instance.props = isSSR ? props : shallowReactive(props)
@@ -427,8 +428,10 @@ export function normalizePropsOptions(
 
   // apply mixin/extends props
   let hasExtends = false
+  // 如果不是函数组件
   if (__FEATURE_OPTIONS_API__ && !isFunction(comp)) {
     const extendProps = (raw: ComponentOptions) => {
+      // 如果是函数且需要兼容
       if (__COMPAT__ && isFunction(raw)) {
         raw = raw.options
       }
@@ -440,14 +443,17 @@ export function normalizePropsOptions(
     if (!asMixin && appContext.mixins.length) {
       appContext.mixins.forEach(extendProps)
     }
+    // 如果存在extends
     if (comp.extends) {
       extendProps(comp.extends)
     }
+    // 如果存在mixins
     if (comp.mixins) {
       comp.mixins.forEach(extendProps)
     }
   }
 
+  // 如果不需要继承 并且
   if (!raw && !hasExtends) {
     return (comp.__props = EMPTY_ARR as any)
   }

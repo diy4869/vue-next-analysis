@@ -38,7 +38,8 @@ export const parserOptions: ParserOptions = {
 
   // https://html.spec.whatwg.org/multipage/parsing.html#tree-construction-dispatcher
   getNamespace(tag: string, parent: ElementNode | undefined): DOMNamespaces {
-    let ns = parent ? parent.ns : DOMNamespaces.HTML
+    // 如果不存在parent.ns 说明是html
+    let ns = parent ? parent.ns : DOMNamespaces.HTML // 0
 
     if (parent && ns === DOMNamespaces.MATH_ML) {
       if (parent.tag === 'annotation-xml') {
@@ -76,9 +77,11 @@ export const parserOptions: ParserOptions = {
 
     if (ns === DOMNamespaces.HTML) {
       if (tag === 'svg') {
+        // 如果tag是svg 说明是svg
         return DOMNamespaces.SVG
       }
       if (tag === 'math') {
+        // 如果tag是math 说明是math ml
         return DOMNamespaces.MATH_ML
       }
     }

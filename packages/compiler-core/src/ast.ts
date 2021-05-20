@@ -570,7 +570,7 @@ export function createVNodeCall(
   }
 
   return {
-    type: NodeTypes.VNODE_CALL,
+    type: NodeTypes.VNODE_CALL, // 13
     tag,
     props,
     children,

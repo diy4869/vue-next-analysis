@@ -19,9 +19,14 @@
 </head>
 <body>
     <div id="app">
-        <span :class="count % 2 === 0 ? 'red' : 'blue'">{{ count }}</span>
+        <span 
+            :class="count % 2 === 0 ? 'red' : 'blue'"
+            :style="'font-size: 14px; font-weight: bold;'"
+        >{{ count }}</span>
         
-        <button @click="add">增加</button>
+        <button @click="add" :style="{
+            color: 'red'
+        }">增加</button>
         <test :count="count"></test>
         <ul>
             <li v-for="item in 10">{{ item }}</li>

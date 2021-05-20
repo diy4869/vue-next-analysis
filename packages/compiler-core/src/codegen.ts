@@ -86,7 +86,7 @@ export interface CodegenContext
   deindent(withoutNewLine?: boolean): void
   newline(): void
 }
-
+// 创建代码生成
 function createCodegenContext(
   ast: RootNode,
   {
@@ -112,7 +112,7 @@ function createCodegenContext(
     runtimeModuleName,
     ssr,
     source: ast.loc.source,
-    code: ``,
+    code: ``, // 最终需要生成的代码
     column: 1,
     line: 1,
     offset: 0,
@@ -151,6 +151,7 @@ function createCodegenContext(
         newline(--context.indentLevel)
       }
     },
+    // 添加新行
     newline() {
       newline(context.indentLevel)
     }
@@ -572,21 +573,26 @@ function genNodeList(
     if (isString(node)) {
       push(node)
     } else if (isArray(node)) {
+      // 如果是数组就生成多个
       genNodeListAsArray(node, context)
     } else {
+      // 生成一个
       genNode(node, context)
     }
     if (i < nodes.length - 1) {
+      // 如果是多个，就添加一个，号，并在添加一行
       if (multilines) {
         comma && push(',')
         newline()
       } else {
+        // 否则只添加,号
         comma && push(', ')
       }
     }
   }
 }
 
+// 生成node
 function genNode(node: CodegenNode | symbol | string, context: CodegenContext) {
   if (isString(node)) {
     context.push(node)
@@ -597,9 +603,9 @@ function genNode(node: CodegenNode | symbol | string, context: CodegenContext) {
     return
   }
   switch (node.type) {
-    case NodeTypes.ELEMENT:
-    case NodeTypes.IF:
-    case NodeTypes.FOR:
+    case NodeTypes.ELEMENT: // 1 生成元素，然后调用genVnodeCall 进行生成
+    case NodeTypes.IF: // 9
+    case NodeTypes.FOR: // 11
       __DEV__ &&
         assert(
           node.codegenNode != null,
@@ -608,69 +614,69 @@ function genNode(node: CodegenNode | symbol | string, context: CodegenContext) {
         )
       genNode(node.codegenNode!, context)
       break
-    case NodeTypes.TEXT:
+    case NodeTypes.TEXT: // 2
       genText(node, context)
       break
-    case NodeTypes.SIMPLE_EXPRESSION:
+    case NodeTypes.SIMPLE_EXPRESSION: // 4 生成表达式
       genExpression(node, context)
       break
-    case NodeTypes.INTERPOLATION:
+    case NodeTypes.INTERPOLATION: // 5 生成文本 例如：{{ count }}
       genInterpolation(node, context)
       break
-    case NodeTypes.TEXT_CALL:
+    case NodeTypes.TEXT_CALL: // 12
       genNode(node.codegenNode, context)
       break
-    case NodeTypes.COMPOUND_EXPRESSION:
+    case NodeTypes.COMPOUND_EXPRESSION: // 8
       genCompoundExpression(node, context)
       break
-    case NodeTypes.COMMENT:
+    case NodeTypes.COMMENT: // 3
       genComment(node, context)
       break
-    case NodeTypes.VNODE_CALL:
+    case NodeTypes.VNODE_CALL: // 13 具体生成元素的部分
       genVNodeCall(node, context)
       break
 
-    case NodeTypes.JS_CALL_EXPRESSION:
+    case NodeTypes.JS_CALL_EXPRESSION: // 14
       genCallExpression(node, context)
       break
-    case NodeTypes.JS_OBJECT_EXPRESSION:
+    case NodeTypes.JS_OBJECT_EXPRESSION: // 15 生成属性 如class style
       genObjectExpression(node, context)
       break
-    case NodeTypes.JS_ARRAY_EXPRESSION:
+    case NodeTypes.JS_ARRAY_EXPRESSION: // 17
       genArrayExpression(node, context)
       break
-    case NodeTypes.JS_FUNCTION_EXPRESSION:
+    case NodeTypes.JS_FUNCTION_EXPRESSION: // 18
       genFunctionExpression(node, context)
       break
-    case NodeTypes.JS_CONDITIONAL_EXPRESSION:
+    case NodeTypes.JS_CONDITIONAL_EXPRESSION: // 19
       genConditionalExpression(node, context)
       break
-    case NodeTypes.JS_CACHE_EXPRESSION:
+    case NodeTypes.JS_CACHE_EXPRESSION: // 20
       genCacheExpression(node, context)
       break
 
     // SSR only types
-    case NodeTypes.JS_BLOCK_STATEMENT:
+    case NodeTypes.JS_BLOCK_STATEMENT: // 21
       !__BROWSER__ && genNodeList(node.body, context, true, false)
       break
-    case NodeTypes.JS_TEMPLATE_LITERAL:
+    case NodeTypes.JS_TEMPLATE_LITERAL: // 22
       !__BROWSER__ && genTemplateLiteral(node, context)
       break
-    case NodeTypes.JS_IF_STATEMENT:
+    case NodeTypes.JS_IF_STATEMENT: // 23
       !__BROWSER__ && genIfStatement(node, context)
       break
-    case NodeTypes.JS_ASSIGNMENT_EXPRESSION:
+    case NodeTypes.JS_ASSIGNMENT_EXPRESSION: // 24
       !__BROWSER__ && genAssignmentExpression(node, context)
       break
-    case NodeTypes.JS_SEQUENCE_EXPRESSION:
+    case NodeTypes.JS_SEQUENCE_EXPRESSION: // 25
       !__BROWSER__ && genSequenceExpression(node, context)
       break
-    case NodeTypes.JS_RETURN_STATEMENT:
+    case NodeTypes.JS_RETURN_STATEMENT: // 26
       !__BROWSER__ && genReturnStatement(node, context)
       break
 
     /* istanbul ignore next */
-    case NodeTypes.IF_BRANCH:
+    case NodeTypes.IF_BRANCH: // 10
       // noop
       break
     default:
@@ -727,11 +733,12 @@ function genExpressionAsPropertyKey(
     genCompoundExpression(node, context)
     push(`]`)
   } else if (node.isStatic) {
+    // 如果是静态节点
     // only quote keys if necessary
-    const text = isSimpleIdentifier(node.content)
+    const text = isSimpleIdentifier(node.content) // 是否简单语句
       ? node.content
       : JSON.stringify(node.content)
-    push(text, node)
+    push(text, node) // 添加key
   } else {
     push(`[${node.content}]`, node)
   }
@@ -744,7 +751,7 @@ function genComment(node: CommentNode, context: CodegenContext) {
   }
   push(`${helper(CREATE_COMMENT)}(${JSON.stringify(node.content)})`, node)
 }
-
+// 生成vnode 用于调用createVnode创建节点渲染
 function genVNodeCall(node: VNodeCall, context: CodegenContext) {
   const { push, helper, pure } = context
   const {
@@ -760,12 +767,14 @@ function genVNodeCall(node: VNodeCall, context: CodegenContext) {
   if (directives) {
     push(helper(WITH_DIRECTIVES) + `(`)
   }
+  // 如果是block push一个_openBlock(
   if (isBlock) {
     push(`(${helper(OPEN_BLOCK)}(${disableTracking ? `true` : ``}), `)
   }
   if (pure) {
     push(PURE_ANNOTATION)
   }
+  // 如果是block 就创建一个_createBlick 否则是createVnode
   push(helper(isBlock ? CREATE_BLOCK : CREATE_VNODE) + `(`, node)
   genNodeList(
     genNullableArgs([tag, props, children, patchFlag, dynamicProps]),
@@ -802,28 +811,31 @@ function genCallExpression(node: CallExpression, context: CodegenContext) {
   push(`)`)
 }
 
+// 生成对象表达式
 function genObjectExpression(node: ObjectExpression, context: CodegenContext) {
   const { push, indent, deindent, newline } = context
   const { properties } = node
+
   if (!properties.length) {
     push(`{}`, node)
     return
   }
+  // 是否多行
   const multilines =
     properties.length > 1 ||
     ((!__BROWSER__ || __DEV__) &&
       properties.some(p => p.value.type !== NodeTypes.SIMPLE_EXPRESSION))
   push(multilines ? `{` : `{ `)
-  multilines && indent()
+  multilines && indent() // 创建空格
   for (let i = 0; i < properties.length; i++) {
-    const { key, value } = properties[i]
-    // key
+    const { key, value } = properties[i] // 获取属性key value
+    // key 生成属性key
     genExpressionAsPropertyKey(key, context)
     push(`: `)
     // value
     genNode(value, context)
     if (i < properties.length - 1) {
-      // will only reach this if it's multilines
+      // will only reach this if it's multilines 只有多行的情况下才会出现
       push(`,`)
       newline()
     }

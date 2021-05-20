@@ -27,6 +27,7 @@ export type ToRefs<T = any> = {
   [K in keyof T]: T[K] extends Ref ? T[K] : Ref<UnwrapRef<T[K]>>
 }
 
+// 如果是array object，就通过reactive包装 否则返回val
 const convert = <T extends unknown>(val: T): T =>
   isObject(val) ? reactive(val) : val
 
@@ -54,7 +55,7 @@ export function shallowRef(value?: unknown) {
 class RefImpl<T> {
   private _value: T
 
-  public readonly __v_isRef = true
+  public readonly __v_isRef = true // 是否响应
 
   constructor(private _rawValue: T, public readonly _shallow = false) {
     this._value = _shallow ? _rawValue : convert(_rawValue)
@@ -75,17 +76,20 @@ class RefImpl<T> {
 }
 
 function createRef(rawValue: unknown, shallow = false) {
+  // 如果已经是响应式的就直接返回
   if (isRef(rawValue)) {
     return rawValue
   }
+  // 否则包装成响应式
   return new RefImpl(rawValue, shallow)
 }
 
 export function triggerRef(ref: Ref) {
   trigger(toRaw(ref), TriggerOpTypes.SET, 'value', __DEV__ ? ref.value : void 0)
 }
-
+// 取消引用
 export function unref<T>(ref: T): T extends Ref<infer V> ? V : T {
+  // 如果是ref就返回ref.value 否则返回ref
   return isRef(ref) ? (ref.value as any) : ref
 }
 
@@ -105,6 +109,7 @@ const shallowUnwrapHandlers: ProxyHandler<any> = {
 export function proxyRefs<T extends object>(
   objectWithRefs: T
 ): ShallowUnwrapRef<T> {
+  // 如果已经是reactive就直接返回，否则包装在返回
   return isReactive(objectWithRefs)
     ? objectWithRefs
     : new Proxy(objectWithRefs, shallowUnwrapHandlers)

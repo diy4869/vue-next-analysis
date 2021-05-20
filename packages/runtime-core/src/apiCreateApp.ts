@@ -290,7 +290,7 @@ export function createAppAPI<HostElement>(
             console.log('else')
             render(vnode, rootContainer, isSVG)
           }
-          return
+          // return
           isMounted = true
           app._container = rootContainer
           // for devtools and telemetry

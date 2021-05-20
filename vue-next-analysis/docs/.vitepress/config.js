@@ -40,10 +40,13 @@ module.exports = {
           }
         ]
       },
-
       {
         text: '初始化渲染',
         children: [
+          {
+            text: '☆ vue-next 渲染流程',
+            link: '/page/flow'
+          },
           {
             text: '☆ createApp',
             link: '/page/createApp'
@@ -51,10 +54,6 @@ module.exports = {
           {
             text: 'vnode',
             link: '/page/vnode'
-          },
-          {
-            text: 'compiler',
-            link: '/page/compiler'
           },
           {
             text: 'render',
@@ -67,19 +66,45 @@ module.exports = {
         ]
       },
       {
-        text: '指令 directive',
+        text: '编译 compiler',
         children: [
+          {
+            text: 'ast',
+            link: '/compiler/ast'
+          },
           {
             text: 'v-if',
             link: '/directive/v-if'
           },
           {
+            text: 'v-for',
+            link: '/directive/v-for'
+          },
+          {
+            text: 'generate',
+            link: '/compiler/generate'
+          }
+        ]
+      },
+      {
+        text: '渲染 render',
+        children: [
+          {
             text: 'v-show',
             link: '/directive/v-show'
           },
           {
-            text: 'v-for',
-            link: '/directive/v-for'
+            text: 'v-on',
+            link: '/directive/v-on'
+          }
+        ]
+      },
+      {
+        text: '指令 directive',
+        children: [
+          {
+            text: 'v-show',
+            link: '/directive/v-show'
           },
           {
             text: 'v-on',

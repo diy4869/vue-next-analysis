@@ -82,10 +82,11 @@ function resolveAsset(
 ) {
   const instance = currentRenderingInstance || currentInstance
   if (instance) {
-    const Component = instance.type
+    const Component = instance.type // 组件的内容
 
     // explicit self name has highest priority
     if (type === COMPONENTS) {
+      // 获取组件名称
       const selfName = getComponentName(Component)
       if (
         selfName &&

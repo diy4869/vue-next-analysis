@@ -51,11 +51,12 @@ export const transformExpression: NodeTransform = (node, context) => {
   } else if (node.type === NodeTypes.ELEMENT) {
     // handle directives on element
     for (let i = 0; i < node.props.length; i++) {
-      const dir = node.props[i]
+      const dir = node.props[i] // 获取当前指令
       // do not process for v-on & v-for since they are special handled
+      // 如果dir.type === 7 且dir.name 不等于for
       if (dir.type === NodeTypes.DIRECTIVE && dir.name !== 'for') {
-        const exp = dir.exp
-        const arg = dir.arg
+        const exp = dir.exp // 指令内容
+        const arg = dir.arg // 指令类型
         // do not process exp if this is v-on:arg - we need special handling
         // for wrapping inline statements.
         if (

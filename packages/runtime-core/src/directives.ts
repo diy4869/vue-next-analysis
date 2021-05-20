@@ -64,6 +64,7 @@ const isBuiltInDirective = /*#__PURE__*/ makeMap(
   'bind,cloak,else-if,else,for,html,if,model,on,once,pre,show,slot,text'
 )
 
+// 校验指令，判断是否是vue自带指令
 export function validateDirectiveName(name: string) {
   if (isBuiltInDirective(name)) {
     warn('Do not use built-in directive ids as custom directive id: ' + name)

@@ -30,6 +30,7 @@ export const transformText: NodeTransform = (node, context) => {
 
       for (let i = 0; i < children.length; i++) {
         const child = children[i]
+        // 判断是否为text
         if (isText(child)) {
           hasText = true
           for (let j = i + 1; j < children.length; j++) {

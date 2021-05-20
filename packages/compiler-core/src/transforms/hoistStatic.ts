@@ -145,7 +145,7 @@ export function getConstantType(
 ): ConstantTypes {
   const { constantCache } = context
   switch (node.type) {
-    case NodeTypes.ELEMENT:
+    case NodeTypes.ELEMENT: // 1
       if (node.tagType !== ElementTypes.ELEMENT) {
         return ConstantTypes.NOT_CONSTANT
       }
@@ -157,6 +157,7 @@ export function getConstantType(
       if (codegenNode.type !== NodeTypes.VNODE_CALL) {
         return ConstantTypes.NOT_CONSTANT
       }
+      // 获取patchFlag
       const flag = getPatchFlag(codegenNode)
       if (!flag) {
         let returnType = ConstantTypes.CAN_STRINGIFY

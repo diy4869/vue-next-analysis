@@ -64,6 +64,9 @@ const arrayInstrumentations: Record<string, Function> = {}
 })
 // instrument length-altering mutation methods to avoid length being tracked
 // which leads to infinite loops in some cases (#2137)
+
+// 拦截能修改数组长度的方法
+// 在某些情况可能导致无限循环
 ;(['push', 'pop', 'shift', 'unshift', 'splice'] as const).forEach(key => {
   const method = Array.prototype[key] as any
   arrayInstrumentations[key] = function(this: unknown[], ...args: unknown[]) {

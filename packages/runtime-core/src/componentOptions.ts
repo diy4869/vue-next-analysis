@@ -578,7 +578,7 @@ export function applyOptions(
       globalMixins
     )
     shouldCacheAccess = true
-    // global mixins are applied first
+    // global mixins are applied first 应用全局mixins
     applyMixins(
       instance,
       globalMixins,
@@ -627,6 +627,7 @@ export function applyOptions(
     resolveInjections(injectOptions, ctx, checkDuplicateProperties)
   }
 
+  // 执行methods内部的函数
   if (methods) {
     for (const key in methods) {
       const methodHandler = (methods as MethodOptions)[key]
@@ -659,6 +660,7 @@ export function applyOptions(
     if (deferredData.length) {
       deferredData.forEach(dataFn => resolveData(instance, dataFn, publicThis))
     }
+    // 组件内的data
     if (dataOptions) {
       // @ts-ignore dataOptions is not fully type safe
       resolveData(instance, dataOptions, publicThis)
@@ -682,6 +684,7 @@ export function applyOptions(
     deferredData.push(dataOptions as DataFn)
   }
 
+  // computed 选项
   if (computedOptions) {
     for (const key in computedOptions) {
       const opt = (computedOptions as ComputedOptions)[key]
@@ -887,8 +890,10 @@ function callSyncHook(
   globalMixins: ComponentOptions[]
 ) {
   for (let i = 0; i < globalMixins.length; i++) {
+    // mixins混入
     callHookWithMixinAndExtends(name, type, globalMixins[i], instance)
   }
+  // 组件内钩子
   callHookWithMixinAndExtends(name, type, options, instance)
 }
 
@@ -908,6 +913,7 @@ function callHookWithMixinAndExtends(
       callHookWithMixinAndExtends(name, type, mixins[i], instance)
     }
   }
+  // 调用beforeCreate 和 created
   if (selfHook) {
     callWithAsyncErrorHandling(
       __COMPAT__ && isArray(selfHook)
@@ -943,6 +949,7 @@ function resolveData(
   dataFn: DataFn,
   publicThis: ComponentPublicInstance
 ) {
+  // 如果data 不是一个函数 报错
   if (__DEV__ && !isFunction(dataFn)) {
     warn(
       `The data option must be a function. ` +
@@ -952,6 +959,7 @@ function resolveData(
   shouldCacheAccess = false
   const data = dataFn.call(publicThis, publicThis)
   shouldCacheAccess = true
+  // data 不能是异步的，如果需要使用异步需要使用setup 和suspense
   if (__DEV__ && isPromise(data)) {
     warn(
       `data() returned a Promise - note data() cannot be async; If you ` +
@@ -959,6 +967,7 @@ function resolveData(
         `async setup() + <Suspense>.`
     )
   }
+  // 如果data函数的结果不是一个对象
   if (!isObject(data)) {
     __DEV__ && warn(`data() should return an object.`)
   } else if (instance.data === EMPTY_OBJ) {

@@ -34,6 +34,10 @@ export const patchProp: DOMRendererOptions['patchProp'] = (
       break
     default:
       if (isOn(key)) {
+        // 如果是event
+        /**
+         * 可能突然解析？？？？ 可能是因为下一个dom是组件的问题
+         */
         // ignore v-model listeners
         if (!isModelListener(key)) {
           patchEvent(el, key, prevValue, nextValue, parentComponent)

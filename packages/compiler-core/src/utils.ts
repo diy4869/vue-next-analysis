@@ -34,6 +34,7 @@ import {
 } from './runtimeHelpers'
 import { isString, isObject, hyphenate, extend } from '@vue/shared'
 
+// 是否是静态语句
 export const isStaticExp = (p: JSChildNode): p is SimpleExpressionNode =>
   p.type === NodeTypes.SIMPLE_EXPRESSION && p.isStatic
 
@@ -109,6 +110,7 @@ export function advancePositionWithMutation(
   let linesCount = 0
   let lastNewLinePos = -1
   for (let i = 0; i < numberOfCharacters; i++) {
+    // 如果需要换行
     if (source.charCodeAt(i) === 10 /* newline char code */) {
       linesCount++
       lastNewLinePos = i
@@ -128,6 +130,7 @@ export function advancePositionWithMutation(
 export function assert(condition: boolean, msg?: string) {
   /* istanbul ignore if */
   if (!condition) {
+    // 意外的编译条件
     throw new Error(msg || `unexpected compiler condition`)
   }
 }
@@ -204,10 +207,11 @@ export function isTemplateNode(
     node.type === NodeTypes.ELEMENT && node.tagType === ElementTypes.TEMPLATE
   )
 }
-
+// 是否是插槽出口
 export function isSlotOutlet(
   node: RootNode | TemplateChildNode
 ): node is SlotOutletNode {
+  // node.type === 1 && node.tagType === 2
   return node.type === NodeTypes.ELEMENT && node.tagType === ElementTypes.SLOT
 }
 

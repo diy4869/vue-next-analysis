@@ -3,6 +3,7 @@ import { ComponentInternalInstance, formatComponentName } from './component'
 let supported: boolean
 let perf: any
 
+// 开始性能统计
 export function startMeasure(
   instance: ComponentInternalInstance,
   type: string
@@ -27,6 +28,7 @@ export function endMeasure(instance: ComponentInternalInstance, type: string) {
   }
 }
 
+// 是否支持performance
 function isSupported() {
   if (supported !== undefined) {
     return supported

@@ -84,6 +84,7 @@ export const transformElement: NodeTransform = (node, context) => {
     }
 
     const { tag, props } = node
+    // 判断是否为组件
     const isComponent = node.tagType === ElementTypes.COMPONENT
 
     // The goal of the transform is to create a codegenNode implementing the
@@ -105,6 +106,7 @@ export const transformElement: NodeTransform = (node, context) => {
       vnodeTag = context.helper(FRAGMENT)
     }
 
+    // 是否动态组件
     const isDynamicComponent =
       isObject(vnodeTag) && vnodeTag.callee === RESOLVE_DYNAMIC_COMPONENT
 
@@ -215,12 +217,13 @@ export const transformElement: NodeTransform = (node, context) => {
           vnodePatchFlag = patchFlag + ` /* ${PatchFlagNames[patchFlag]} */`
         } else {
           // bitwise flags
+          // 计算patchFlag
           const flagNames = Object.keys(PatchFlagNames)
             .map(Number)
             .filter(n => n > 0 && patchFlag & n)
             .map(n => PatchFlagNames[n])
             .join(`, `)
-          vnodePatchFlag = patchFlag + ` /* ${flagNames} */`
+          vnodePatchFlag = patchFlag + ` /* ${flagNames} */` // "TEXT, CLASS, STYLE"
         }
       } else {
         vnodePatchFlag = String(patchFlag)

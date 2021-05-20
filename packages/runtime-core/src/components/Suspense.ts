@@ -54,6 +54,7 @@ export const SuspenseImpl = {
     rendererInternals: RendererInternals
   ) {
     if (n1 == null) {
+      // 渲染 suspense 组件
       mountSuspense(
         n2,
         container,
@@ -385,6 +386,7 @@ function createSuspenseBoundary(
   rendererInternals: RendererInternals,
   isHydrating = false
 ): SuspenseBoundary {
+  // <suspence>是一个实验性的特性，它的API可能会改变 如果你用了，vue会丢你个日志
   /* istanbul ignore if */
   if (__DEV__ && !__TEST__ && !hasWarned) {
     hasWarned = true

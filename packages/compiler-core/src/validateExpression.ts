@@ -31,6 +31,7 @@ export function validateBrowserExpression(
   asParams = false,
   asRawStatements = false
 ) {
+  // 表达式的内容
   const exp = node.content
 
   // empty expressions are validated per-directive since some directives
@@ -40,6 +41,7 @@ export function validateBrowserExpression(
   }
 
   try {
+    // 创建一个函数，校验表达式是否正确
     new Function(
       asRawStatements
         ? ` ${exp} `

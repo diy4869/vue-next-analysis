@@ -420,6 +420,7 @@ const emptyAppContext = createAppContext()
 
 let uid = 0
 
+// 创建组件
 export function createComponentInstance(
   vnode: VNode,
   parent: ComponentInternalInstance | null,
@@ -427,6 +428,8 @@ export function createComponentInstance(
 ) {
   const type = vnode.type as ConcreteComponent
   // inherit parent app context - or - if root, adopt from root vnode
+  // 如果有父组件，则用父组件的appContext 否则用当前vnode的，或者就重新创建一个appContext
+  // 初次渲染是不存在parent的，所以这里为vnode.appContext
   const appContext =
     (parent ? parent.appContext : vnode.appContext) || emptyAppContext
 
@@ -485,19 +488,19 @@ export function createComponentInstance(
     isMounted: false,
     isUnmounted: false,
     isDeactivated: false,
-    bc: null,
-    c: null,
-    bm: null,
-    m: null,
-    bu: null,
-    u: null,
-    um: null,
-    bum: null,
-    da: null,
-    a: null,
-    rtg: null,
-    rtc: null,
-    ec: null
+    bc: null, // beforeCreate
+    c: null, // created
+    bm: null, // beforeMount
+    m: null, // mounted
+    bu: null, //beforeUpdate
+    u: null, // updated
+    um: null, // unMounted
+    bum: null, // beforeUnMount
+    da: null, // deactivated
+    a: null, // activated
+    rtg: null, // RENDER_TRIGGERED
+    rtc: null, // RENDER_TRACKED
+    ec: null // ERROR_CAPTURED
   }
   if (__DEV__) {
     instance.ctx = createRenderContext(instance)
@@ -523,6 +526,7 @@ export const setCurrentInstance = (
 
 const isBuiltInTag = /*#__PURE__*/ makeMap('slot,component')
 
+// 校验组件name
 export function validateComponentName(name: string, config: AppConfig) {
   const appIsNativeTag = config.isNativeTag || NO
   if (isBuiltInTag(name) || appIsNativeTag(name)) {
@@ -545,6 +549,7 @@ export function setupComponent(
   isInSSRComponentSetup = isSSR
 
   const { props, children } = instance.vnode
+  // 是否是有状态的组件
   const isStateful = isStatefulComponent(instance)
   initProps(instance, props, isStateful, isSSR)
   initSlots(instance, children)
@@ -563,15 +568,18 @@ function setupStatefulComponent(
   const Component = instance.type as ComponentOptions
 
   if (__DEV__) {
+    // 如果存在组件名称
     if (Component.name) {
       validateComponentName(Component.name, instance.appContext.config)
     }
+    // 如果有注册组件，则进行校验
     if (Component.components) {
       const names = Object.keys(Component.components)
       for (let i = 0; i < names.length; i++) {
         validateComponentName(names[i], instance.appContext.config)
       }
     }
+    // 如果有注册指令
     if (Component.directives) {
       const names = Object.keys(Component.directives)
       for (let i = 0; i < names.length; i++) {
@@ -602,6 +610,7 @@ function setupStatefulComponent(
 
     currentInstance = instance
     pauseTracking()
+    // 调用组件内的setup函数执行，并拿到返回结果
     const setupResult = callWithErrorHandling(
       setup,
       instance,
@@ -611,7 +620,9 @@ function setupStatefulComponent(
     resetTracking()
     currentInstance = null
 
+    // 如果setup返回的结果是promise
     if (isPromise(setupResult)) {
+      // 如果是服务端渲染
       if (isSSR) {
         // return the promise so server-renderer can wait on it
         return setupResult
@@ -632,6 +643,7 @@ function setupStatefulComponent(
         )
       }
     } else {
+      // 否则
       handleSetupResult(instance, setupResult, isSSR)
     }
   } else {
@@ -644,8 +656,9 @@ export function handleSetupResult(
   setupResult: unknown,
   isSSR: boolean
 ) {
+  // setup可能返回一个render function
   if (isFunction(setupResult)) {
-    // setup returned an inline render function
+    // setup returned an inline render function 如果是node ssr，则返回一个内联渲染函数
     if (__NODE_JS__ && (instance.type as ComponentOptions).__ssrInlineRender) {
       // when the function's name is `ssrRender` (compiled by SFC inline mode),
       // set it as ssrRender instead.
@@ -654,7 +667,9 @@ export function handleSetupResult(
       instance.render = setupResult as InternalRenderFunction
     }
   } else if (isObject(setupResult)) {
+    // 如果是vnode
     if (__DEV__ && isVNode(setupResult)) {
+      // setup不应返回一个vnode 应该是render function
       warn(
         `setup() should not return VNodes directly - ` +
           `return a render function instead.`
@@ -662,9 +677,11 @@ export function handleSetupResult(
     }
     // setup returned bindings.
     // assuming a render function compiled from template is present.
+    // 如果存在devtools 就把setup返回结果赋值给devtoolsRawSetupState
     if (__DEV__ || __FEATURE_PROD_DEVTOOLS__) {
       instance.devtoolsRawSetupState = setupResult
     }
+    // 这步会把setup的返回结果在进一步通过proxy进行包装
     instance.setupState = proxyRefs(setupResult)
     if (__DEV__) {
       exposeSetupStateOnRenderContext(instance)
@@ -725,6 +742,7 @@ export function finishComponentSetup(
   } else if (!instance.render) {
     // could be set from setup()
     if (compile && !Component.render) {
+      // 获取模板
       const template =
         (__COMPAT__ &&
           instance.vnode.props &&
@@ -732,6 +750,7 @@ export function finishComponentSetup(
         Component.template
       if (template) {
         if (__DEV__) {
+          // 编译性能统计
           startMeasure(instance, `compile`)
         }
         const { isCustomElement, compilerOptions } = instance.appContext.config
@@ -756,8 +775,10 @@ export function finishComponentSetup(
             extend(finalCompilerOptions.compatConfig, Component.compatConfig)
           }
         }
+        // 编译模板 生成render function，这一步只是生成了createVnode
         Component.render = compile(template, finalCompilerOptions)
         if (__DEV__) {
+          // 编译结束
           endMeasure(instance, `compile`)
         }
       }
@@ -768,6 +789,10 @@ export function finishComponentSetup(
     // for runtime-compiled render functions using `with` blocks, the render
     // proxy used needs a different `has` handler which is more performant and
     // also only allows a whitelist of globals to fallthrough.
+    /**
+     * vue在生成render function的时候，vue是通过new Function() 实现的，内部用了with进行包装（可能是浏览器做的）
+     * 从而通过需要proxy 进行代理 提高性能
+     */
     if (instance.render._rc) {
       instance.withProxy = new Proxy(
         instance.ctx,

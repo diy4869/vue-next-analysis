@@ -432,22 +432,23 @@ export function traverseNode(
   }
 
   switch (node.type) {
-    case NodeTypes.COMMENT:
+    case NodeTypes.COMMENT: // 3
       if (!context.ssr) {
         // inject import for the Comment symbol, which is needed for creating
         // comment nodes with `createVNode`
         context.helper(CREATE_COMMENT)
       }
       break
-    case NodeTypes.INTERPOLATION:
+    case NodeTypes.INTERPOLATION: // 5
       // no need to traverse, but we need to inject toString helper
+      // 不需要遍历 但是需要tostring
       if (!context.ssr) {
         context.helper(TO_DISPLAY_STRING)
       }
       break
 
     // for container types, further traverse downwards
-    case NodeTypes.IF:
+    case NodeTypes.IF: // 9
       for (let i = 0; i < node.branches.length; i++) {
         traverseNode(node.branches[i], context)
       }

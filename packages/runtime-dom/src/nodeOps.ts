@@ -8,6 +8,7 @@ let tempContainer: HTMLElement
 let tempSVGContainer: SVGElement
 
 export const nodeOps: Omit<RendererOptions<Node, Element>, 'patchProp'> = {
+  // 插入节点
   insert: (child, parent, anchor) => {
     parent.insertBefore(child, anchor || null)
   },
@@ -20,6 +21,7 @@ export const nodeOps: Omit<RendererOptions<Node, Element>, 'patchProp'> = {
   },
 
   createElement: (tag, isSVG, is, props): Element => {
+    // 如果是svg就创建svg 否则创建普通标签
     const el = isSVG
       ? doc.createElementNS(svgNS, tag)
       : doc.createElement(tag, is ? { is } : undefined)
@@ -38,7 +40,7 @@ export const nodeOps: Omit<RendererOptions<Node, Element>, 'patchProp'> = {
   setText: (node, text) => {
     node.nodeValue = text
   },
-
+  // 设置元素文本
   setElementText: (el, text) => {
     el.textContent = text
   },

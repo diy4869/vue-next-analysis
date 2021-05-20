@@ -80,7 +80,9 @@ export function baseCompile(
     onError(createCompilerError(ErrorCodes.X_SCOPE_ID_NOT_SUPPORTED))
   }
 
+  // 获取ast
   const ast = isString(template) ? baseParse(template, options) : template
+  console.log('ast -------', ast)
   const [nodeTransforms, directiveTransforms] = getBaseTransformPreset(
     prefixIdentifiers
   )
