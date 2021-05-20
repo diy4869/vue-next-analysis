@@ -1,3 +1,3 @@
 ## vue-next 初次渲染流程图
 
-<img :src="$withBase('/assets/image/vue-next.png')" alt="foo" />
+![vue-next渲染流程图](/image/vue-next.png)

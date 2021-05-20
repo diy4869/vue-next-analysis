@@ -3,7 +3,7 @@ home: true
 heroText: vue-next源码解析
 tagline: 
 actionText: Get Started
-actionLink: /page/my
+actionLink: /page/base
 features:
   - title: Simplicity First
     details: Minimal setup with markdown-centered project structure helps you focus on writing.
