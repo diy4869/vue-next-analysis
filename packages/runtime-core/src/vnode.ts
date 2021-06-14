@@ -312,7 +312,15 @@ export function transformVNodeArgs(transformer?: typeof vnodeArgsTransformer) {
 const createVNodeWithArgsTransform = (
   ...args: Parameters<typeof _createVNode>
 ): VNode => {
-  console.log('args', vnodeArgsTransformer, currentRenderingInstance)
+  console.log(
+    '_createVNode',
+    vnodeArgsTransformer(args, currentRenderingInstance),
+    _createVNode(
+      ...(vnodeArgsTransformer
+        ? vnodeArgsTransformer(args, currentRenderingInstance)
+        : args)
+    )
+  )
   return _createVNode(
     ...(vnodeArgsTransformer
       ? vnodeArgsTransformer(args, currentRenderingInstance)
@@ -345,8 +353,8 @@ function _createVNode(
   dynamicProps: string[] | null = null,
   isBlockNode = false // 是否为块节点
 ): VNode {
-  console.log('_createVNode')
-  console.log(type, props, children, patchFlag, dynamicProps, isBlockNode)
+  // console.log('_createVNode')
+  // console.log(type, props, children, patchFlag, dynamicProps, isBlockNode)
 
   // return
   if (!type || type === NULL_DYNAMIC_COMPONENT) {
@@ -406,7 +414,7 @@ function _createVNode(
    *  teleport会多一个__isTeleport属性
    *
    * if 如果是string 则为1
-   * else if 如果__FEATURE_SUSPENSE__ 并且是suspense组件 则为 128 __FEATURE_SUSPENSE__不知道是啥，没找到，只翻到一个类型定义为boolean
+   * else if 如果__FEATURE_SUSPENSE__ 并且是suspense组件 则为 128 __FEATURE_SUSPENSE__ 默认为true 通过rollup启动注入
    * else if 如果是teleport组件为64
    * else if 如果是对象，则为4
    * else if 如果是函数，则为2
@@ -648,6 +656,7 @@ export function cloneIfMounted(child: VNode): VNode {
 }
 
 export function normalizeChildren(vnode: VNode, children: unknown) {
+  // debugger
   let type = 0
   const { shapeFlag } = vnode
   if (children == null) {

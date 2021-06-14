@@ -16,6 +16,15 @@ module.exports = {
         link: '/components/my'
       },
       {
+        text: '一些流程图',
+        children: [
+          {
+            text: '☆ vue-next 渲染流程',
+            link: '/page/flow'
+          }
+        ]
+      },
+      {
         text: '准备工作',
         children: [
           {
@@ -44,15 +53,11 @@ module.exports = {
         text: '初始化渲染',
         children: [
           {
-            text: '☆ vue-next 渲染流程',
-            link: '/page/flow'
-          },
-          {
             text: '☆ createApp',
             link: '/page/createApp'
           },
           {
-            text: 'vnode',
+            text: '☆ vnode',
             link: '/page/vnode'
           },
           {
