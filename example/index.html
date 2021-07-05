@@ -42,7 +42,7 @@
 </body>
 <script src="../packages/vue/dist/vue.global.js"></script>
 <script>
-    const { createApp, reactive, ref } = Vue
+    const { createApp, reactive, ref, onBeforeMount, onMounted } = Vue
 
     const children = {
         props: {
@@ -50,6 +50,14 @@
             test: {
                 type: Boolean
             }
+        },
+        setup () {
+            onBeforeMount(() => {
+                console.log('子组件渲染之前')
+            })
+            onMounted(() => {
+                console.log('子组件渲染完成')
+            })
         },
         template: `
             <div>这是子组件</div>
@@ -66,6 +74,14 @@
                 console.log(count)
                 count.value++
             }
+            console.log(this)
+            onBeforeMount(() => {
+                console.log('渲染之前')
+            })
+            onMounted(() => {
+                console.log('渲染完成')
+            })
+
             return {
                 count,
                 add

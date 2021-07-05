@@ -714,6 +714,7 @@ export function registerRuntimeCompiler(_compile: any) {
   compile = _compile
 }
 
+// 完成组件设置
 export function finishComponentSetup(
   instance: ComponentInternalInstance,
   isSSR: boolean,
@@ -721,6 +722,7 @@ export function finishComponentSetup(
 ) {
   const Component = instance.type as ComponentOptions
 
+  // 针对v2进行兼容
   if (__COMPAT__) {
     convertLegacyRenderFn(instance)
 
@@ -758,6 +760,7 @@ export function finishComponentSetup(
           delimiters,
           compilerOptions: componentCompilerOptions
         } = Component
+        // 合并最终编译选项
         const finalCompilerOptions: CompilerOptions = extend(
           extend(
             {

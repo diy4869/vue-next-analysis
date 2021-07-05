@@ -274,7 +274,7 @@ export function createAppAPI<HostElement>(
           // store app context on the root VNode.
           // this will be set on the root instance on initial mount.
           console.log('vnode', vnode)
-
+          // 将context挂载到根节点
           vnode.appContext = context
 
           // HMR root reload
@@ -283,19 +283,19 @@ export function createAppAPI<HostElement>(
               render(cloneVNode(vnode), rootContainer, isSVG)
             }
           }
-
+          // ssr渲染
           if (isHydrate && hydrate) {
             hydrate(vnode as VNode<Node, Element>, rootContainer as any)
           } else {
-            console.log('else')
+            // 普通渲染
             render(vnode, rootContainer, isSVG)
           }
-          // return
+
           isMounted = true
           app._container = rootContainer
           // for devtools and telemetry
           ;(rootContainer as any).__vue_app__ = app
-
+          // 初始化devtools
           if (__DEV__ || __FEATURE_PROD_DEVTOOLS__) {
             devtoolsInitApp(app, version)
           }

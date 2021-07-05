@@ -40,6 +40,18 @@ module.exports = {
             link: '/page/bitOperators'
           },
           {
+            text: '☆ 浏览器渲染过程',
+            link: '/page/browserRender'
+          },
+          {
+            text: '☆ Vnode',
+            link: '/page/vnode'
+          },
+          {
+            text: '☆ AST 抽象语法树',
+            link: 'compiler/ast'
+          },
+          {
             text: 'Rollup',
             link: ''
           },
@@ -57,25 +69,29 @@ module.exports = {
             link: '/page/createApp'
           },
           {
-            text: '☆ vnode',
-            link: '/page/vnode'
+            text: '☆ mount 挂载',
+            link: '/page/mount'
           },
           {
-            text: 'render',
-            link: ''
+            text: '☆ render 渲染',
+            link: '/page/render'
           },
           {
-            text: '...',
-            link: ''
+            text: '☆ mountComponent 挂载组件',
+            link: '/page/mountComponent'
+          },
+          {
+            text: '☆ setupComponent 安装组件',
+            link: '/page/setupComponent'
           }
         ]
       },
       {
-        text: '编译 compiler',
+        text: 'compiler 编译',
         children: [
           {
-            text: 'ast',
-            link: '/compiler/ast'
+            text: '☆ baseCompile',
+            link: '/compiler/baseCompile'
           },
           {
             text: 'v-if',

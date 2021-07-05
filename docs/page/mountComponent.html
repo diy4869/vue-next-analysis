@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>
+      mountComponent 挂载组件 | vue-next源码解析
+    </title>
+    <meta name="description" content="A VitePress site">
+    <link rel="stylesheet" href="/vue-next-analysis/assets/style.31751967.css">
+    <link rel="modulepreload" href="/vue-next-analysis/assets/Home.c533fff6.js">
+    <link rel="modulepreload" href="/vue-next-analysis/assets/app.5846fbd1.js">
+    <link rel="modulepreload" href="/vue-next-analysis/assets/page_mountComponent.md.9b2d73b0.lean.js">
+    <link rel="modulepreload" href="/vue-next-analysis/assets/app.5846fbd1.js">
+    
+    
+  </head>
+  <body>
+    <div id="app"><!--[--><div class="theme"><header class="nav-bar" data-v-5df6160f><div class="sidebar-button" data-v-5df6160f><svg class="icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z" class></path></svg></div><a class="nav-bar-title" href="/vue-next-analysis/" aria-label="vue-next源码解析, back to home" data-v-5df6160f data-v-8dbfef3c><!----> vue-next源码解析</a><div class="flex-grow" data-v-5df6160f></div><div class="nav" data-v-5df6160f><nav class="nav-links" data-v-5df6160f data-v-38e3b123><!--[--><div class="item" data-v-38e3b123><div class="nav-link" data-v-38e3b123 data-v-45eb32c6><a class="item isExternal" href="https://github.com/diy4869/vue-next-analysis" target="_blank" rel="noopener noreferrer" data-v-45eb32c6>Github <svg class="icon outbound" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15" data-v-45eb32c6><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div></div><!--]--><!----><!----></nav></div><!--[--><!--]--></header><aside class="sidebar" data-v-58e261f2><nav class="nav-links nav" data-v-58e261f2 data-v-38e3b123><!--[--><div class="item" data-v-38e3b123><div class="nav-link" data-v-38e3b123 data-v-45eb32c6><a class="item isExternal" href="https://github.com/diy4869/vue-next-analysis" target="_blank" rel="noopener noreferrer" data-v-45eb32c6>Github <svg class="icon outbound" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15" data-v-45eb32c6><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div></div><!--]--><!----><!----></nav><!--[--><!--]--><ul class="sidebar-links" data-v-58e261f2><!--[--><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/components/my">☆ 个人介绍</a><!----></li><li class="sidebar-link"><p class="sidebar-link-item">一些流程图</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/flow">☆ vue-next 渲染流程</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">准备工作</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/base">☆ 一些基本知识</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/debug">☆ 如何debug</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/bitOperators">☆ 位运算</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/browserRender">☆ 浏览器渲染过程</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/vnode">☆ Vnode</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/ast">☆ AST 抽象语法树</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">Rollup</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">Typescript</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">初始化渲染</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/createApp">☆ createApp</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/mount">☆ mount 挂载</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/render">☆ render 渲染</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item active" href="/vue-next-analysis/page/mountComponent">☆ mountComponent 挂载组件</a><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="#mountcomponent-挂载组件">mountComponent 挂载组件</a><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="#createcomponentinstance-创建组件实例">createComponentInstance  创建组件实例</a><!----></li></ul></li><li class="sidebar-link"><a class="sidebar-link-item" href="#总结">总结</a><!----></li></ul></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/setupComponent">☆ setupComponent 安装组件</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">compiler 编译</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/baseCompile">☆ baseCompile</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/directive/v-if">v-if</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/directive/v-for">v-for</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/generate">generate</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">渲染 render</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/directive/v-show">v-show</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/directive/v-on">v-on</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">指令 directive</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/directive/v-show">v-show</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/directive/v-on">v-on</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">内置组件 components</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/components/keepAlive">keepAlive</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/components/suspense">suspense</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/components/teleport">teleport</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">响应式</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">reactive</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">ref</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">...</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">服务端渲染</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">serverRender</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">...</a><!----></li></ul></li><!--]--></ul><!--[--><!--]--></aside><!-- TODO: make this button accessible --><div class="sidebar-mask"></div><main class="page" data-v-d36a7fda><div class="container" data-v-d36a7fda><!--[--><!--]--><div class="content" data-v-d36a7fda><div data-v-d36a7fda><h2 id="mountcomponent-挂载组件"><a class="header-anchor" href="#mountcomponent-挂载组件" aria-hidden="true">#</a> mountComponent 挂载组件</h2><p>这部分代码在<code>packages/runtime-core/src/renderer.ts</code>，组件挂载有以下过程：</p><ul><li><code>createComponentInstance</code> 创建组件实例</li><li><code>setupComponent</code> 安装组件</li><li><code>setupRenderEffect</code> 渲染组件</li></ul><div class="language-ts"><pre><code> <span class="token keyword">const</span> mountComponent<span class="token operator">:</span> <span class="token function-variable function">MountComponentFn</span> <span class="token operator">=</span> <span class="token punctuation">(</span>
+    initialVNode<span class="token punctuation">,</span>
+    container<span class="token punctuation">,</span>
+    anchor<span class="token punctuation">,</span>
+    parentComponent<span class="token punctuation">,</span>
+    parentSuspense<span class="token punctuation">,</span>
+    isSVG<span class="token punctuation">,</span>
+    optimized
+  <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 2.x 在实际创建组件之前，预先创建了组件实例</span>
+    <span class="token comment">// 2.x compat may pre-creaate the component instance before actually</span>
+    <span class="token comment">// mounting</span>
+    <span class="token keyword">const</span> compatMountInstance <span class="token operator">=</span> __COMPAT__ <span class="token operator">&amp;&amp;</span> initialVNode<span class="token punctuation">.</span>component
+    <span class="token comment">// 创建组件</span>
+    <span class="token keyword">const</span> instance<span class="token operator">:</span> ComponentInternalInstance <span class="token operator">=</span>
+      compatMountInstance <span class="token operator">||</span>
+      <span class="token punctuation">(</span>initialVNode<span class="token punctuation">.</span>component <span class="token operator">=</span> <span class="token function">createComponentInstance</span><span class="token punctuation">(</span>
+        initialVNode<span class="token punctuation">,</span>
+        parentComponent<span class="token punctuation">,</span>
+        parentSuspense
+      <span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// ... </span>
+  
+    <span class="token comment">// inject renderer internals for keepAlive</span>
+    <span class="token comment">// 是否keepAlive组件，是否存在__isKeepAlive属性</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isKeepAlive</span><span class="token punctuation">(</span>initialVNode<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token punctuation">;</span><span class="token punctuation">(</span>instance<span class="token punctuation">.</span>ctx <span class="token keyword">as</span> KeepAliveContext<span class="token punctuation">)</span><span class="token punctuation">.</span>renderer <span class="token operator">=</span> internals
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// resolve props and slots for setup context</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>__COMPAT__ <span class="token operator">&amp;&amp;</span> compatMountInstance<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>__DEV__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 性能统计</span>
+        <span class="token function">startMeasure</span><span class="token punctuation">(</span>instance<span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">init</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+      <span class="token comment">// 安装组件</span>
+      <span class="token function">setupComponent</span><span class="token punctuation">(</span>instance<span class="token punctuation">)</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>__DEV__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">endMeasure</span><span class="token punctuation">(</span>instance<span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">init</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// setup() is async. This component relies on async logic to be resolved</span>
+    <span class="token comment">// before proceeding</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>__FEATURE_SUSPENSE__ <span class="token operator">&amp;&amp;</span> instance<span class="token punctuation">.</span>asyncDep<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      parentSuspense <span class="token operator">&amp;&amp;</span> parentSuspense<span class="token punctuation">.</span><span class="token function">registerDep</span><span class="token punctuation">(</span>instance<span class="token punctuation">,</span> setupRenderEffect<span class="token punctuation">)</span>
+
+      <span class="token comment">// Give it a placeholder if this is not hydration</span>
+      <span class="token comment">// TODO handle self-defined fallback</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>initialVNode<span class="token punctuation">.</span>el<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> placeholder <span class="token operator">=</span> <span class="token punctuation">(</span>instance<span class="token punctuation">.</span>subTree <span class="token operator">=</span> <span class="token function">createVNode</span><span class="token punctuation">(</span>Comment<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token function">processCommentNode</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> placeholder<span class="token punctuation">,</span> container<span class="token operator">!</span><span class="token punctuation">,</span> anchor<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">return</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 渲染组件</span>
+    <span class="token function">setupRenderEffect</span><span class="token punctuation">(</span>
+      instance<span class="token punctuation">,</span>
+      initialVNode<span class="token punctuation">,</span>
+      container<span class="token punctuation">,</span>
+      anchor<span class="token punctuation">,</span>
+      parentSuspense<span class="token punctuation">,</span>
+      isSVG<span class="token punctuation">,</span>
+      optimized
+    <span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>__DEV__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">popWarningContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token function">endMeasure</span><span class="token punctuation">(</span>instance<span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">mount</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+</code></pre></div><h3 id="createcomponentinstance-创建组件实例"><a class="header-anchor" href="#createcomponentinstance-创建组件实例" aria-hidden="true">#</a> createComponentInstance 创建组件实例</h3><p>这部分代码在<code>packages/runtime-core/src/component.ts</code>，由于类型声明有点多，这里就不贴出来了。</p><div class="language-ts"><pre><code><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">createComponentInstance</span><span class="token punctuation">(</span>
+  vnode<span class="token operator">:</span> VNode<span class="token punctuation">,</span>
+  parent<span class="token operator">:</span> ComponentInternalInstance <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  suspense<span class="token operator">:</span> SuspenseBoundary <span class="token operator">|</span> <span class="token keyword">null</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token keyword">type</span> <span class="token operator">=</span> vnode<span class="token punctuation">.</span><span class="token keyword">type</span> <span class="token class-name"><span class="token keyword">as</span></span> ConcreteComponent
+  <span class="token comment">// inherit parent app context - or - if root, adopt from root vnode</span>
+  <span class="token comment">// 如果有父组件，则用父组件的appContext 否则用当前vnode的，或者就重新创建一个appContext</span>
+  <span class="token comment">// 初次渲染是不存在parent的，所以这里为vnode.appContext</span>
+  <span class="token keyword">const</span> appContext <span class="token operator">=</span>
+    <span class="token punctuation">(</span>parent <span class="token operator">?</span> parent<span class="token punctuation">.</span>appContext <span class="token operator">:</span> vnode<span class="token punctuation">.</span>appContext<span class="token punctuation">)</span> <span class="token operator">||</span> emptyAppContext
+
+  <span class="token keyword">const</span> instance<span class="token operator">:</span> ComponentInternalInstance <span class="token operator">=</span> <span class="token punctuation">{</span>
+    uid<span class="token operator">:</span> uid<span class="token operator">++</span><span class="token punctuation">,</span>
+    vnode<span class="token punctuation">,</span>
+    <span class="token keyword">type</span><span class="token punctuation">,</span>
+    parent<span class="token punctuation">,</span>
+    appContext<span class="token punctuation">,</span>
+    root<span class="token operator">:</span> <span class="token keyword">null</span><span class="token operator">!</span><span class="token punctuation">,</span> <span class="token comment">// to be immediately set</span>
+    next<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    subTree<span class="token operator">:</span> <span class="token keyword">null</span><span class="token operator">!</span><span class="token punctuation">,</span> <span class="token comment">// 重点，最终需要根据这个去渲染DOM</span>
+    update<span class="token operator">:</span> <span class="token keyword">null</span><span class="token operator">!</span><span class="token punctuation">,</span> <span class="token comment">// will be set synchronously right after creation</span>
+    render<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    proxy<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    exposed<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    withProxy<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    effects<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    provides<span class="token operator">:</span> parent <span class="token operator">?</span> parent<span class="token punctuation">.</span>provides <span class="token operator">:</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>appContext<span class="token punctuation">.</span>provides<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    accessCache<span class="token operator">:</span> <span class="token keyword">null</span><span class="token operator">!</span><span class="token punctuation">,</span>
+    renderCache<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// local resovled assets</span>
+    components<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    directives<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// resolved props and emits options</span>
+    propsOptions<span class="token operator">:</span> <span class="token function">normalizePropsOptions</span><span class="token punctuation">(</span><span class="token keyword">type</span><span class="token punctuation">,</span> appContext<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    emitsOptions<span class="token operator">:</span> <span class="token function">normalizeEmitsOptions</span><span class="token punctuation">(</span><span class="token keyword">type</span><span class="token punctuation">,</span> appContext<span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// emit</span>
+    emit<span class="token operator">:</span> <span class="token keyword">null</span> <span class="token keyword">as</span> <span class="token builtin">any</span><span class="token punctuation">,</span> <span class="token comment">// to be set immediately</span>
+    emitted<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// props default value</span>
+    propsDefaults<span class="token operator">:</span> <span class="token constant">EMPTY_OBJ</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// state</span>
+    ctx<span class="token operator">:</span> <span class="token constant">EMPTY_OBJ</span><span class="token punctuation">,</span>
+    data<span class="token operator">:</span> <span class="token constant">EMPTY_OBJ</span><span class="token punctuation">,</span>
+    props<span class="token operator">:</span> <span class="token constant">EMPTY_OBJ</span><span class="token punctuation">,</span>
+    attrs<span class="token operator">:</span> <span class="token constant">EMPTY_OBJ</span><span class="token punctuation">,</span>
+    slots<span class="token operator">:</span> <span class="token constant">EMPTY_OBJ</span><span class="token punctuation">,</span>
+    refs<span class="token operator">:</span> <span class="token constant">EMPTY_OBJ</span><span class="token punctuation">,</span>
+    setupState<span class="token operator">:</span> <span class="token constant">EMPTY_OBJ</span><span class="token punctuation">,</span>
+    setupContext<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// suspense related</span>
+    suspense<span class="token punctuation">,</span>
+    suspenseId<span class="token operator">:</span> suspense <span class="token operator">?</span> suspense<span class="token punctuation">.</span>pendingId <span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    asyncDep<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    asyncResolved<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// lifecycle hooks</span>
+    <span class="token comment">// not using enums here because it results in computed properties</span>
+    isMounted<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    isUnmounted<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    isDeactivated<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    bc<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token comment">// beforeCreate</span>
+    c<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token comment">// created</span>
+    bm<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token comment">// beforeMount</span>
+    m<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token comment">// mounted</span>
+    bu<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token comment">//beforeUpdate</span>
+    u<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token comment">// updated</span>
+    um<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token comment">// unMounted</span>
+    bum<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token comment">// beforeUnMount</span>
+    da<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token comment">// deactivated</span>
+    a<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token comment">// activated</span>
+    rtg<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token comment">// RENDER_TRIGGERED</span>
+    rtc<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token comment">// RENDER_TRACKED</span>
+    ec<span class="token operator">:</span> <span class="token keyword">null</span> <span class="token comment">// ERROR_CAPTURED</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>__DEV__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    instance<span class="token punctuation">.</span>ctx <span class="token operator">=</span> <span class="token function">createRenderContext</span><span class="token punctuation">(</span>instance<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    instance<span class="token punctuation">.</span>ctx <span class="token operator">=</span> <span class="token punctuation">{</span> _<span class="token operator">:</span> instance <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  instance<span class="token punctuation">.</span>root <span class="token operator">=</span> parent <span class="token operator">?</span> parent<span class="token punctuation">.</span>root <span class="token operator">:</span> instance
+  instance<span class="token punctuation">.</span>emit <span class="token operator">=</span> <span class="token function">emit</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> instance<span class="token punctuation">)</span>
+
+  <span class="token keyword">return</span> instance
+<span class="token punctuation">}</span>
+</code></pre></div><p>组件其实就是一个对象，里面去维护了一些数据，用于渲染。</p><h2 id="总结"><a class="header-anchor" href="#总结" aria-hidden="true">#</a> 总结</h2><p>暂时就到这里，下一篇来说如何安装组件。</p></div></div><footer class="page-footer" data-v-d36a7fda data-v-5a019cc9><div class="edit" data-v-5a019cc9><div class="edit-link" data-v-5a019cc9 data-v-3ae295f1><!----></div></div><div class="updated" data-v-5a019cc9><!----></div></footer><div class="next-and-prev-link" data-v-d36a7fda data-v-6683615c><div class="container" data-v-6683615c><div class="prev" data-v-6683615c><a class="link" href="/vue-next-analysis/page/render" data-v-6683615c><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" class="icon icon-prev" data-v-6683615c><path d="M19,11H7.4l5.3-5.3c0.4-0.4,0.4-1,0-1.4s-1-0.4-1.4,0l-7,7c-0.1,0.1-0.2,0.2-0.2,0.3c-0.1,0.2-0.1,0.5,0,0.8c0.1,0.1,0.1,0.2,0.2,0.3l7,7c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3c0.4-0.4,0.4-1,0-1.4L7.4,13H19c0.6,0,1-0.4,1-1S19.6,11,19,11z"></path></svg><span class="text" data-v-6683615c>☆ render 渲染</span></a></div><div class="next" data-v-6683615c><a class="link" href="/vue-next-analysis/page/setupComponent" data-v-6683615c><span class="text" data-v-6683615c>☆ setupComponent 安装组件</span><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" class="icon icon-next" data-v-6683615c><path d="M19.9,12.4c0.1-0.2,0.1-0.5,0-0.8c-0.1-0.1-0.1-0.2-0.2-0.3l-7-7c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l5.3,5.3H5c-0.6,0-1,0.4-1,1s0.4,1,1,1h11.6l-5.3,5.3c-0.4,0.4-0.4,1,0,1.4c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3l7-7C19.8,12.6,19.9,12.5,19.9,12.4z"></path></svg></a></div></div></div><!--[--><!--]--></div></main></div><!----><!--]--></div>
+    <script>__VP_HASH_MAP__ = JSON.parse("{\"index.md\":\"7aeddfdb\",\"compiler_ast.md\":\"b437f324\",\"compiler_basecompile.md\":\"b904cc67\",\"compiler_generate.md\":\"74a7eba0\",\"directive_v-for.md\":\"1c6491a5\",\"directive_v-if.md\":\"ed594ce7\",\"directive_v-on.md\":\"1c3649a1\",\"directive_v-show.md\":\"10ff3d18\",\"components_base.md\":\"f43539ba\",\"components_createapp.md\":\"4b1b925e\",\"components_keepalive.md\":\"94a03511\",\"components_suspense.md\":\"2b5dbcb8\",\"components_teleport.md\":\"46795626\",\"components_vnode.md\":\"4bb4def3\",\"page_base.md\":\"e80d4275\",\"page_bitoperators.md\":\"61cf3057\",\"page_browserrender.md\":\"2310b08a\",\"page_components.md\":\"6b576e3e\",\"page_createapp.md\":\"8755dc2d\",\"page_debug.md\":\"8cb3cbe0\",\"page_flow.md\":\"08a35ab0\",\"page_mount.md\":\"3615738d\",\"page_mountcomponent.md\":\"9b2d73b0\",\"page_my.md\":\"9f1b59aa\",\"page_render.md\":\"e7d9da28\",\"page_setupcomponent.md\":\"93c0f41f\",\"page_vnode.md\":\"5a27f81e\",\"render_patch.md\":\"334ecb11\"}")</script>
+    <script type="module" async src="/vue-next-analysis/assets/app.5846fbd1.js"></script>
+  </body>
+</html>

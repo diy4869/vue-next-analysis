@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>
+      setupComponent 安装组件 | vue-next源码解析
+    </title>
+    <meta name="description" content="A VitePress site">
+    <link rel="stylesheet" href="/vue-next-analysis/assets/style.31751967.css">
+    <link rel="modulepreload" href="/vue-next-analysis/assets/Home.c533fff6.js">
+    <link rel="modulepreload" href="/vue-next-analysis/assets/app.5846fbd1.js">
+    <link rel="modulepreload" href="/vue-next-analysis/assets/page_setupComponent.md.93c0f41f.lean.js">
+    <link rel="modulepreload" href="/vue-next-analysis/assets/app.5846fbd1.js">
+    
+    
+  </head>
+  <body>
+    <div id="app"><!--[--><div class="theme"><header class="nav-bar" data-v-5df6160f><div class="sidebar-button" data-v-5df6160f><svg class="icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z" class></path></svg></div><a class="nav-bar-title" href="/vue-next-analysis/" aria-label="vue-next源码解析, back to home" data-v-5df6160f data-v-8dbfef3c><!----> vue-next源码解析</a><div class="flex-grow" data-v-5df6160f></div><div class="nav" data-v-5df6160f><nav class="nav-links" data-v-5df6160f data-v-38e3b123><!--[--><div class="item" data-v-38e3b123><div class="nav-link" data-v-38e3b123 data-v-45eb32c6><a class="item isExternal" href="https://github.com/diy4869/vue-next-analysis" target="_blank" rel="noopener noreferrer" data-v-45eb32c6>Github <svg class="icon outbound" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15" data-v-45eb32c6><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div></div><!--]--><!----><!----></nav></div><!--[--><!--]--></header><aside class="sidebar" data-v-58e261f2><nav class="nav-links nav" data-v-58e261f2 data-v-38e3b123><!--[--><div class="item" data-v-38e3b123><div class="nav-link" data-v-38e3b123 data-v-45eb32c6><a class="item isExternal" href="https://github.com/diy4869/vue-next-analysis" target="_blank" rel="noopener noreferrer" data-v-45eb32c6>Github <svg class="icon outbound" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15" data-v-45eb32c6><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div></div><!--]--><!----><!----></nav><!--[--><!--]--><ul class="sidebar-links" data-v-58e261f2><!--[--><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/components/my">☆ 个人介绍</a><!----></li><li class="sidebar-link"><p class="sidebar-link-item">一些流程图</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/flow">☆ vue-next 渲染流程</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">准备工作</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/base">☆ 一些基本知识</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/debug">☆ 如何debug</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/bitOperators">☆ 位运算</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/browserRender">☆ 浏览器渲染过程</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/vnode">☆ Vnode</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/ast">☆ AST 抽象语法树</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">Rollup</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">Typescript</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">初始化渲染</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/createApp">☆ createApp</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/mount">☆ mount 挂载</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/render">☆ render 渲染</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/mountComponent">☆ mountComponent 挂载组件</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item active" href="/vue-next-analysis/page/setupComponent">☆ setupComponent 安装组件</a><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="#setupcomponent-安装组件">setupComponent 安装组件</a><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="#获取setup状态">获取setup状态</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="#对setup返回的结果进行处理">对setup返回的结果进行处理</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="#finishcomponentsetup-完成组件设置">finishComponentSetup 完成组件设置</a><!----></li></ul></li><li class="sidebar-link"><a class="sidebar-link-item" href="#总结">总结</a><!----></li></ul></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">compiler 编译</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/baseCompile">☆ baseCompile</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/directive/v-if">v-if</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/directive/v-for">v-for</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/generate">generate</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">渲染 render</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/directive/v-show">v-show</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/directive/v-on">v-on</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">指令 directive</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/directive/v-show">v-show</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/directive/v-on">v-on</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">内置组件 components</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/components/keepAlive">keepAlive</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/components/suspense">suspense</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/components/teleport">teleport</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">响应式</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">reactive</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">ref</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">...</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">服务端渲染</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">serverRender</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">...</a><!----></li></ul></li><!--]--></ul><!--[--><!--]--></aside><!-- TODO: make this button accessible --><div class="sidebar-mask"></div><main class="page" data-v-d36a7fda><div class="container" data-v-d36a7fda><!--[--><!--]--><div class="content" data-v-d36a7fda><div data-v-d36a7fda><h2 id="setupcomponent-安装组件"><a class="header-anchor" href="#setupcomponent-安装组件" aria-hidden="true">#</a> setupComponent 安装组件</h2><p>这部分代码在<code>packages/runtime-core/src/renderer.ts</code></p><p><code>setupComponent</code>首先从<code>Vnode</code>获取<code>props、children</code>，并对<code>props、children</code>做了初始化。并判断是否有状态，有就执行<code>setupStatefulComponent</code>，否则就为<code>undefined</code>，并最终返回<code>setup</code>函数执行结果。</p><div class="language-ts"><pre><code><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">setupComponent</span><span class="token punctuation">(</span>
+  instance<span class="token operator">:</span> ComponentInternalInstance<span class="token punctuation">,</span>
+  isSSR <span class="token operator">=</span> <span class="token boolean">false</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  isInSSRComponentSetup <span class="token operator">=</span> isSSR
+
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> props<span class="token punctuation">,</span> children <span class="token punctuation">}</span> <span class="token operator">=</span> instance<span class="token punctuation">.</span>vnode
+  <span class="token comment">// 是否是有状态的组件</span>
+  <span class="token keyword">const</span> isStateful <span class="token operator">=</span> <span class="token function">isStatefulComponent</span><span class="token punctuation">(</span>instance<span class="token punctuation">)</span>
+  <span class="token function">initProps</span><span class="token punctuation">(</span>instance<span class="token punctuation">,</span> props<span class="token punctuation">,</span> isStateful<span class="token punctuation">,</span> isSSR<span class="token punctuation">)</span>
+  <span class="token function">initSlots</span><span class="token punctuation">(</span>instance<span class="token punctuation">,</span> children<span class="token punctuation">)</span>
+
+  <span class="token keyword">const</span> setupResult <span class="token operator">=</span> isStateful
+    <span class="token operator">?</span> <span class="token function">setupStatefulComponent</span><span class="token punctuation">(</span>instance<span class="token punctuation">,</span> isSSR<span class="token punctuation">)</span>
+    <span class="token operator">:</span> <span class="token keyword">undefined</span>
+  isInSSRComponentSetup <span class="token operator">=</span> <span class="token boolean">false</span>
+  <span class="token keyword">return</span> setupResult
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="获取setup状态"><a class="header-anchor" href="#获取setup状态" aria-hidden="true">#</a> 获取setup状态</h3><div class="language-ts"><pre><code><span class="token keyword">function</span> <span class="token function">setupStatefulComponent</span><span class="token punctuation">(</span>
+  instance<span class="token operator">:</span> ComponentInternalInstance<span class="token punctuation">,</span>
+  isSSR<span class="token operator">:</span> <span class="token builtin">boolean</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> Component <span class="token operator">=</span> instance<span class="token punctuation">.</span><span class="token keyword">type</span> <span class="token class-name"><span class="token keyword">as</span></span> ComponentOptions
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>__DEV__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 如果存在组件名称</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Component<span class="token punctuation">.</span>name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">validateComponentName</span><span class="token punctuation">(</span>Component<span class="token punctuation">.</span>name<span class="token punctuation">,</span> instance<span class="token punctuation">.</span>appContext<span class="token punctuation">.</span>config<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 如果有注册组件，则进行校验</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Component<span class="token punctuation">.</span>components<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> names <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>Component<span class="token punctuation">.</span>components<span class="token punctuation">)</span>
+      <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> names<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">validateComponentName</span><span class="token punctuation">(</span>names<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> instance<span class="token punctuation">.</span>appContext<span class="token punctuation">.</span>config<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 如果有注册指令</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Component<span class="token punctuation">.</span>directives<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> names <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>Component<span class="token punctuation">.</span>directives<span class="token punctuation">)</span>
+      <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> names<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">validateDirectiveName</span><span class="token punctuation">(</span>names<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Component<span class="token punctuation">.</span>compilerOptions <span class="token operator">&amp;&amp;</span> <span class="token function">isRuntimeOnly</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">warn</span><span class="token punctuation">(</span>
+        <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&quot;compilerOptions&quot; is only supported when using a build of Vue that </span><span class="token template-punctuation string">`</span></span> <span class="token operator">+</span>
+          <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">includes the runtime compiler. Since you are using a runtime-only </span><span class="token template-punctuation string">`</span></span> <span class="token operator">+</span>
+          <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">build, the options should be passed via your build tool config instead.</span><span class="token template-punctuation string">`</span></span>
+      <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// 0. create render proxy property access cache</span>
+  instance<span class="token punctuation">.</span>accessCache <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+  <span class="token comment">// 1. create public instance / render proxy</span>
+  <span class="token comment">// also mark it raw so it&#39;s never observed</span>
+  instance<span class="token punctuation">.</span>proxy <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Proxy</span><span class="token punctuation">(</span>instance<span class="token punctuation">.</span>ctx<span class="token punctuation">,</span> PublicInstanceProxyHandlers<span class="token punctuation">)</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>__DEV__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">exposePropsOnRenderContext</span><span class="token punctuation">(</span>instance<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// 2. call setup()</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> setup <span class="token punctuation">}</span> <span class="token operator">=</span> Component
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>setup<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> setupContext <span class="token operator">=</span> <span class="token punctuation">(</span>instance<span class="token punctuation">.</span>setupContext <span class="token operator">=</span>
+      setup<span class="token punctuation">.</span>length <span class="token operator">&gt;</span> <span class="token number">1</span> <span class="token operator">?</span> <span class="token function">createSetupContext</span><span class="token punctuation">(</span>instance<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+
+    currentInstance <span class="token operator">=</span> instance
+    <span class="token function">pauseTracking</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">// 调用组件内的setup函数执行，并拿到返回结果</span>
+    <span class="token keyword">const</span> setupResult <span class="token operator">=</span> <span class="token function">callWithErrorHandling</span><span class="token punctuation">(</span>
+      setup<span class="token punctuation">,</span>
+      instance<span class="token punctuation">,</span>
+      ErrorCodes<span class="token punctuation">.</span><span class="token constant">SETUP_FUNCTION</span><span class="token punctuation">,</span>
+      <span class="token punctuation">[</span>__DEV__ <span class="token operator">?</span> <span class="token function">shallowReadonly</span><span class="token punctuation">(</span>instance<span class="token punctuation">.</span>props<span class="token punctuation">)</span> <span class="token operator">:</span> instance<span class="token punctuation">.</span>props<span class="token punctuation">,</span> setupContext<span class="token punctuation">]</span>
+    <span class="token punctuation">)</span>
+    <span class="token function">resetTracking</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    currentInstance <span class="token operator">=</span> <span class="token keyword">null</span>
+
+    <span class="token comment">// 如果setup返回的结果是promise</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isPromise</span><span class="token punctuation">(</span>setupResult<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 如果是服务端渲染</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>isSSR<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 返回Promise 以便在SSR期间处理</span>
+        <span class="token keyword">return</span> setupResult
+          <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span>resolvedResult<span class="token operator">:</span> <span class="token builtin">unknown</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">handleSetupResult</span><span class="token punctuation">(</span>instance<span class="token punctuation">,</span> resolvedResult<span class="token punctuation">,</span> isSSR<span class="token punctuation">)</span>
+          <span class="token punctuation">}</span><span class="token punctuation">)</span>
+          <span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span>e <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">handleError</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> instance<span class="token punctuation">,</span> ErrorCodes<span class="token punctuation">.</span><span class="token constant">SETUP_FUNCTION</span><span class="token punctuation">)</span>
+          <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 否则</span>
+      <span class="token function">handleSetupResult</span><span class="token punctuation">(</span>instance<span class="token punctuation">,</span> setupResult<span class="token punctuation">,</span> isSSR<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 完成组件安装</span>
+    <span class="token function">finishComponentSetup</span><span class="token punctuation">(</span>instance<span class="token punctuation">,</span> isSSR<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="对setup返回的结果进行处理"><a class="header-anchor" href="#对setup返回的结果进行处理" aria-hidden="true">#</a> 对setup返回的结果进行处理</h3><div class="language-ts"><pre><code><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">handleSetupResult</span><span class="token punctuation">(</span>
+  instance<span class="token operator">:</span> ComponentInternalInstance<span class="token punctuation">,</span>
+  setupResult<span class="token operator">:</span> <span class="token builtin">unknown</span><span class="token punctuation">,</span>
+  isSSR<span class="token operator">:</span> <span class="token builtin">boolean</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// setup可能返回一个render function</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isFunction</span><span class="token punctuation">(</span>setupResult<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// setup returned an inline render function 如果是node ssr，则返回一个内联渲染函数</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>__NODE_JS__ <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>instance<span class="token punctuation">.</span><span class="token keyword">type</span> <span class="token class-name"><span class="token keyword">as</span></span> ComponentOptions<span class="token punctuation">)</span><span class="token punctuation">.</span>__ssrInlineRender<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// when the function&#39;s name is `ssrRender` (compiled by SFC inline mode),</span>
+      <span class="token comment">// set it as ssrRender instead.</span>
+      instance<span class="token punctuation">.</span>ssrRender <span class="token operator">=</span> setupResult
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      instance<span class="token punctuation">.</span>render <span class="token operator">=</span> setupResult <span class="token keyword">as</span> InternalRenderFunction
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isObject</span><span class="token punctuation">(</span>setupResult<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 如果是vnode</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>__DEV__ <span class="token operator">&amp;&amp;</span> <span class="token function">isVNode</span><span class="token punctuation">(</span>setupResult<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// setup不应返回一个vnode 应该是render function</span>
+      <span class="token function">warn</span><span class="token punctuation">(</span>
+        <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">setup() should not return VNodes directly - </span><span class="token template-punctuation string">`</span></span> <span class="token operator">+</span>
+          <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">return a render function instead.</span><span class="token template-punctuation string">`</span></span>
+      <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// setup returned bindings.</span>
+    <span class="token comment">// assuming a render function compiled from template is present.</span>
+    <span class="token comment">// 如果存在devtools 就把setup返回结果赋值给devtoolsRawSetupState</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>__DEV__ <span class="token operator">||</span> __FEATURE_PROD_DEVTOOLS__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      instance<span class="token punctuation">.</span>devtoolsRawSetupState <span class="token operator">=</span> setupResult
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 这步会把setup的返回结果在进一步通过proxy进行包装</span>
+    instance<span class="token punctuation">.</span>setupState <span class="token operator">=</span> <span class="token function">proxyRefs</span><span class="token punctuation">(</span>setupResult<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>__DEV__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">exposeSetupStateOnRenderContext</span><span class="token punctuation">(</span>instance<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>__DEV__ <span class="token operator">&amp;&amp;</span> setupResult <span class="token operator">!==</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">warn</span><span class="token punctuation">(</span>
+      <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">setup() should return an object. Received: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>
+        setupResult <span class="token operator">===</span> <span class="token keyword">null</span> <span class="token operator">?</span> <span class="token string">&#39;null&#39;</span> <span class="token operator">:</span> <span class="token keyword">typeof</span> setupResult
+      <span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// 完成组件安装</span>
+  <span class="token function">finishComponentSetup</span><span class="token punctuation">(</span>instance<span class="token punctuation">,</span> isSSR<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="finishcomponentsetup-完成组件设置"><a class="header-anchor" href="#finishcomponentsetup-完成组件设置" aria-hidden="true">#</a> finishComponentSetup 完成组件设置</h3><p><code>finishComponentSetup</code>这块，主要完成了组件的安装处理，并初始化了编译选项，对<code>setup</code>返回<code>render Function</code>和普通结果做了处理。并对v2做了兼容处理。</p><div class="language-ts"><pre><code><span class="token comment">// 完成组件设置</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">finishComponentSetup</span><span class="token punctuation">(</span>
+  instance<span class="token operator">:</span> ComponentInternalInstance<span class="token punctuation">,</span>
+  isSSR<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span>
+  skipOptions<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> Component <span class="token operator">=</span> instance<span class="token punctuation">.</span><span class="token keyword">type</span> <span class="token class-name"><span class="token keyword">as</span></span> ComponentOptions
+
+  <span class="token comment">// 针对v2进行兼容</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>__COMPAT__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">convertLegacyRenderFn</span><span class="token punctuation">(</span>instance<span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>__DEV__ <span class="token operator">&amp;&amp;</span> Component<span class="token punctuation">.</span>compatConfig<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">validateCompatConfig</span><span class="token punctuation">(</span>Component<span class="token punctuation">.</span>compatConfig<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// template / render function normalization</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>__NODE_JS__ <span class="token operator">&amp;&amp;</span> isSSR<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 1. the render function may already exist, returned by `setup`</span>
+    <span class="token comment">// 2. otherwise try to use the `Component.render`</span>
+    <span class="token comment">// 3. if the component doesn&#39;t have a render function,</span>
+    <span class="token comment">//    set `instance.render` to NOOP so that it can inherit the render</span>
+    <span class="token comment">//    function from mixins/extend</span>
+    <span class="token comment">// render函数可能由setup进行返回，否则就用Component.render</span>
+    instance<span class="token punctuation">.</span>render <span class="token operator">=</span> <span class="token punctuation">(</span>instance<span class="token punctuation">.</span>render <span class="token operator">||</span>
+      Component<span class="token punctuation">.</span>render <span class="token operator">||</span>
+      <span class="token constant">NOOP</span><span class="token punctuation">)</span> <span class="token keyword">as</span> InternalRenderFunction
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>instance<span class="token punctuation">.</span>render<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// could be set from setup()</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>compile <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>Component<span class="token punctuation">.</span>render<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 获取模板</span>
+      <span class="token keyword">const</span> template <span class="token operator">=</span>
+        <span class="token punctuation">(</span>__COMPAT__ <span class="token operator">&amp;&amp;</span>
+          instance<span class="token punctuation">.</span>vnode<span class="token punctuation">.</span>props <span class="token operator">&amp;&amp;</span>
+          instance<span class="token punctuation">.</span>vnode<span class="token punctuation">.</span>props<span class="token punctuation">[</span><span class="token string">&#39;inline-template&#39;</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+        Component<span class="token punctuation">.</span>template
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>template<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>__DEV__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token comment">// 编译性能统计</span>
+          <span class="token function">startMeasure</span><span class="token punctuation">(</span>instance<span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">compile</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">const</span> <span class="token punctuation">{</span> isCustomElement<span class="token punctuation">,</span> compilerOptions <span class="token punctuation">}</span> <span class="token operator">=</span> instance<span class="token punctuation">.</span>appContext<span class="token punctuation">.</span>config
+        <span class="token keyword">const</span> <span class="token punctuation">{</span>
+          delimiters<span class="token punctuation">,</span>
+          compilerOptions<span class="token operator">:</span> componentCompilerOptions
+        <span class="token punctuation">}</span> <span class="token operator">=</span> Component
+        <span class="token comment">// 合并最终编译选项</span>
+        <span class="token keyword">const</span> finalCompilerOptions<span class="token operator">:</span> CompilerOptions <span class="token operator">=</span> <span class="token function">extend</span><span class="token punctuation">(</span>
+          <span class="token function">extend</span><span class="token punctuation">(</span>
+            <span class="token punctuation">{</span>
+              isCustomElement<span class="token punctuation">,</span>
+              delimiters
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            compilerOptions
+          <span class="token punctuation">)</span><span class="token punctuation">,</span>
+          componentCompilerOptions
+        <span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>__COMPAT__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token comment">// pass runtime compat config into the compiler</span>
+          finalCompilerOptions<span class="token punctuation">.</span>compatConfig <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>globalCompatConfig<span class="token punctuation">)</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>Component<span class="token punctuation">.</span>compatConfig<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">extend</span><span class="token punctuation">(</span>finalCompilerOptions<span class="token punctuation">.</span>compatConfig<span class="token punctuation">,</span> Component<span class="token punctuation">.</span>compatConfig<span class="token punctuation">)</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// 编译模板 生成render function，这一步只是生成了createVnode</span>
+        Component<span class="token punctuation">.</span>render <span class="token operator">=</span> <span class="token function">compile</span><span class="token punctuation">(</span>template<span class="token punctuation">,</span> finalCompilerOptions<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>__DEV__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token comment">// 编译结束</span>
+          <span class="token function">endMeasure</span><span class="token punctuation">(</span>instance<span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">compile</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    instance<span class="token punctuation">.</span>render <span class="token operator">=</span> <span class="token punctuation">(</span>Component<span class="token punctuation">.</span>render <span class="token operator">||</span> <span class="token constant">NOOP</span><span class="token punctuation">)</span> <span class="token keyword">as</span> InternalRenderFunction
+
+    <span class="token comment">// for runtime-compiled render functions using `with` blocks, the render</span>
+    <span class="token comment">// proxy used needs a different `has` handler which is more performant and</span>
+    <span class="token comment">// also only allows a whitelist of globals to fallthrough.</span>
+    <span class="token comment">/**
+     * vue在生成render function的时候，vue是通过new Function() 实现的，内部用了with进行包装（可能是浏览器做的）
+     * 从而通过需要proxy 进行代理 提高性能
+     */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>instance<span class="token punctuation">.</span>render<span class="token punctuation">.</span>_rc<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      instance<span class="token punctuation">.</span>withProxy <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Proxy</span><span class="token punctuation">(</span>
+        instance<span class="token punctuation">.</span>ctx<span class="token punctuation">,</span>
+        RuntimeCompiledPublicInstanceProxyHandlers
+      <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// support for 2.x options</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>__FEATURE_OPTIONS_API__ <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token punctuation">(</span>__COMPAT__ <span class="token operator">&amp;&amp;</span> skipOptions<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    currentInstance <span class="token operator">=</span> instance
+    <span class="token function">pauseTracking</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">applyOptions</span><span class="token punctuation">(</span>instance<span class="token punctuation">,</span> Component<span class="token punctuation">)</span>
+    <span class="token function">resetTracking</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    currentInstance <span class="token operator">=</span> <span class="token keyword">null</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// warn missing template/render</span>
+  <span class="token comment">// the runtime compilation of template in SSR is done by server-render</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>__DEV__ <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>Component<span class="token punctuation">.</span>render <span class="token operator">&amp;&amp;</span> instance<span class="token punctuation">.</span>render <span class="token operator">===</span> <span class="token constant">NOOP</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>isSSR<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">/* istanbul ignore if */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>compile <span class="token operator">&amp;&amp;</span> Component<span class="token punctuation">.</span>template<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">warn</span><span class="token punctuation">(</span>
+        <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Component provided template option but </span><span class="token template-punctuation string">`</span></span> <span class="token operator">+</span>
+          <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">runtime compilation is not supported in this build of Vue.</span><span class="token template-punctuation string">`</span></span> <span class="token operator">+</span>
+          <span class="token punctuation">(</span>__ESM_BUNDLER__
+            <span class="token operator">?</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string"> Configure your bundler to alias &quot;vue&quot; to &quot;vue/dist/vue.esm-bundler.js&quot;.</span><span class="token template-punctuation string">`</span></span>
+            <span class="token operator">:</span> __ESM_BROWSER__
+              <span class="token operator">?</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string"> Use &quot;vue.esm-browser.js&quot; instead.</span><span class="token template-punctuation string">`</span></span>
+              <span class="token operator">:</span> __GLOBAL__
+                <span class="token operator">?</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string"> Use &quot;vue.global.js&quot; instead.</span><span class="token template-punctuation string">`</span></span>
+                <span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span> <span class="token comment">/* should not happen */</span>
+      <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token function">warn</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Component is missing template or render function.</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="总结"><a class="header-anchor" href="#总结" aria-hidden="true">#</a> 总结</h2><p>至此，组件已经完成安装，下一部分将开始说明<code>template</code>是如何编译的，需要懂一点简单的编译原理。由于本人例子是通过template实现的，所以和直接返回<code>render Function</code>的会有部分区别，可能以后会去写<code>render Function</code>的处理方案吧。</p></div></div><footer class="page-footer" data-v-d36a7fda data-v-5a019cc9><div class="edit" data-v-5a019cc9><div class="edit-link" data-v-5a019cc9 data-v-3ae295f1><!----></div></div><div class="updated" data-v-5a019cc9><!----></div></footer><div class="next-and-prev-link" data-v-d36a7fda data-v-6683615c><div class="container" data-v-6683615c><div class="prev" data-v-6683615c><a class="link" href="/vue-next-analysis/page/mountComponent" data-v-6683615c><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" class="icon icon-prev" data-v-6683615c><path d="M19,11H7.4l5.3-5.3c0.4-0.4,0.4-1,0-1.4s-1-0.4-1.4,0l-7,7c-0.1,0.1-0.2,0.2-0.2,0.3c-0.1,0.2-0.1,0.5,0,0.8c0.1,0.1,0.1,0.2,0.2,0.3l7,7c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3c0.4-0.4,0.4-1,0-1.4L7.4,13H19c0.6,0,1-0.4,1-1S19.6,11,19,11z"></path></svg><span class="text" data-v-6683615c>☆ mountComponent 挂载组件</span></a></div><div class="next" data-v-6683615c><a class="link" href="/vue-next-analysis/compiler/baseCompile" data-v-6683615c><span class="text" data-v-6683615c>☆ baseCompile</span><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" class="icon icon-next" data-v-6683615c><path d="M19.9,12.4c0.1-0.2,0.1-0.5,0-0.8c-0.1-0.1-0.1-0.2-0.2-0.3l-7-7c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l5.3,5.3H5c-0.6,0-1,0.4-1,1s0.4,1,1,1h11.6l-5.3,5.3c-0.4,0.4-0.4,1,0,1.4c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3l7-7C19.8,12.6,19.9,12.5,19.9,12.4z"></path></svg></a></div></div></div><!--[--><!--]--></div></main></div><!----><!--]--></div>
+    <script>__VP_HASH_MAP__ = JSON.parse("{\"index.md\":\"7aeddfdb\",\"compiler_ast.md\":\"b437f324\",\"compiler_basecompile.md\":\"b904cc67\",\"compiler_generate.md\":\"74a7eba0\",\"directive_v-for.md\":\"1c6491a5\",\"directive_v-if.md\":\"ed594ce7\",\"directive_v-on.md\":\"1c3649a1\",\"directive_v-show.md\":\"10ff3d18\",\"components_base.md\":\"f43539ba\",\"components_createapp.md\":\"4b1b925e\",\"components_keepalive.md\":\"94a03511\",\"components_suspense.md\":\"2b5dbcb8\",\"components_teleport.md\":\"46795626\",\"components_vnode.md\":\"4bb4def3\",\"page_base.md\":\"e80d4275\",\"page_bitoperators.md\":\"61cf3057\",\"page_browserrender.md\":\"2310b08a\",\"page_components.md\":\"6b576e3e\",\"page_createapp.md\":\"8755dc2d\",\"page_debug.md\":\"8cb3cbe0\",\"page_flow.md\":\"08a35ab0\",\"page_mount.md\":\"3615738d\",\"page_mountcomponent.md\":\"9b2d73b0\",\"page_my.md\":\"9f1b59aa\",\"page_render.md\":\"e7d9da28\",\"page_setupcomponent.md\":\"93c0f41f\",\"page_vnode.md\":\"5a27f81e\",\"render_patch.md\":\"334ecb11\"}")</script>
+    <script type="module" async src="/vue-next-analysis/assets/app.5846fbd1.js"></script>
+  </body>
+</html>

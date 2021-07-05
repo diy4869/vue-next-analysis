@@ -405,6 +405,7 @@ export function traverseChildren(
   }
 }
 
+// 不懂干嘛的
 export function traverseNode(
   node: RootNode | TemplateChildNode,
   context: TransformContext

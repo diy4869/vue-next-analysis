@@ -304,6 +304,8 @@ let vnodeArgsTransformer:
  * used for creating stubs in the test-utils
  * It is *internal* but needs to be exposed for test-utils to pick up proper
  * typings
+ *
+ * 自定义转换器，应该是用于其他库，如uniapp，这里不考虑
  */
 export function transformVNodeArgs(transformer?: typeof vnodeArgsTransformer) {
   vnodeArgsTransformer = transformer
@@ -312,15 +314,7 @@ export function transformVNodeArgs(transformer?: typeof vnodeArgsTransformer) {
 const createVNodeWithArgsTransform = (
   ...args: Parameters<typeof _createVNode>
 ): VNode => {
-  console.log(
-    '_createVNode',
-    vnodeArgsTransformer(args, currentRenderingInstance),
-    _createVNode(
-      ...(vnodeArgsTransformer
-        ? vnodeArgsTransformer(args, currentRenderingInstance)
-        : args)
-    )
-  )
+  // 首次渲染会执行args，args为组件
   return _createVNode(
     ...(vnodeArgsTransformer
       ? vnodeArgsTransformer(args, currentRenderingInstance)

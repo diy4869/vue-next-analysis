@@ -16,10 +16,17 @@ export { onActivated, onDeactivated } from './components/KeepAlive'
 export function injectHook(
   type: LifecycleHooks,
   hook: Function & { __weh?: Function },
-  target: ComponentInternalInstance | null = currentInstance,
+  target: ComponentInternalInstance | null = currentInstance, // 组件实例
   prepend: boolean = false
 ): Function | undefined {
   if (target) {
+    /***
+     * 获取组件内已经保存的hook，不存在会初始化一个数组
+     * {
+     *  bm: []
+     *  type: 'bm'
+     * }
+     */
     const hooks = target[type] || (target[type] = [])
     // cache the error handling wrapper for injected hooks so the same hook
     // can be properly deduped by the scheduler. "__weh" stands for "with error
@@ -36,6 +43,7 @@ export function injectHook(
         // Set currentInstance during hook invocation.
         // This assumes the hook does not synchronously trigger other hooks, which
         // can only be false when the user does something really funky.
+        console.log('setCurrentInstance')
         setCurrentInstance(target)
         const res = callWithAsyncErrorHandling(hook, target, type, args)
         setCurrentInstance(null)
@@ -66,6 +74,7 @@ export const createHook = <T extends Function = () => any>(
   lifecycle: LifecycleHooks
 ) => (hook: T, target: ComponentInternalInstance | null = currentInstance) =>
   // post-create lifecycle registrations are noops during SSR
+  // 判断是否是SSR渲染
   !isInSSRComponentSetup && injectHook(lifecycle, hook, target)
 
 export const onBeforeMount = createHook(LifecycleHooks.BEFORE_MOUNT)

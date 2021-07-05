@@ -1434,12 +1434,13 @@ function baseCreateRenderer(
         const { el, props } = initialVNode
         const { bm, m, parent } = instance
 
-        // beforeMount hook
+        // beforeMount hook 调用beforeMount
         if (bm) {
           invokeArrayFns(bm)
         }
         // onVnodeBeforeMount
         if ((vnodeHook = props && props.onVnodeBeforeMount)) {
+          debugger
           invokeVNodeHook(vnodeHook, parent, initialVNode)
         }
         if (
@@ -1502,6 +1503,7 @@ function baseCreateRenderer(
         }
         // onVnodeMounted
         if ((vnodeHook = props && props.onVnodeMounted)) {
+          debugger
           const scopedInitialVNode = initialVNode
           queuePostRenderEffect(
             () => invokeVNodeHook(vnodeHook!, parent, scopedInitialVNode),
