@@ -1,0 +1,301 @@
+{
+  "type": 0,
+  "children": [
+      {
+          "type": 1,
+          "ns": 0,
+          "tag": "div",
+          "tagType": 0,
+          "props": [
+            {
+                "type": 7,
+                "name": "bind",
+                "exp": {
+                    "type": 4,
+                    "content": "count % 2 === 0 ? 'red' : 'blue'",
+                    "isStatic": false,
+                    "constType": 0,
+                    "loc": {
+                        "start": {
+                            "column": 23,
+                            "line": 2,
+                            "offset": 23
+                        },
+                        "end": {
+                            "column": 55,
+                            "line": 2,
+                            "offset": 55
+                        },
+                        "source": "count % 2 === 0 ? 'red' : 'blue'"
+                    }
+                },
+                "arg": {
+                    "type": 4,
+                    "content": "class",
+                    "isStatic": true,
+                    "constType": 3,
+                    "loc": {
+                        "start": {
+                            "column": 16,
+                            "line": 2,
+                            "offset": 16
+                        },
+                        "end": {
+                            "column": 21,
+                            "line": 2,
+                            "offset": 21
+                        },
+                        "source": "class"
+                    }
+                },
+                "modifiers": [],
+                "loc": {
+                    "start": {
+                        "column": 15,
+                        "line": 2,
+                        "offset": 15
+                    },
+                    "end": {
+                        "column": 56,
+                        "line": 2,
+                        "offset": 56
+                    },
+                    "source": ":class=\"count % 2 === 0 ? 'red' : 'blue'\""
+                }
+            },
+            {
+                "type": 7,
+                "name": "bind",
+                "exp": {
+                    "type": 4,
+                    "content": "'font-size: 14px; font-weight: bold;'",
+                    "isStatic": false,
+                    "constType": 0,
+                    "loc": {
+                        "start": {
+                            "column": 65,
+                            "line": 2,
+                            "offset": 65
+                        },
+                        "end": {
+                            "column": 102,
+                            "line": 2,
+                            "offset": 102
+                        },
+                        "source": "'font-size: 14px; font-weight: bold;'"
+                    }
+                },
+                "arg": {
+                    "type": 4,
+                    "content": "style",
+                    "isStatic": true,
+                    "constType": 3,
+                    "loc": {
+                        "start": {
+                            "column": 58,
+                            "line": 2,
+                            "offset": 58
+                        },
+                        "end": {
+                            "column": 63,
+                            "line": 2,
+                            "offset": 63
+                        },
+                        "source": "style"
+                    }
+                },
+                "modifiers": [],
+                "loc": {
+                    "start": {
+                        "column": 57,
+                        "line": 2,
+                        "offset": 57
+                    },
+                    "end": {
+                        "column": 103,
+                        "line": 2,
+                        "offset": 103
+                    },
+                    "source": ":style=\"'font-size: 14px; font-weight: bold;'\""
+                }
+            }
+        ],
+          "isSelfClosing": false,
+          "children": [
+              {
+                  "type": 2,
+                  "content": "这是子组件",
+                  "loc": {
+                      "start": {
+                          "column": 18,
+                          "line": 2,
+                          "offset": 18
+                      },
+                      "end": {
+                          "column": 23,
+                          "line": 2,
+                          "offset": 23
+                      },
+                      "source": "这是子组件"
+                  }
+              }
+          ],
+          "loc": {
+              "start": {
+                  "column": 13,
+                  "line": 2,
+                  "offset": 13
+              },
+              "end": {
+                  "column": 29,
+                  "line": 2,
+                  "offset": 29
+              },
+              "source": "<div>这是子组件</div>"
+          },
+          "codegenNode": {
+              "type": 4,
+              "loc": {
+                  "start": {
+                      "column": 13,
+                      "line": 2,
+                      "offset": 13
+                  },
+                  "end": {
+                      "column": 29,
+                      "line": 2,
+                      "offset": 29
+                  },
+                  "source": "<div>这是子组件</div>"
+              },
+              "content": "_hoisted_1",
+              "isStatic": false,
+              "constType": 2,
+              "hoisted": {
+                  "type": 13,
+                  "tag": "\"div\"",
+                  "children": {
+                      "type": 2,
+                      "content": "这是子组件",
+                      "loc": {
+                          "start": {
+                              "column": 18,
+                              "line": 2,
+                              "offset": 18
+                          },
+                          "end": {
+                              "column": 23,
+                              "line": 2,
+                              "offset": 23
+                          },
+                          "source": "这是子组件"
+                      }
+                  },
+                  "patchFlag": "-1 /* HOISTED */",
+                  "isBlock": false,
+                  "disableTracking": false,
+                  "loc": {
+                      "start": {
+                          "column": 13,
+                          "line": 2,
+                          "offset": 13
+                      },
+                      "end": {
+                          "column": 29,
+                          "line": 2,
+                          "offset": 29
+                      },
+                      "source": "<div>这是子组件</div>"
+                  }
+              }
+          }
+      }
+  ],
+  "helpers": [
+    Symbol(createVNode)
+    Symbol(toDisplayString)
+    Symbol(Fragment)
+    Symbol(openBlock)
+    Symbol(createBlock)
+    
+  ],
+  "components": ["test"],
+  "directives": [],
+  "hoists": [
+      {
+          "type": 13,
+          "tag": "\"div\"",
+          "children": {
+              "type": 2,
+              "content": "这是子组件",
+              "loc": {
+                  "start": {
+                      "column": 18,
+                      "line": 2,
+                      "offset": 18
+                  },
+                  "end": {
+                      "column": 23,
+                      "line": 2,
+                      "offset": 23
+                  },
+                  "source": "这是子组件"
+              }
+          },
+          "patchFlag": "-1 /* HOISTED */",
+          "isBlock": false,
+          "disableTracking": false,
+          "loc": {
+              "start": {
+                  "column": 13,
+                  "line": 2,
+                  "offset": 13
+              },
+              "end": {
+                  "column": 29,
+                  "line": 2,
+                  "offset": 29
+              },
+              "source": "<div>这是子组件</div>"
+          }
+      }
+  ],
+  "imports": [],
+  "cached": 0,
+  "temps": 0,
+  "codegenNode": {
+      "type": 13,
+      "children": [
+      ],
+      "directives": null,
+      "patchFlag": "64 /* STABLE_FRAGMENT */",
+      "isBlock": true,
+      "disableTracking": false,
+      "loc": {
+          "source": "",
+          "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+          },
+          "end": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+          }
+      }
+  },
+  "loc": {
+      "start": {
+          "column": 1,
+          "line": 1,
+          "offset": 0
+      },
+      "end": {
+          "column": 9,
+          "line": 4,
+          "offset": 85
+      },
+      "source": "\n            <div>这是子组件</div>\n            <div>这是父组件接受的count：{{count}}</div>\n        "
+  }
+}

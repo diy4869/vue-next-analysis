@@ -13,7 +13,7 @@ module.exports = {
     sidebar: [
       {
         text: '☆ 个人介绍',
-        link: '/components/my'
+        link: '/page/my'
       },
       {
         text: '一些流程图',
@@ -44,7 +44,7 @@ module.exports = {
             link: '/page/browserRender'
           },
           {
-            text: '☆ Vnode',
+            text: '☆ VNode',
             link: '/page/vnode'
           },
           {
@@ -90,8 +90,44 @@ module.exports = {
         text: 'compiler 编译',
         children: [
           {
-            text: '☆ baseCompile',
+            text: '☆ baseCompile 基本编译',
             link: '/compiler/baseCompile'
+          },
+          {
+            text: '☆ parse 一 初始化解析',
+            link: '/compiler/parse'
+          },
+          {
+            text: '☆ parse 二 解析子节点',
+            link: '/compiler/parseChildren'
+          },
+          {
+            text: '☆ parse 三 一些解析工具函数',
+            link: '/compiler/utils'
+          },
+          {
+            text: '☆ parse 四 解析标签',
+            link: '/compiler/parseTag'
+          },
+          {
+            text: '☆ parse 五 解析属性',
+            link: '/compiler/parseAttribute'
+          },
+          {
+            text: '☆ parse 六 解析文本',
+            link: '/compiler/parseText'
+          },
+          {
+            text: '☆ parse 七 解析元素',
+            link: '/compiler/parseElement'
+          },
+          {
+            text: '☆ parse 八 结束',
+            link: '/compiler/parseEnd'
+          },
+          {
+            text: '☆ transform 一 初始化',
+            link: '/compiler/transform'
           },
           {
             text: 'v-if',

@@ -23,6 +23,7 @@ export type TransformPreset = [
   Record<string, DirectiveTransform>
 ]
 
+// 获取基本转换预设
 export function getBaseTransformPreset(
   prefixIdentifiers?: boolean
 ): TransformPreset {
@@ -56,6 +57,7 @@ export function getBaseTransformPreset(
 
 // we name it `baseCompile` so that higher order compilers like
 // @vue/compiler-dom can export `compile` while re-exporting everything else.
+
 export function baseCompile(
   template: string | RootNode,
   options: CompilerOptions = {}
@@ -82,10 +84,10 @@ export function baseCompile(
 
   // 获取ast
   const ast = isString(template) ? baseParse(template, options) : template
-  console.log('ast -------', ast)
   const [nodeTransforms, directiveTransforms] = getBaseTransformPreset(
     prefixIdentifiers
   )
+  // 转换
   transform(
     ast,
     extend({}, options, {
@@ -102,6 +104,7 @@ export function baseCompile(
     })
   )
 
+  // 生成block tree 用于最终渲染
   return generate(
     ast,
     extend({}, options, {

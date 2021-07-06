@@ -117,12 +117,12 @@ export function advancePositionWithMutation(
     }
   }
 
-  pos.offset += numberOfCharacters
-  pos.line += linesCount
+  pos.offset += numberOfCharacters // 解析的位置++
+  pos.line += linesCount // 解析的行数++
   pos.column =
     lastNewLinePos === -1
       ? pos.column + numberOfCharacters
-      : numberOfCharacters - lastNewLinePos
+      : numberOfCharacters - lastNewLinePos // 拿到列数
 
   return pos
 }

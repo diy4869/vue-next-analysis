@@ -107,10 +107,12 @@ export function baseParse(
   const context = createParserContext(content, options)
   const start = getCursor(context)
   console.log('baseParse')
-  return createRoot(
-    parseChildren(context, TextModes.DATA, []),
-    getSelection(context, start)
+  const result = createRoot(
+    parseChildren(context, TextModes.DATA, []), // 解析的子元素
+    getSelection(context, start) // 每次解析的位置
   )
+  console.log('ast', result)
+  return result
 }
 
 function createParserContext(
@@ -138,7 +140,7 @@ function createParserContext(
 
 function parseChildren(
   context: ParserContext,
-  mode: TextModes,
+  mode: TextModes, // 默认为0
   ancestors: ElementNode[]
 ): TemplateChildNode[] {
   const parent = last(ancestors)
@@ -157,6 +159,7 @@ function parseChildren(
       if (!context.inVPre && startsWith(s, context.options.delimiters[0])) {
         console.log('{{')
         // '{{'
+        debugger
         node = parseInterpolation(context, mode)
       } else if (mode === TextModes.DATA && s[0] === '<') {
         // https://html.spec.whatwg.org/multipage/parsing.html#tag-open-state
@@ -217,6 +220,7 @@ function parseChildren(
     }
     // node不存在
     if (!node) {
+      // 解析文本
       node = parseText(context, mode)
     }
 
@@ -240,9 +244,9 @@ function parseChildren(
           const prev = nodes[i - 1]
           const next = nodes[i + 1]
           // Remove if:
-          // - the whitespace is the first or last node, or:
-          // - (condense mode) the whitespace is adjacent to a comment, or:
-          // - (condense mode) the whitespace is between two elements AND contains newline
+          // - the whitespace is the first or last node, or: 如果空格是第一个或者最后一个节点
+          // - (condense mode) the whitespace is adjacent to a comment, or: 或者空格和注释相邻
+          // - (condense mode) the whitespace is between two elements AND contains newline 或者空格在2个元素之间包含换行符
           if (
             !prev ||
             !next ||
@@ -437,7 +441,6 @@ function parseElement(
         context,
         element.loc.end
       ).source
-      console.log(inlineTemplateProp)
     }
   }
 
@@ -665,6 +668,7 @@ function parseAttributes(
       advanceSpaces(context)
       continue
     }
+    // 是否为结束
     if (type === TagType.End) {
       emitError(context, ErrorCodes.END_TAG_WITH_ATTRIBUTES)
     }
@@ -689,9 +693,9 @@ function parseAttribute(
 ): AttributeNode | DirectiveNode {
   __TEST__ && assert(/^[^\t\r\n\f />]/.test(context.source))
 
-  // Name.
+  // Name. 解析属性名
   const start = getCursor(context)
-  const match = /^[^\t\r\n\f />][^\t\r\n\f />=]*/.exec(context.source)!
+  const match = /^[^\t\r\n\f />][^\t\r\n\f />=]*/.exec(context.source)! // 匹配属性
   const name = match[0]
 
   // 如果已经存在，抛出错误
@@ -720,7 +724,7 @@ function parseAttribute(
 
   advanceBy(context, name.length)
 
-  // Value
+  // Value 解析属性值
   let value: AttributeValue = undefined
 
   if (/^[\t\r\n\f ]*=/.test(context.source)) {
@@ -734,7 +738,7 @@ function parseAttribute(
     }
   }
   const loc = getSelection(context, start)
-
+  // 解析指令
   if (!context.inVPre && /^(v-|:|@|#)/.test(name)) {
     const match = /(?:^v-([a-z0-9-]+))?(?:(?::|^@|^#)(\[[^\]]+\]|[^\.]+))?(.+)?$/i.exec(
       name
@@ -791,6 +795,7 @@ function parseAttribute(
       }
     }
 
+    // 是引号
     if (value && value.isQuoted) {
       const valueLoc = value.loc
       valueLoc.start.offset++
@@ -907,26 +912,27 @@ function parseInterpolation(
   const [open, close] = context.options.delimiters
   __TEST__ && assert(startsWith(context.source, open))
 
-  const closeIndex = context.source.indexOf(close, open.length)
+  const closeIndex = context.source.indexOf(close, open.length) // 拿到结束位置
   if (closeIndex === -1) {
+    // 如果为 -1就抛出错误
     emitError(context, ErrorCodes.X_MISSING_INTERPOLATION_END)
     return undefined
   }
 
-  const start = getCursor(context)
-  advanceBy(context, open.length)
-  const innerStart = getCursor(context)
-  const innerEnd = getCursor(context)
-  const rawContentLength = closeIndex - open.length
-  const rawContent = context.source.slice(0, rawContentLength)
+  const start = getCursor(context) // 获取开始的位置
+  advanceBy(context, open.length) // 前进
+  const innerStart = getCursor(context) //开始解析的位置
+  const innerEnd = getCursor(context) // 结束解析的位置
+  const rawContentLength = closeIndex - open.length // 获取文本长度
+  const rawContent = context.source.slice(0, rawContentLength) // 获取文本内容
   const preTrimContent = parseTextData(context, rawContentLength, mode)
-  const content = preTrimContent.trim()
+  const content = preTrimContent.trim() // 去除空格
   const startOffset = preTrimContent.indexOf(content)
   if (startOffset > 0) {
     advancePositionWithMutation(innerStart, rawContent, startOffset)
   }
   const endOffset =
-    rawContentLength - (preTrimContent.length - content.length - startOffset)
+    rawContentLength - (preTrimContent.length - content.length - startOffset) // 结束位置
   advancePositionWithMutation(innerEnd, rawContent, endOffset)
   advanceBy(context, close.length)
 
@@ -945,6 +951,7 @@ function parseInterpolation(
 }
 
 function parseText(context: ParserContext, mode: TextModes): TextNode {
+  debugger
   __TEST__ && assert(context.source.length > 0)
 
   const endTokens = ['<', context.options.delimiters[0]]
@@ -963,6 +970,7 @@ function parseText(context: ParserContext, mode: TextModes): TextNode {
   __TEST__ && assert(endIndex > 0)
 
   const start = getCursor(context)
+  // 通过对endTokens循环判断就能知道结束的位置
   const content = parseTextData(context, endIndex, mode)
 
   return {
@@ -1005,6 +1013,7 @@ function getCursor(context: ParserContext): Position {
   return { column, line, offset }
 }
 
+// 获取当前已解析的相关信息
 function getSelection(
   context: ParserContext,
   start: Position,
@@ -1014,7 +1023,7 @@ function getSelection(
   return {
     start,
     end,
-    source: context.originalSource.slice(start.offset, end.offset)
+    source: context.originalSource.slice(start.offset, end.offset) // 拿到文本内容
   }
 }
 

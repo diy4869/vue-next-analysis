@@ -23,8 +23,8 @@ export const enum DOMNamespaces {
 }
 
 export const parserOptions: ParserOptions = {
-  isVoidTag,
-  isNativeTag: tag => isHTMLTag(tag) || isSVGTag(tag),
+  isVoidTag, // 是否空标签
+  isNativeTag: tag => isHTMLTag(tag) || isSVGTag(tag), // 是否HTML自带标签
   isPreTag: tag => tag === 'pre',
   decodeEntities: __BROWSER__ ? decodeHtmlBrowser : decodeHtml,
 
@@ -34,12 +34,12 @@ export const parserOptions: ParserOptions = {
     } else if (isBuiltInType(tag, `TransitionGroup`)) {
       return TRANSITION_GROUP
     }
-  },
+  }, // 是否内置组件
 
   // https://html.spec.whatwg.org/multipage/parsing.html#tree-construction-dispatcher
   getNamespace(tag: string, parent: ElementNode | undefined): DOMNamespaces {
     // 如果不存在parent.ns 说明是html
-    let ns = parent ? parent.ns : DOMNamespaces.HTML // 0
+    let ns = parent ? parent.ns : DOMNamespaces.HTML
 
     if (parent && ns === DOMNamespaces.MATH_ML) {
       if (parent.tag === 'annotation-xml') {
