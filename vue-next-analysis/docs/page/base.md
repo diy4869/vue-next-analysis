@@ -16,7 +16,7 @@
 
 ## 本人目前阅读进度
 
-本人目前也就看到初始化创建```vnode```的阶段，后面更新的话，大概是到初次渲染结束大概，具体时间不知道，可能中间也会更点其他的内容。
+本人目前也就看到首次渲染完成，有空就写，随缘，勿喷<span style="color: red;">（你行你上，不行别BB）</span>。
 
 ## 测试代码
 
@@ -43,9 +43,19 @@
 </head>
 <body>
     <div id="app">
-        <span :class="count % 2 === 0 ? 'red' : 'blue'">{{ count }}</span>
+        <span 
+            :class="count % 2 === 0 ? 'red' : 'blue'"
+            :style="'font-size: 14px; font-weight: bold;'">
+            {{ count }}
+        </span>
         
-        <button @click="add">增加</button>
+        <button 
+            @click="add" 
+            :style="{
+                color: 'red'
+            }">
+            增加
+        </button>
         <test :count="count"></test>
         <ul>
             <li v-for="item in 10">{{ item }}</li>
@@ -61,7 +71,7 @@
 </body>
 <script src="../packages/vue/dist/vue.global.js"></script>
 <script>
-    const { createApp, reactive, ref } = Vue
+    const { createApp, reactive, ref, onBeforeMount, onMounted } = Vue
 
     const children = {
         props: {
@@ -69,6 +79,14 @@
             test: {
                 type: Boolean
             }
+        },
+        setup () {
+            onBeforeMount(() => {
+                console.log('子组件渲染之前')
+            })
+            onMounted(() => {
+                console.log('子组件渲染完成')
+            })
         },
         template: `
             <div>这是子组件</div>
@@ -85,6 +103,14 @@
                 console.log(count)
                 count.value++
             }
+            console.log(this)
+            onBeforeMount(() => {
+                console.log('渲染之前')
+            })
+            onMounted(() => {
+                console.log('渲染完成')
+            })
+
             return {
                 count,
                 add

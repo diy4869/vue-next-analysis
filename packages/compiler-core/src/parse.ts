@@ -111,7 +111,6 @@ export function baseParse(
     parseChildren(context, TextModes.DATA, []), // 解析的子元素
     getSelection(context, start) // 每次解析的位置
   )
-  console.log('ast', result)
   return result
 }
 
@@ -157,9 +156,6 @@ function parseChildren(
 
     if (mode === TextModes.DATA || mode === TextModes.RCDATA) {
       if (!context.inVPre && startsWith(s, context.options.delimiters[0])) {
-        console.log('{{')
-        // '{{'
-        debugger
         node = parseInterpolation(context, mode)
       } else if (mode === TextModes.DATA && s[0] === '<') {
         // https://html.spec.whatwg.org/multipage/parsing.html#tag-open-state
@@ -951,7 +947,6 @@ function parseInterpolation(
 }
 
 function parseText(context: ParserContext, mode: TextModes): TextNode {
-  debugger
   __TEST__ && assert(context.source.length > 0)
 
   const endTokens = ['<', context.options.delimiters[0]]

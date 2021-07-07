@@ -83,6 +83,7 @@ export function baseCompile(
   }
 
   // 获取ast
+  debugger
   const ast = isString(template) ? baseParse(template, options) : template
   const [nodeTransforms, directiveTransforms] = getBaseTransformPreset(
     prefixIdentifiers
