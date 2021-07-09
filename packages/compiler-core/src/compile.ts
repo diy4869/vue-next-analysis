@@ -83,11 +83,11 @@ export function baseCompile(
   }
 
   // 获取ast
-  debugger
   const ast = isString(template) ? baseParse(template, options) : template
   const [nodeTransforms, directiveTransforms] = getBaseTransformPreset(
     prefixIdentifiers
   )
+  // debugger
   // 转换
   transform(
     ast,

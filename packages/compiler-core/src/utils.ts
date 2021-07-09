@@ -135,10 +135,11 @@ export function assert(condition: boolean, msg?: string) {
   }
 }
 
+// 查找指令
 export function findDir(
   node: ElementNode,
-  name: string | RegExp,
-  allowEmpty: boolean = false
+  name: string | RegExp, // 指令名称
+  allowEmpty: boolean = false // 是否允许为空
 ): DirectiveNode | undefined {
   for (let i = 0; i < node.props.length; i++) {
     const p = node.props[i]

@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
   base: '/vue-next-analysis/',
-  title: 'vue-next源码解析',
+  title: 'Vue3源码解析',
   themeConfig: {
     nav: [
       {
@@ -126,19 +126,43 @@ module.exports = {
             link: '/compiler/parseEnd'
           },
           {
-            text: '☆ transform 一 初始化',
+            text: '☆ transform 初始化',
             link: '/compiler/transform'
           },
           {
-            text: 'v-if',
-            link: '/directive/v-if'
+            text: '☆ transform 创建转换器上下文',
+            link: '/compiler/createTransformContext'
           },
           {
-            text: 'v-for',
-            link: '/directive/v-for'
+            text: '☆ transform 转换节点',
+            link: '/compiler/traverseNode'
           },
           {
-            text: 'generate',
+            text: '☆ transform 一些转换的工具函数',
+            link: '/compiler/transformUtils'
+          },
+          {
+            text: '☆ transform 转换元素',
+            link: '/compiler/transformElement'
+          },
+          {
+            text: '☆ transform createVNodeCall',
+            link: '/compiler/createVNodeCall'
+          },
+          {
+            text: '☆ transform 静态提升',
+            link: '/compiler/staticHoist'
+          },
+          {
+            text: '☆ transform 创建根节点代码生成',
+            link: '/compiler/createRootCodegen'
+          },
+          {
+            text: '☆ transform 结束',
+            link: '/compiler/transformEnd'
+          },
+          {
+            text: '☆ generate',
             link: '/compiler/generate'
           }
         ]

@@ -187,7 +187,7 @@ export const transformElement: NodeTransform = (node, context) => {
       } else if (node.children.length === 1 && vnodeTag !== TELEPORT) {
         const child = node.children[0]
         const type = child.type
-        // check for dynamic text children
+        // check for dynamic text children 是否动态文本
         const hasDynamicTextChild =
           type === NodeTypes.INTERPOLATION ||
           type === NodeTypes.COMPOUND_EXPRESSION
@@ -253,12 +253,12 @@ export function resolveComponentType(
   context: TransformContext,
   ssr = false
 ) {
-  let { tag } = node
+  let { tag } = node // 获取组件名称
 
   // 1. dynamic component
-  const isExplicitDynamic = isComponentTag(tag)
+  const isExplicitDynamic = isComponentTag(tag) // 是否 component组件
   const isProp =
-    findProp(node, 'is') || (!isExplicitDynamic && findDir(node, 'is'))
+    findProp(node, 'is') || (!isExplicitDynamic && findDir(node, 'is')) // 是否具有is属性
   if (isProp) {
     if (!isExplicitDynamic && isProp.type === NodeTypes.ATTRIBUTE) {
       // <button is="vue:xxx">
@@ -312,7 +312,7 @@ export function resolveComponentType(
     return toValidAssetId(tag, `component`)
   }
 
-  // 5. user component (resolve)
+  // 5. user component (resolve) 说明是用户自己的组件
   context.helper(RESOLVE_COMPONENT)
   context.components.add(tag)
   return toValidAssetId(tag, `component`)
@@ -471,8 +471,8 @@ export function buildProps(
     } else {
       // directives
       const { name, arg, exp, loc } = prop
-      const isVBind = name === 'bind'
-      const isVOn = name === 'on'
+      const isVBind = name === 'bind' // 是否v-bind
+      const isVOn = name === 'on' // 是否v-on
 
       // skip v-slot - it is handled by its dedicated transform.
       if (name === 'slot') {
@@ -576,7 +576,7 @@ export function buildProps(
         continue
       }
 
-      const directiveTransform = context.directiveTransforms[name]
+      const directiveTransform = context.directiveTransforms[name] // 获取当前指令对应的转换函数
       if (directiveTransform) {
         // has built-in directive transform.
         const { props, needRuntime } = directiveTransform(prop, node, context)
@@ -613,13 +613,13 @@ export function buildProps(
       )
     }
   }
-
   let propsExpression: PropsExpression | undefined = undefined
 
   // has v-bind="object" or v-on="object", wrap with mergeProps
   if (mergeArgs.length) {
     if (properties.length) {
       mergeArgs.push(
+        // 如果存在多个属性，将保证唯一性，并创建对象表达式
         createObjectExpression(dedupeProperties(properties), elementLoc)
       )
     }
@@ -642,15 +642,19 @@ export function buildProps(
 
   // patchFlag analysis
   if (hasDynamicKeys) {
+    // 是否动态Props
     patchFlag |= PatchFlags.FULL_PROPS
   } else {
     if (hasClassBinding) {
+      // 是否动态class
       patchFlag |= PatchFlags.CLASS
     }
     if (hasStyleBinding) {
+      // 是否动态style
       patchFlag |= PatchFlags.STYLE
     }
     if (dynamicPropNames.length) {
+      // 是否动态props属性
       patchFlag |= PatchFlags.PROPS
     }
     if (hasHydrationEventBinding) {

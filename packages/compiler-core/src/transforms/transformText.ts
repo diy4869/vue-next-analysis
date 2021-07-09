@@ -24,7 +24,7 @@ export const transformText: NodeTransform = (node, context) => {
     // perform the transform on node exit so that all expressions have already
     // been processed.
     return () => {
-      const children = node.children
+      const children = node.children // 获取文本节点
       let currentContainer: CompoundExpressionNode | undefined = undefined
       let hasText = false
 

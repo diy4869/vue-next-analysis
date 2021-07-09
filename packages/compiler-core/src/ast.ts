@@ -617,6 +617,7 @@ export function createObjectProperty(
   }
 }
 
+// 创建简单表达式
 export function createSimpleExpression(
   content: SimpleExpressionNode['content'],
   isStatic: SimpleExpressionNode['isStatic'],

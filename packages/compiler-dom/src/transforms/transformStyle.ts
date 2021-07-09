@@ -14,7 +14,10 @@ import { parseStringStyle } from '@vue/shared'
 // style="color: red" -> :style='{ "color": "red" }'
 // It is then processed by `transformElement` and included in the generated
 // props.
-// 样式转换
+
+/***
+ * 样式转换，将内联链式转换为对象，并将在之后的transformElement进行处理
+ */
 export const transformStyle: NodeTransform = node => {
   console.log('transformStyle')
   if (node.type === NodeTypes.ELEMENT) {

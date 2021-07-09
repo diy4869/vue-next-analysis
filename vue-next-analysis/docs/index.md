@@ -1,6 +1,6 @@
 ---
 home: true
-heroText: vue-next源码解析
+heroText: Vue3源码解析
 tagline: 
 actionText: 开始内卷
 actionLink: /page/base

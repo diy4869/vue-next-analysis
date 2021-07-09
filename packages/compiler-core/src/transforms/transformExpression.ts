@@ -43,6 +43,7 @@ import { BindingTypes } from '../options'
 const isLiteralWhitelisted = /*#__PURE__*/ makeMap('true,false,null,this')
 
 export const transformExpression: NodeTransform = (node, context) => {
+  // node.type === 5
   if (node.type === NodeTypes.INTERPOLATION) {
     node.content = processExpression(
       node.content as SimpleExpressionNode,
@@ -59,6 +60,9 @@ export const transformExpression: NodeTransform = (node, context) => {
         const arg = dir.arg // 指令类型
         // do not process exp if this is v-on:arg - we need special handling
         // for wrapping inline statements.
+        /**
+         * 如果dir 为class 则为简单表达式
+         */
         if (
           exp &&
           exp.type === NodeTypes.SIMPLE_EXPRESSION &&

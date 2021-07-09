@@ -23,7 +23,7 @@
             :class="count % 2 === 0 ? 'red' : 'blue'"
             :style="'font-size: 14px; font-weight: bold;'"
         >{{ count }}</span>
-        
+        <input ref="inputRef" v-model="inputVal"/>
         <button @click="add" :style="{
             color: 'red'
         }">增加</button>
@@ -70,6 +70,8 @@
         },
         setup () {
             const count = ref(0)
+            const inputVal = ref('hello world')
+            const inputRef = ref(null)
             const add = () => {
                 console.log(count)
                 count.value++
@@ -83,6 +85,8 @@
             })
 
             return {
+                inputVal,
+                inputRef,
                 count,
                 add
             }

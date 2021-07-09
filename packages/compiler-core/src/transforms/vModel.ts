@@ -28,7 +28,7 @@ export const transformModel: DirectiveTransform = (dir, node, context) => {
     return createTransformProps()
   }
 
-  const rawExp = exp.loc.source
+  const rawExp = exp.loc.source // 获取v-model的属性值
   const expString =
     exp.type === NodeTypes.SIMPLE_EXPRESSION ? exp.content : rawExp
 
@@ -60,7 +60,9 @@ export const transformModel: DirectiveTransform = (dir, node, context) => {
     return createTransformProps()
   }
 
+  // 给v-model创建modelValue的prop属性
   const propName = arg ? arg : createSimpleExpression('modelValue', true)
+  // 事件名称
   const eventName = arg
     ? isStaticExp(arg)
       ? `onUpdate:${arg.content}`
@@ -68,10 +70,12 @@ export const transformModel: DirectiveTransform = (dir, node, context) => {
     : `onUpdate:modelValue`
 
   let assignmentExp: ExpressionNode
+  // 事件的参数
   const eventArg = context.isTS ? `($event: any)` : `$event`
   if (maybeRef) {
     if (bindingType === BindingTypes.SETUP_REF) {
       // v-model used on known ref.
+      // 创建事件内的表达式
       assignmentExp = createCompoundExpression([
         `${eventArg} => (`,
         createSimpleExpression(rawExp, false, exp.loc),

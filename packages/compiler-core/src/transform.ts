@@ -148,7 +148,7 @@ export function createTransformContext(
     compatConfig
   }: TransformOptions
 ): TransformContext {
-  const nameMatch = filename.replace(/\?.*$/, '').match(/([^/\\]+)\.\w+$/)
+  const nameMatch = filename.replace(/\?.*$/, '').match(/([^/\\]+)\.\w+$/) // 匹配文件名，应该是用于.vue文件
   const context: TransformContext = {
     // options
     selfName: nameMatch && capitalize(camelize(nameMatch[1])),
@@ -312,8 +312,11 @@ export function createTransformContext(
 }
 
 export function transform(root: RootNode, options: TransformOptions) {
+  // 创建转换器上下文
   const context = createTransformContext(root, options)
   traverseNode(root, context)
+
+  debugger
   if (options.hoistStatic) {
     hoistStatic(root, context)
   }
@@ -360,11 +363,12 @@ function createRootCodegen(root: RootNode, context: TransformContext) {
       root.codegenNode = child
     }
   } else if (children.length > 1) {
-    // root has multiple nodes - return a fragment block.
+    // root has multiple nodes - return a fragment block. 当根节点有多个节点时，返回一个FRAGEMENT
     let patchFlag = PatchFlags.STABLE_FRAGMENT
     let patchFlagText = PatchFlagNames[PatchFlags.STABLE_FRAGMENT]
     // check if the fragment actually contains a single valid child with
     // the rest being comments
+    // 检查Fragement内是否包含一个子元素，并且不熟注释
     if (
       __DEV__ &&
       children.filter(c => c.type !== NodeTypes.COMMENT).length === 1
@@ -373,6 +377,7 @@ function createRootCodegen(root: RootNode, context: TransformContext) {
       patchFlagText += `, ${PatchFlagNames[PatchFlags.DEV_ROOT_FRAGMENT]}`
     }
     root.codegenNode = createVNodeCall(
+      // 调用VNodeCall 生成block
       context,
       helper(FRAGMENT),
       undefined,
@@ -396,12 +401,13 @@ export function traverseChildren(
     i--
   }
   for (; i < parent.children.length; i++) {
+    // 对子节点数组进行遍历
     const child = parent.children[i]
-    if (isString(child)) continue
+    if (isString(child)) continue // 是否为string
     context.parent = parent
     context.childIndex = i
     context.onNodeRemoved = nodeRemoved
-    traverseNode(child, context)
+    traverseNode(child, context) // 转换节点
   }
 }
 
@@ -411,11 +417,31 @@ export function traverseNode(
   context: TransformContext
 ) {
   context.currentNode = node
-  // apply transform plugins
+  /**
+   * 应用转换函数，vue-next会对每个标签解析好的AST，依次调用对应的转换函数
+   * 部分函数在调用的时候会返回一个新的函数，该函数将等待所有转换完成后，重新执行 如transformElement、transformText
+   */
   const { nodeTransforms } = context
   const exitFns = []
+  /**
+   * nodeTransforms
+   *
+   * 0 transformOnce
+   * 3 transformExpression
+   * 4 transformSlotOutlet
+   * 5 transformElement
+   * 6 trackSlotScopes
+   * 7 transformText
+   * 8 ignoreSideEffectTags
+   * 9 transformStyle
+   * 10 warnTransitionChildren
+   *
+   * on for if model bind 会在transformElement进行处理
+   */
+
   for (let i = 0; i < nodeTransforms.length; i++) {
     const onExit = nodeTransforms[i](node, context)
+
     if (onExit) {
       if (isArray(onExit)) {
         exitFns.push(...onExit)
@@ -424,10 +450,10 @@ export function traverseNode(
       }
     }
     if (!context.currentNode) {
-      // node was removed
+      // node was removed 节点被删除
       return
     } else {
-      // node may have been replaced
+      // node may have been replaced 节点可能被替换
       node = context.currentNode
     }
   }
@@ -457,7 +483,7 @@ export function traverseNode(
     case NodeTypes.IF_BRANCH:
     case NodeTypes.FOR:
     case NodeTypes.ELEMENT:
-    case NodeTypes.ROOT:
+    case NodeTypes.ROOT: // 如果是 0 就继续执行转换
       traverseChildren(node, context)
       break
   }
@@ -470,6 +496,7 @@ export function traverseNode(
   }
 }
 
+// 对template执行转换
 export function createStructuralDirectiveTransform(
   name: string | RegExp,
   fn: StructuralDirectiveTransform
@@ -483,6 +510,7 @@ export function createStructuralDirectiveTransform(
       const { props } = node
       // structural directive transforms are not concerned with slots
       // as they are handled separately in vSlot.ts
+      // node.type === 3
       if (node.tagType === ElementTypes.TEMPLATE && props.some(isVSlot)) {
         return
       }
