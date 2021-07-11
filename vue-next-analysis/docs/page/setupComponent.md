@@ -289,3 +289,5 @@ export function finishComponentSetup(
 ## 总结
 
 至此，组件已经完成安装，下一部分将开始说明```template```是如何编译的，需要懂一点简单的编译原理。由于本人例子是通过template实现的，所以和直接返回```render Function```的会有部分区别，可能以后会去写```render Function```的处理方案吧。
+
+[组件编译过程传送门](/compiler/baseCompile)

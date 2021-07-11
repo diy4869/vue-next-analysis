@@ -62,6 +62,15 @@ module.exports = {
         ]
       },
       {
+        text: 'API',
+        children: [
+          {
+            text: 'lifeCycle 生命周期',
+            link: '/page/lifeCycle'
+          }
+        ]
+      },
+      {
         text: '初始化渲染',
         children: [
           {
@@ -83,6 +92,10 @@ module.exports = {
           {
             text: '☆ setupComponent 安装组件',
             link: '/page/setupComponent'
+          },
+          {
+            text: '☆ setupRenderEffect 准备渲染',
+            link: '/page/setupRenderEffect'
           }
         ]
       },
@@ -187,25 +200,8 @@ module.exports = {
         text: '渲染 render',
         children: [
           {
-            text: 'v-show',
+            text: 'patch 渲染更新DOM',
             link: '/directive/v-show'
-          },
-          {
-            text: 'v-on',
-            link: '/directive/v-on'
-          }
-        ]
-      },
-      {
-        text: '指令 directive',
-        children: [
-          {
-            text: 'v-show',
-            link: '/directive/v-show'
-          },
-          {
-            text: 'v-on',
-            link: '/directive/v-on'
           }
         ]
       },
@@ -235,19 +231,6 @@ module.exports = {
           },
           {
             text: 'ref',
-            link: ''
-          },
-          {
-            text: '...',
-            link: ''
-          }
-        ]
-      },
-      {
-        text: '服务端渲染',
-        children: [
-          {
-            text: 'serverRender',
             link: ''
           },
           {

@@ -5,34 +5,7 @@ function compileToFunction(
   template: string | HTMLElement,
   options?: CompilerOptions
 ): RenderFunction {
-  // 如果template不是string
-  if (!isString(template)) {
-    if (template.nodeType) {
-      template = template.innerHTML
-    } else {
-      __DEV__ && warn(`invalid template option: `, template)
-      return NOOP
-    }
-  }
-
-  const key = template
-  // 保存编译结果，如果已经编译过则直接返回
-  const cached = compileCache[key]
-  if (cached) {
-    return cached
-  }
-
-  if (template[0] === '#') {
-    const el = document.querySelector(template)
-    if (__DEV__ && !el) {
-      warn(`Template element not found or is empty: ${template}`)
-    }
-    // __UNSAFE__
-    // Reason: potential execution of JS expressions in in-DOM template.
-    // The user must make sure the in-DOM template is trusted. If it's rendered
-    // by the server, the template should not contain any user data.
-    template = el ? el.innerHTML : ``
-  }
+  // ...
 
   // 编译模板，生成代码
   const { code } = compile(

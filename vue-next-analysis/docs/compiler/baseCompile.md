@@ -102,7 +102,7 @@ export const parserOptions: ParserOptions = {
 }
 ```
 
-### compile
+## compile 编译
 
 这一步主要把```template```和编译选项传递给了```baseCompile```，并对编译选项做了一个简单的合并，并把```baseCompile```的结果返回了出去。这部分代码在```@packages/compiler-dom/src/index.ts```
 ```ts

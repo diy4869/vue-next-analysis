@@ -1352,6 +1352,7 @@ function baseCreateRenderer(
         endMeasure(instance, `init`)
       }
     }
+    debugger
 
     // setup() is async. This component relies on async logic to be resolved
     // before proceeding
@@ -1429,6 +1430,7 @@ function baseCreateRenderer(
   ) => {
     // create reactive effect for rendering
     instance.update = effect(function componentEffect() {
+      // 如果没有渲染
       if (!instance.isMounted) {
         let vnodeHook: VNodeHook | null | undefined
         const { el, props } = initialVNode

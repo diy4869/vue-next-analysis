@@ -191,7 +191,6 @@ export function generate(
     onContextCreated?: (context: CodegenContext) => void
   } = {}
 ): CodegenResult {
-  debugger
   const context = createCodegenContext(ast, options)
   if (options.onContextCreated) options.onContextCreated(context)
   const {
