@@ -162,8 +162,24 @@ module.exports = {
             link: '/compiler/transformEnd'
           },
           {
-            text: '☆ generate',
-            link: '/compiler/generate'
+            text: '☆ generate 一些生成函数',
+            link: '/compiler/generateFunction'
+          },
+          {
+            text: '☆ generate 一',
+            link: '/compiler/generateOne'
+          },
+          {
+            text: '☆ generate 二',
+            link: '/compiler/generateTwo'
+          },
+          {
+            text: '☆ generate 模板转render function',
+            link: '/compiler/generateThree'
+          },
+          {
+            text: '☆ generate 结束',
+            link: '/compiler/generateEnd'
           }
         ]
       },

@@ -242,7 +242,7 @@ export function finishComponentSetup(
     // proxy used needs a different `has` handler which is more performant and
     // also only allows a whitelist of globals to fallthrough.
     /**
-     * vue在生成render function的时候，vue是通过new Function() 实现的，内部用了with进行包装（可能是浏览器做的）
+     * vue在生成render function的时候，vue是通过new Function() 实现的
      * 从而通过需要proxy 进行代理 提高性能
      */
     if (instance.render._rc) {

@@ -191,6 +191,7 @@ export function generate(
     onContextCreated?: (context: CodegenContext) => void
   } = {}
 ): CodegenResult {
+  debugger
   const context = createCodegenContext(ast, options)
   if (options.onContextCreated) options.onContextCreated(context)
   const {
@@ -645,7 +646,7 @@ function genNode(node: CodegenNode | symbol | string, context: CodegenContext) {
     case NodeTypes.JS_ARRAY_EXPRESSION: // 17
       genArrayExpression(node, context)
       break
-    case NodeTypes.JS_FUNCTION_EXPRESSION: // 18
+    case NodeTypes.JS_FUNCTION_EXPRESSION: // 18 生成函数语句
       genFunctionExpression(node, context)
       break
     case NodeTypes.JS_CONDITIONAL_EXPRESSION: // 19
@@ -662,7 +663,7 @@ function genNode(node: CodegenNode | symbol | string, context: CodegenContext) {
     case NodeTypes.JS_TEMPLATE_LITERAL: // 22
       !__BROWSER__ && genTemplateLiteral(node, context)
       break
-    case NodeTypes.JS_IF_STATEMENT: // 23
+    case NodeTypes.JS_IF_STATEMENT: // 23 生成if表达式
       !__BROWSER__ && genIfStatement(node, context)
       break
     case NodeTypes.JS_ASSIGNMENT_EXPRESSION: // 24

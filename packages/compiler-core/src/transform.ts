@@ -316,7 +316,6 @@ export function transform(root: RootNode, options: TransformOptions) {
   const context = createTransformContext(root, options)
   traverseNode(root, context)
 
-  debugger
   if (options.hoistStatic) {
     hoistStatic(root, context)
   }
