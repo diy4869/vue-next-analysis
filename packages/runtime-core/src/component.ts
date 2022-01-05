@@ -75,7 +75,7 @@ export interface AllowedComponentProps {
 
 // Note: can't mark this whole interface internal because some public interfaces
 // extend it.
-export interface ComponentInternalOptions {
+export interface normalizeContainer {
   /**
    * @internal
    */

@@ -3,12 +3,20 @@ import { camelize } from '@vue/runtime-core'
 
 type Style = string | Record<string, string | string[]> | null
 
+/**
+ *
+ * @param el 当前元素
+ * @param prev 旧节点的style
+ * @param next 新节点的style
+ */
 export function patchStyle(el: Element, prev: Style, next: Style) {
   const style = (el as HTMLElement).style
+  // 如果旧节点不存在style 就直接移除
   if (!next) {
     el.removeAttribute('style')
   } else if (isString(next)) {
     if (prev !== next) {
+      // 新旧节点style是否相同
       const current = style.display // 保存当前display属性
       style.cssText = next
       // indicates that the `display` of the element is controlled by `v-show`,

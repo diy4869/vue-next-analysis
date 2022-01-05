@@ -162,7 +162,6 @@ export function createAppAPI<HostElement>(
       __DEV__ && warn(`root props passed to app.mount() must be an object.`)
       rootProps = null
     }
-    console.log('createApp', rootComponent, rootProps)
     // 创建AppContext
     const context = createAppContext()
     // 已安装的插件
@@ -273,7 +272,6 @@ export function createAppAPI<HostElement>(
           )
           // store app context on the root VNode.
           // this will be set on the root instance on initial mount.
-          console.log('vnode', vnode)
           // 将context挂载到根节点
           vnode.appContext = context
 

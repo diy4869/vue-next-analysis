@@ -106,7 +106,6 @@ export function baseParse(
   // 创建解析上下文
   const context = createParserContext(content, options)
   const start = getCursor(context)
-  console.log('baseParse')
   const result = createRoot(
     parseChildren(context, TextModes.DATA, []), // 解析的子元素
     getSelection(context, start) // 每次解析的位置

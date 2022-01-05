@@ -33,7 +33,6 @@ let renderer: Renderer<Element> | HydrationRenderer
 let enabledHydration = false
 
 function ensureRenderer() {
-  console.log('render', rendererOptions)
   return renderer || (renderer = createRenderer<Node, Element>(rendererOptions))
 }
 
@@ -63,7 +62,6 @@ export const createApp = ((...args) => {
     // 检查是否自定义标签
     injectCompilerOptionsCheck(app)
   }
-  console.log(app)
 
   const { mount } = app
   app.mount = (containerOrSelector: Element | ShadowRoot | string): any => {
@@ -85,7 +83,6 @@ export const createApp = ((...args) => {
       // 临时保存需要渲染的内容
       component.template = container.innerHTML
       // 2.x compat check
-      console.log('兼容', __COMPAT__)
       /**
        * __COMPAT__ 是启动的时候通过rollup去注入进去的
        * 用来判断是否向下兼容

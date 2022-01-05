@@ -188,7 +188,11 @@ function createConfig(format, output, plugins = []) {
       ...nodePlugins,
       ...plugins
     ],
-    output,
+    output: {
+      sourceMap: true,
+      // eslint-disable-next-line no-restricted-syntax
+      ...output
+    },
     onwarn: (msg, warn) => {
       if (!/Circular/.test(msg)) {
         warn(msg)

@@ -446,8 +446,6 @@ function baseCreateRenderer(
   options: RendererOptions,
   createHydrationFns?: typeof createHydrationFunctions
 ): any {
-  console.log('baseCreateRenderer')
-  console.log(options, createHydrationFns)
   // compile-time feature flags check
 
   if (__ESM_BUNDLER__ && !__TEST__) {
@@ -494,7 +492,7 @@ function baseCreateRenderer(
     slotScopeIds = null,
     optimized = false
   ) => {
-    // patching & not same type, unmount old tree
+    // patching & not same type, unmount old tree 是否相同vnode
     if (n1 && !isSameVNodeType(n1, n2)) {
       anchor = getNextHostNode(n1)
       unmount(n1, parentComponent, parentSuspense, true)
@@ -1012,8 +1010,10 @@ function baseCreateRenderer(
       // text
       // This flag is matched when the element has only dynamic text children.
       if (patchFlag & PatchFlags.TEXT) {
+        // 如果是动态文本
         if (n1.children !== n2.children) {
-          hostSetElementText(el, n2.children as string)
+          // 判断是否相同
+          hostSetElementText(el, n2.children as string) // 更新文本节点
         }
       }
     } else if (!optimized && dynamicChildren == null) {
@@ -1192,7 +1192,7 @@ function baseCreateRenderer(
       optimized = false
       dynamicChildren = null
     }
-
+    // 首次渲染
     if (n1 == null) {
       hostInsert(fragmentStartAnchor, container, anchor)
       hostInsert(fragmentEndAnchor, container, anchor)
@@ -1352,7 +1352,6 @@ function baseCreateRenderer(
         endMeasure(instance, `init`)
       }
     }
-    debugger
 
     // setup() is async. This component relies on async logic to be resolved
     // before proceeding
@@ -1442,7 +1441,6 @@ function baseCreateRenderer(
         }
         // onVnodeBeforeMount
         if ((vnodeHook = props && props.onVnodeBeforeMount)) {
-          debugger
           invokeVNodeHook(vnodeHook, parent, initialVNode)
         }
         if (
@@ -1485,6 +1483,7 @@ function baseCreateRenderer(
             startMeasure(instance, `patch`)
           }
           // 更新dom
+
           patch(
             null,
             subTree,
@@ -1497,15 +1496,16 @@ function baseCreateRenderer(
           if (__DEV__) {
             endMeasure(instance, `patch`)
           }
+          console.log(subTree)
           initialVNode.el = subTree.el
         }
+
         // mounted hook
         if (m) {
           queuePostRenderEffect(m, parentSuspense)
         }
         // onVnodeMounted
         if ((vnodeHook = props && props.onVnodeMounted)) {
-          debugger
           const scopedInitialVNode = initialVNode
           queuePostRenderEffect(
             () => invokeVNodeHook(vnodeHook!, parent, scopedInitialVNode),
@@ -1592,6 +1592,7 @@ function baseCreateRenderer(
         if (__DEV__) {
           startMeasure(instance, `patch`)
         }
+        debugger
         patch(
           prevTree,
           nextTree,
@@ -2375,8 +2376,6 @@ function baseCreateRenderer(
   }
 
   const render: RootRenderFunction = (vnode, container, isSVG) => {
-    console.log('renderFn', vnode, container)
-
     // 如果vnode不存在
     if (vnode == null) {
       // 该container
@@ -2411,7 +2410,6 @@ function baseCreateRenderer(
       Element
     >)
   }
-  console.log('createHydrationFns', createHydrationFns)
 
   // console.log('------', render, hydrate)
   return {

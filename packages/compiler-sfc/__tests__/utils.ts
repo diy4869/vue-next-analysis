@@ -23,7 +23,6 @@ export function assertCode(code: string) {
       plugins: [...babelParserDefaultPlugins, 'typescript']
     })
   } catch (e) {
-    console.log(code)
     throw e
   }
   expect(code).toMatchSnapshot()

@@ -314,6 +314,7 @@ export function createTransformContext(
 export function transform(root: RootNode, options: TransformOptions) {
   // 创建转换器上下文
   const context = createTransformContext(root, options)
+  // 转换  v-if v-for
   traverseNode(root, context)
 
   if (options.hoistStatic) {

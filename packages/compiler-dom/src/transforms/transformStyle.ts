@@ -19,7 +19,6 @@ import { parseStringStyle } from '@vue/shared'
  * 样式转换，将内联链式转换为对象，并将在之后的transformElement进行处理
  */
 export const transformStyle: NodeTransform = node => {
-  console.log('transformStyle')
   if (node.type === NodeTypes.ELEMENT) {
     node.props.forEach((p, i) => {
       if (p.type === NodeTypes.ATTRIBUTE && p.name === 'style' && p.value) {
