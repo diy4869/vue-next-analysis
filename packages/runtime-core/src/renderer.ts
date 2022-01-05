@@ -1352,7 +1352,7 @@ function baseCreateRenderer(
         endMeasure(instance, `init`)
       }
     }
-    debugger
+    // debugger
 
     // setup() is async. This component relies on async logic to be resolved
     // before proceeding
@@ -1442,7 +1442,7 @@ function baseCreateRenderer(
         }
         // onVnodeBeforeMount
         if ((vnodeHook = props && props.onVnodeBeforeMount)) {
-          debugger
+          // debugger
           invokeVNodeHook(vnodeHook, parent, initialVNode)
         }
         if (
@@ -1505,7 +1505,7 @@ function baseCreateRenderer(
         }
         // onVnodeMounted
         if ((vnodeHook = props && props.onVnodeMounted)) {
-          debugger
+          // debugger
           const scopedInitialVNode = initialVNode
           queuePostRenderEffect(
             () => invokeVNodeHook(vnodeHook!, parent, scopedInitialVNode),
