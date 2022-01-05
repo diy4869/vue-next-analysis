@@ -7,18 +7,18 @@
       步骤 | Vue3源码解析
     </title>
     <meta name="description" content="A VitePress site">
-    <link rel="stylesheet" href="/vue-next-analysis/assets/style.31751967.css">
+    <link rel="stylesheet" href="/vue-next-analysis/assets/style.97e3a7c9.css">
     <link rel="modulepreload" href="/vue-next-analysis/assets/Home.07e909de.js">
     <link rel="modulepreload" href="/vue-next-analysis/assets/app.547ab472.js">
-    <link rel="modulepreload" href="/vue-next-analysis/assets/page_debug.md.e26d0242.lean.js">
+    <link rel="modulepreload" href="/vue-next-analysis/assets/page_debug.md.1441bece.lean.js">
     <link rel="modulepreload" href="/vue-next-analysis/assets/app.547ab472.js">
     
     
   </head>
   <body>
-    <div id="app"><!--[--><div class="theme"><header class="nav-bar" data-v-5df6160f><div class="sidebar-button" data-v-5df6160f><svg class="icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z" class></path></svg></div><a class="nav-bar-title" href="/vue-next-analysis/" aria-label="Vue3源码解析, back to home" data-v-5df6160f data-v-8dbfef3c><!----> Vue3源码解析</a><div class="flex-grow" data-v-5df6160f></div><div class="nav" data-v-5df6160f><nav class="nav-links" data-v-5df6160f data-v-38e3b123><!--[--><div class="item" data-v-38e3b123><div class="nav-link" data-v-38e3b123 data-v-45eb32c6><a class="item isExternal" href="https://github.com/diy4869/vue-next-analysis" target="_blank" rel="noopener noreferrer" data-v-45eb32c6>Github <svg class="icon outbound" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15" data-v-45eb32c6><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div></div><!--]--><!----><!----></nav></div><!--[--><!--]--></header><aside class="sidebar" data-v-58e261f2><nav class="nav-links nav" data-v-58e261f2 data-v-38e3b123><!--[--><div class="item" data-v-38e3b123><div class="nav-link" data-v-38e3b123 data-v-45eb32c6><a class="item isExternal" href="https://github.com/diy4869/vue-next-analysis" target="_blank" rel="noopener noreferrer" data-v-45eb32c6>Github <svg class="icon outbound" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15" data-v-45eb32c6><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div></div><!--]--><!----><!----></nav><!--[--><!--]--><ul class="sidebar-links" data-v-58e261f2><!--[--><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/my">☆ 个人介绍</a><!----></li><li class="sidebar-link"><p class="sidebar-link-item">一些流程图</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/flow">☆ vue-next 渲染流程</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">准备工作</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/base">☆ 一些基本知识</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item active" href="/vue-next-analysis/page/debug">☆ 如何debug</a><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="#步骤">步骤</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="#vue-next源码结构">vue-next源码结构</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="#完整目录">完整目录</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="#生成目录树">生成目录树</a><!----></li></ul></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/bitOperators">☆ 位运算</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/browserRender">☆ 浏览器渲染过程</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/vnode">☆ VNode</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/ast">☆ AST 抽象语法树</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">Rollup</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">Typescript</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">API</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/lifeCycle">lifeCycle 生命周期</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">初始化渲染</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/createApp">☆ createApp</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/mount">☆ mount 挂载</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/render">☆ render 渲染</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/mountComponent">☆ mountComponent 挂载组件</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/setupComponent">☆ setupComponent 安装组件</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/setupRenderEffect">☆ setupRenderEffect 准备渲染</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">compiler 编译</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/baseCompile">☆ baseCompile 基本编译</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/parse">☆ parse 一 初始化解析</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/parseChildren">☆ parse 二 解析子节点</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/utils">☆ parse 三 一些解析工具函数</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/parseTag">☆ parse 四 解析标签</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/parseAttribute">☆ parse 五 解析属性</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/parseText">☆ parse 六 解析文本</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/parseElement">☆ parse 七 解析元素</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/parseEnd">☆ parse 八 结束</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/transform">☆ transform 初始化</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/createTransformContext">☆ transform 创建转换器上下文</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/traverseNode">☆ transform 转换节点</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/transformUtils">☆ transform 一些转换的工具函数</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/transformElement">☆ transform 转换元素</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/createVNodeCall">☆ transform createVNodeCall</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/staticHoist">☆ transform 静态提升</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/createRootCodegen">☆ transform 创建根节点代码生成</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/transformEnd">☆ transform 结束</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/generateFunction">☆ generate 一些生成函数</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/generateOne">☆ generate 一</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/generateTwo">☆ generate 二</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/generateThree">☆ generate 模板转render function</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/generateEnd">☆ generate 结束</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">渲染 render</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/directive/v-show">patch 渲染更新DOM</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">内置组件 components</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/components/keepAlive">keepAlive</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/components/suspense">suspense</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/components/teleport">teleport</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">响应式</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">reactive</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">ref</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">...</a><!----></li></ul></li><!--]--></ul><!--[--><!--]--></aside><!-- TODO: make this button accessible --><div class="sidebar-mask"></div><main class="page" data-v-d36a7fda><div class="container" data-v-d36a7fda><!--[--><!--]--><div class="content" data-v-d36a7fda><div data-v-d36a7fda><h2 id="步骤"><a class="header-anchor" href="#步骤" aria-hidden="true">#</a> 步骤</h2><ul><li>step zero</li></ul><div class="language-"><pre><code>git clone https://github.com/vuejs/vue-next.git
-</code></pre></div><ul><li>step one</li></ul><div class="language-"><pre><code>npm install
-</code></pre></div><ul><li>step two</li></ul><p>执行完这个命令后，vue会在<code>packages/vue/dist</code>下生成一个<code>vue.global.js</code></p><div class="language-"><pre><code>npm run dev
+    <div id="app"><!--[--><div class="theme"><header class="nav-bar" data-v-5df6160f><div class="sidebar-button" data-v-5df6160f><svg class="icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z" class></path></svg></div><a class="nav-bar-title" href="/vue-next-analysis/" aria-label="Vue3源码解析, back to home" data-v-5df6160f data-v-8dbfef3c><!----> Vue3源码解析</a><div class="flex-grow" data-v-5df6160f></div><div class="nav" data-v-5df6160f><nav class="nav-links" data-v-5df6160f data-v-38e3b123><!--[--><div class="item" data-v-38e3b123><div class="nav-link" data-v-38e3b123 data-v-45eb32c6><a class="item isExternal" href="https://github.com/diy4869/vue-next-analysis" target="_blank" rel="noopener noreferrer" data-v-45eb32c6>Github <svg class="icon outbound" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15" data-v-45eb32c6><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div></div><!--]--><!----><!----></nav></div><!--[--><!--]--></header><aside class="sidebar" data-v-58e261f2><nav class="nav-links nav" data-v-58e261f2 data-v-38e3b123><!--[--><div class="item" data-v-38e3b123><div class="nav-link" data-v-38e3b123 data-v-45eb32c6><a class="item isExternal" href="https://github.com/diy4869/vue-next-analysis" target="_blank" rel="noopener noreferrer" data-v-45eb32c6>Github <svg class="icon outbound" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15" data-v-45eb32c6><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div></div><!--]--><!----><!----></nav><!--[--><!--]--><ul class="sidebar-links" data-v-58e261f2><!--[--><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/my">☆ 个人介绍</a><!----></li><li class="sidebar-link"><p class="sidebar-link-item">一些流程图</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/flow">☆ vue-next 渲染流程</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">准备工作</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/base">☆ 一些基本知识</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item active" href="/vue-next-analysis/page/debug">☆ 如何debug</a><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="#步骤">步骤</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="#生成目录树">生成目录树</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="#vue-next源码结构">vue-next源码结构</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="#完整目录">完整目录</a><!----></li></ul></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/bitOperators">☆ 位运算</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/browserRender">☆ 浏览器渲染过程</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/vnode">☆ VNode</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/ast">☆ AST 抽象语法树</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">Rollup</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">Typescript</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">API</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/lifeCycle">lifeCycle 生命周期</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">初始化渲染</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/createApp">☆ createApp</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/mount">☆ mount 挂载</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/render">☆ render 渲染</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/mountComponent">☆ mountComponent 挂载组件</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/setupComponent">☆ setupComponent 安装组件</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/page/setupRenderEffect">☆ setupRenderEffect 准备渲染</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">compiler 编译</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/baseCompile">☆ baseCompile 基本编译</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/parse">☆ parse 一 初始化解析</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/parseChildren">☆ parse 二 解析子节点</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/utils">☆ parse 三 一些解析工具函数</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/parseTag">☆ parse 四 解析标签</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/parseAttribute">☆ parse 五 解析属性</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/parseText">☆ parse 六 解析文本</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/parseElement">☆ parse 七 解析元素</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/parseEnd">☆ parse 八 结束</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/transform">☆ transform 初始化</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/createTransformContext">☆ transform 创建转换器上下文</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/traverseNode">☆ transform 转换节点</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/transformUtils">☆ transform 一些转换的工具函数</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/transformElement">☆ transform 转换元素</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/createVNodeCall">☆ transform createVNodeCall</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/staticHoist">☆ transform 静态提升</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/createRootCodegen">☆ transform 创建根节点代码生成</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/transformEnd">☆ transform 结束</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/generateFunction">☆ generate 一些生成函数</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/generateOne">☆ generate 一</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/generateTwo">☆ generate 二</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/generateThree">☆ generate 模板转render function</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/compiler/generateEnd">☆ generate 结束</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">渲染 render</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/directive/v-show">patch 渲染更新DOM</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">内置组件 components</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/components/keepAlive">keepAlive</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/components/suspense">suspense</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/components/teleport">teleport</a><!----></li></ul></li><li class="sidebar-link"><p class="sidebar-link-item">响应式</p><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">reactive</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">ref</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="/vue-next-analysis/">...</a><!----></li></ul></li><!--]--></ul><!--[--><!--]--></aside><!-- TODO: make this button accessible --><div class="sidebar-mask"></div><main class="page" data-v-d36a7fda><div class="container" data-v-d36a7fda><!--[--><!--]--><div class="content" data-v-d36a7fda><div data-v-d36a7fda><h2 id="步骤"><a class="header-anchor" href="#步骤" aria-hidden="true">#</a> 步骤</h2><ul><li>step zero</li></ul><div class="language-bash"><pre><code><span class="token function">git</span> clone https://github.com/vuejs/vue-next.git
+</code></pre></div><ul><li>step one</li></ul><div class="language-bash"><pre><code><span class="token function">npm</span> <span class="token function">install</span>
+</code></pre></div><ul><li>step two 执行完这个命令后，vue会在<code>packages/vue/dist</code>下生成一个<code>vue.global.js</code></li></ul><div class="language-bash"><pre><code><span class="token function">npm</span> run dev --sourcemap
 </code></pre></div><ul><li>step three 创建一个debug目录，然后创建index.html，引入刚才生成的文件</li></ul><div class="language-shell"><pre><code><span class="token function">mkdir</span> debug
 <span class="token function">touch</span> index.html
 </code></pre></div><ul><li>step four</li></ul><p>然后在<code>index.html</code>写下如下内容就可以愉快的debug源码了，注意npm run dev启动的服务不要关，他会监听你在当前目录下所做的所有更改。</p><p><code>createApp</code>入口在<code>packages/runtime-core/src/index.ts</code>下。</p><p>新手教程到此结束，然就可以尽情的<code>debug</code>了，如果要提交代码到自己仓库的话，注意commit规范，详细可以百度搜索<code>commitlint</code>。</p><div class="language-html"><pre><code><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">&gt;</span></span>
@@ -56,41 +56,51 @@
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&#39;app&#39;</span><span class="token punctuation">,</span> app<span class="token punctuation">)</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
-</code></pre></div><h2 id="vue-next源码结构"><a class="header-anchor" href="#vue-next源码结构" aria-hidden="true">#</a> vue-next源码结构</h2><div class="language-"><pre><code>├── CHANGELOG.md
+</code></pre></div><h2 id="生成目录树"><a class="header-anchor" href="#生成目录树" aria-hidden="true">#</a> 生成目录树</h2><p>只要通过<code>tree</code>命令，就可以生成目录树，具体操作如下</p><div class="language-bash"><pre><code><span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> tree
+
+<span class="token comment"># 生成目录树</span>
+tree
+
+<span class="token comment"># 过滤掉node_modules</span>
+tree -I <span class="token string">&quot;node_modules&quot;</span>
+
+<span class="token comment"># 生成指定层级的目录tree</span>
+tree -L <span class="token number">2</span>
+</code></pre></div><p>该命令需要在<code>wsl</code>下执行，如果在cmd下执行会报参数过长，其他命令自行执行<code>tree --help</code></p><h2 id="vue-next源码结构"><a class="header-anchor" href="#vue-next源码结构" aria-hidden="true">#</a> vue-next源码结构</h2><div class="language-bash"><pre><code>├── CHANGELOG.md
 ├── LICENSE
 ├── README.md
 ├── api-extractor.json
-├── example // 我写的（用于debug）
+├── example <span class="token comment"># 我写的（用于debug）</span>
 │   └── index.html
 ├── jest.config.js
 ├── package-lock.json
 ├── package.json
 ├── packages
-│   ├── compiler-core // 编译核心
-│   ├── compiler-dom  // 编译dom
+│   ├── compiler-core <span class="token comment"># 编译核心</span>
+│   ├── compiler-dom  <span class="token comment"># 编译dom</span>
 │   ├── compiler-sfc 
-│   ├── compiler-ssr // 编译ssr
+│   ├── compiler-ssr <span class="token comment"># 编译ssr</span>
 │   ├── global.d.ts
-│   ├── reactivity // 响应式
-│   ├── runtime-core // 运行核心
-│   ├── runtime-dom // 运行时的dom
-│   ├── runtime-test // test
-│   ├── server-renderer // ssr部分
-│   ├── shared // dalao的工具库（dalao喜欢的命名，cli也是这个名字）
+│   ├── reactivity <span class="token comment"># 响应式</span>
+│   ├── runtime-core <span class="token comment"># 运行核心</span>
+│   ├── runtime-dom <span class="token comment"># 运行时的 dom</span>
+│   ├── runtime-test <span class="token comment"># test</span>
+│   ├── server-renderer <span class="token comment"># ssr部分</span>
+│   ├── shared <span class="token comment"># dalao的工具库（dalao 喜欢的命名，cli也是这个名字）</span>
 │   ├── size-check
 │   ├── template-explorer
-│   └── vue // build后生成的vue目录
+│   └── vue <span class="token comment"># build后生成的vue目录</span>
 ├── rollup.config.js
-├── scripts // 一些脚本
-│   ├── bootstrap.js // 自动生成package.json、readme.md
-│   ├── build.js // 打包
-│   ├── checkYarn.js // 校验yarn版本
-│   ├── dev.js
-│   ├── release.js // 发布
+├── scripts <span class="token comment"># 一些脚本</span>
+│   ├── bootstrap.js <span class="token comment"># 自动生成package.json、readme.md</span>
+│   ├── build.js <span class="token comment"># 打包</span>
+│   ├── checkYarn.js <span class="token comment"># 校验yarn版本</span>
+│   ├── dev.js <span class="token comment"># 启动脚本</span>
+│   ├── release.js <span class="token comment"># 发布</span>
 │   ├── setupJestEnv.ts
 │   ├── utils.js
-│   └── verifyCommit.js // commit校验
-├── test-dts // 一些测试
+│   └── verifyCommit.js <span class="token comment"># commit 校验</span>
+├── test-dts <span class="token comment"># 一些测试</span>
 │   ├── README.md
 │   ├── component.test-d.ts
 │   ├── componentTypeExtensions.test-d.tsx
@@ -108,75 +118,43 @@
 │   └── watch.test-d.ts
 ├── tsconfig.json
 └── yarn.lock
-</code></pre></div><h2 id="完整目录"><a class="header-anchor" href="#完整目录" aria-hidden="true">#</a> 完整目录</h2><div class="language-"><pre><code>├── CHANGELOG.md
+</code></pre></div><h2 id="完整目录"><a class="header-anchor" href="#完整目录" aria-hidden="true">#</a> 完整目录</h2><div class="language-bash"><pre><code>├── CHANGELOG.md
 ├── LICENSE
 ├── README.md
 ├── api-extractor.json
 ├── example
-│   └── index.html
+│   ├── index.html
+│   └── test.html
 ├── jest.config.js
 ├── package-lock.json
 ├── package.json
 ├── packages
-│   ├── compiler-core
+│   ├── compiler-core <span class="token comment"># 编译核心</span>
 │   │   ├── LICENSE
 │   │   ├── README.md
-│   │   ├── __tests__
-│   │   │   ├── __snapshots__
-│   │   │   │   ├── codegen.spec.ts.snap
-│   │   │   │   ├── compile.spec.ts.snap
-│   │   │   │   ├── parse.spec.ts.snap
-│   │   │   │   └── scopeId.spec.ts.snap
-│   │   │   ├── codegen.spec.ts
-│   │   │   ├── compile.spec.ts
-│   │   │   ├── parse.spec.ts
-│   │   │   ├── scopeId.spec.ts
-│   │   │   ├── testUtils.ts
-│   │   │   ├── transform.spec.ts
-│   │   │   ├── transforms
-│   │   │   │   ├── __snapshots__
-│   │   │   │   │   ├── hoistStatic.spec.ts.snap
-│   │   │   │   │   ├── transformExpressions.spec.ts.snap
-│   │   │   │   │   ├── transformText.spec.ts.snap
-│   │   │   │   │   ├── vFor.spec.ts.snap
-│   │   │   │   │   ├── vIf.spec.ts.snap
-│   │   │   │   │   ├── vModel.spec.ts.snap
-│   │   │   │   │   ├── vOnce.spec.ts.snap
-│   │   │   │   │   └── vSlot.spec.ts.snap
-│   │   │   │   ├── hoistStatic.spec.ts
-│   │   │   │   ├── noopDirectiveTransform.spec.ts
-│   │   │   │   ├── transformElement.spec.ts
-│   │   │   │   ├── transformExpressions.spec.ts
-│   │   │   │   ├── transformSlotOutlet.spec.ts
-│   │   │   │   ├── transformText.spec.ts
-│   │   │   │   ├── vBind.spec.ts
-│   │   │   │   ├── vFor.spec.ts
-│   │   │   │   ├── vIf.spec.ts
-│   │   │   │   ├── vModel.spec.ts
-│   │   │   │   ├── vOn.spec.ts
-│   │   │   │   ├── vOnce.spec.ts
-│   │   │   │   └── vSlot.spec.ts
-│   │   │   └── utils.spec.ts
 │   │   ├── api-extractor.json
-│   │   ├── index.js
+│   │   ├── index.js 
 │   │   ├── package.json
 │   │   └── src
-│   │       ├── ast.ts
-│   │       ├── codegen.ts
-│   │       ├── compile.ts
-│   │       ├── errors.ts
+│   │       ├── ast.ts <span class="token comment">#  AST 类型</span>
+│   │       ├── codegen.ts <span class="token comment"># 代码生成</span>
+│   │       ├── compat <span class="token comment"># 兼容</span>
+│   │       │   ├── compatConfig.ts
+│   │       │   └── transformFilter.ts
+│   │       ├── compile.ts <span class="token comment"># 编译入口</span>
+│   │       ├── errors.ts <span class="token comment"># 编译的错误代码</span>
 │   │       ├── index.ts
-│   │       ├── options.ts
-│   │       ├── parse.ts
-│   │       ├── runtimeHelpers.ts
-│   │       ├── transform.ts
+│   │       ├── options.ts <span class="token comment"># 编译选项</span>
+│   │       ├── parse.ts <span class="token comment"># AST 解析</span>
+│   │       ├── runtimeHelpers.ts <span class="token comment"># 代码生成期间的帮助函数 （这个会在转换期间就会生成对应的帮助函数，从而在生成阶段进行调用）</span>
+│   │       ├── transform.ts <span class="token comment"># 转换入口</span>
 │   │       ├── transforms
-│   │       │   ├── hoistStatic.ts
+│   │       │   ├── hoistStatic.ts <span class="token comment"># 静态提升</span>
 │   │       │   ├── noopDirectiveTransform.ts
-│   │       │   ├── transformElement.ts
-│   │       │   ├── transformExpression.ts
-│   │       │   ├── transformSlotOutlet.ts
-│   │       │   ├── transformText.ts
+│   │       │   ├── transformElement.ts <span class="token comment"># 转换元素 (所有指令、文本都会在这一个阶段进行调用，并生成 patchFlag)</span>
+│   │       │   ├── transformExpression.ts <span class="token comment"># 转换表达式</span>
+│   │       │   ├── transformSlotOutlet.ts <span class="token comment"># 转换 slot</span>
+│   │       │   ├── transformText.ts <span class="token comment"># 转换 文本</span>
 │   │       │   ├── vBind.ts
 │   │       │   ├── vFor.ts
 │   │       │   ├── vIf.ts
@@ -184,29 +162,11 @@
 │   │       │   ├── vOn.ts
 │   │       │   ├── vOnce.ts
 │   │       │   └── vSlot.ts
-│   │       ├── utils.ts
-│   │       └── validateExpression.ts
+│   │       ├── utils.ts <span class="token comment"># 解析期间的一些工具函数</span>
+│   │       └── validateExpression.ts <span class="token comment"># 解析期间去校验 class 等一些表达式</span>
 │   ├── compiler-dom
 │   │   ├── LICENSE
 │   │   ├── README.md
-│   │   ├── __tests__
-│   │   │   ├── __snapshots__
-│   │   │   │   └── index.spec.ts.snap
-│   │   │   ├── index.spec.ts
-│   │   │   ├── parse.spec.ts
-│   │   │   └── transforms
-│   │   │       ├── __snapshots__
-│   │   │       │   ├── vModel.spec.ts.snap
-│   │   │       │   └── vShow.spec.ts.snap
-│   │   │       ├── ignoreSideEffectTags.spec.ts
-│   │   │       ├── stringifyStatic.spec.ts
-│   │   │       ├── transformStyle.spec.ts
-│   │   │       ├── vHtml.spec.ts
-│   │   │       ├── vModel.spec.ts
-│   │   │       ├── vOn.spec.ts
-│   │   │       ├── vShow.spec.ts
-│   │   │       ├── vText.spec.ts
-│   │   │       └── warnTransitionChildren.spec.ts
 │   │   ├── api-extractor.json
 │   │   ├── index.js
 │   │   ├── package.json
@@ -228,29 +188,11 @@
 │   │           ├── vShow.ts
 │   │           ├── vText.ts
 │   │           └── warnTransitionChildren.ts
-│   ├── compiler-sfc
+│   ├── compiler-sfc <span class="token comment"># SFC 新功能 没看过，所以就不标注了</span>
 │   │   ├── LICENSE
 │   │   ├── README.md
-│   │   ├── __tests__
-│   │   │   ├── __snapshots__
-│   │   │   │   ├── compileScript.spec.ts.snap
-│   │   │   │   ├── compileTemplate.spec.ts.snap
-│   │   │   │   ├── cssVars.spec.ts.snap
-│   │   │   │   ├── templateTransformAssetUrl.spec.ts.snap
-│   │   │   │   └── templateTransformSrcset.spec.ts.snap
-│   │   │   ├── compileScript.spec.ts
-│   │   │   ├── compileStyle.spec.ts
-│   │   │   ├── compileTemplate.spec.ts
-│   │   │   ├── cssVars.spec.ts
-│   │   │   ├── fixture
-│   │   │   │   └── import.scss
-│   │   │   ├── parse.spec.ts
-│   │   │   ├── rewriteDefault.spec.ts
-│   │   │   ├── templateTransformAssetUrl.spec.ts
-│   │   │   ├── templateTransformSrcset.spec.ts
-│   │   │   ├── templateUtils.spec.ts
-│   │   │   └── utils.ts
 │   │   ├── api-extractor.json
+│   │   ├── index.js
 │   │   ├── package.json
 │   │   └── src
 │   │       ├── compileScript.ts
@@ -268,24 +210,11 @@
 │   │       ├── templateTransformSrcset.ts
 │   │       ├── templateUtils.ts
 │   │       └── warn.ts
-│   ├── compiler-ssr
+│   ├── compiler-ssr  <span class="token comment"># SSR 服务端渲染 没看过，所以就不标注了</span>
 │   │   ├── LICENSE
 │   │   ├── README.md
-│   │   ├── __tests__
-│   │   │   ├── ssrComponent.spec.ts
-│   │   │   ├── ssrElement.spec.ts
-│   │   │   ├── ssrInjectCssVars.spec.ts
-│   │   │   ├── ssrPortal.spec.ts
-│   │   │   ├── ssrScopeId.spec.ts
-│   │   │   ├── ssrSlotOutlet.spec.ts
-│   │   │   ├── ssrSuspense.spec.ts
-│   │   │   ├── ssrText.spec.ts
-│   │   │   ├── ssrVFor.spec.ts
-│   │   │   ├── ssrVIf.spec.ts
-│   │   │   ├── ssrVModel.spec.ts
-│   │   │   ├── ssrVShow.spec.ts
-│   │   │   └── utils.ts
 │   │   ├── api-extractor.json
+│   │   ├── index.js
 │   │   ├── package.json
 │   │   └── src
 │   │       ├── errors.ts
@@ -306,22 +235,9 @@
 │   │           ├── ssrVModel.ts
 │   │           └── ssrVShow.ts
 │   ├── global.d.ts
-│   ├── reactivity
+│   ├── reactivity <span class="token comment"># 响应式</span>
 │   │   ├── LICENSE
 │   │   ├── README.md
-│   │   ├── __tests__
-│   │   │   ├── collections
-│   │   │   │   ├── Map.spec.ts
-│   │   │   │   ├── Set.spec.ts
-│   │   │   │   ├── WeakMap.spec.ts
-│   │   │   │   └── WeakSet.spec.ts
-│   │   │   ├── computed.spec.ts
-│   │   │   ├── effect.spec.ts
-│   │   │   ├── reactive.spec.ts
-│   │   │   ├── reactiveArray.spec.ts
-│   │   │   ├── readonly.spec.ts
-│   │   │   ├── ref.spec.ts
-│   │   │   └── shallowReactive.spec.ts
 │   │   ├── api-extractor.json
 │   │   ├── index.js
 │   │   ├── package.json
@@ -337,61 +253,37 @@
 │   ├── runtime-core
 │   │   ├── LICENSE
 │   │   ├── README.md
-│   │   ├── __tests__
-│   │   │   ├── apiAsyncComponent.spec.ts
-│   │   │   ├── apiCreateApp.spec.ts
-│   │   │   ├── apiExpose.spec.ts
-│   │   │   ├── apiInject.spec.ts
-│   │   │   ├── apiLifecycle.spec.ts
-│   │   │   ├── apiOptions.spec.ts
-│   │   │   ├── apiSetupContext.spec.ts
-│   │   │   ├── apiSetupHelpers.spec.ts
-│   │   │   ├── apiTemplateRef.spec.ts
-│   │   │   ├── apiWatch.spec.ts
-│   │   │   ├── componentEmits.spec.ts
-│   │   │   ├── componentProps.spec.ts
-│   │   │   ├── componentPublicInstance.spec.ts
-│   │   │   ├── componentSlots.spec.ts
-│   │   │   ├── components
-│   │   │   │   ├── BaseTransition.spec.ts
-│   │   │   │   ├── KeepAlive.spec.ts
-│   │   │   │   ├── Suspense.spec.ts
-│   │   │   │   └── Teleport.spec.ts
-│   │   │   ├── directives.spec.ts
-│   │   │   ├── errorHandling.spec.ts
-│   │   │   ├── h.spec.ts
-│   │   │   ├── helpers
-│   │   │   │   ├── createSlots.spec.ts
-│   │   │   │   ├── renderList.spec.ts
-│   │   │   │   ├── renderSlot.spec.ts
-│   │   │   │   ├── resolveAssets.spec.ts
-│   │   │   │   └── toHandlers.spec.ts
-│   │   │   ├── hmr.spec.ts
-│   │   │   ├── hydration.spec.ts
-│   │   │   ├── misc.spec.ts
-│   │   │   ├── rendererAttrsFallthrough.spec.ts
-│   │   │   ├── rendererChildren.spec.ts
-│   │   │   ├── rendererComponent.spec.ts
-│   │   │   ├── rendererElement.spec.ts
-│   │   │   ├── rendererFragment.spec.ts
-│   │   │   ├── rendererOptimizedMode.spec.ts
-│   │   │   ├── scheduler.spec.ts
-│   │   │   ├── scopeId.spec.ts
-│   │   │   ├── vnode.spec.ts
-│   │   │   └── vnodeHooks.spec.ts
 │   │   ├── api-extractor.json
 │   │   ├── index.js
 │   │   ├── package.json
 │   │   ├── src
 │   │   │   ├── apiAsyncComponent.ts
-│   │   │   ├── apiComputed.ts
-│   │   │   ├── apiCreateApp.ts
-│   │   │   ├── apiDefineComponent.ts
-│   │   │   ├── apiInject.ts
-│   │   │   ├── apiLifecycle.ts
+│   │   │   ├── apiComputed.ts <span class="token comment"># computed</span>
+│   │   │   ├── apiCreateApp.ts <span class="token comment"># createApp 实例</span>
+│   │   │   ├── apiDefineComponent.ts <span class="token comment"># defineComponent 组件</span>
+│   │   │   ├── apiInject.ts <span class="token comment"># provide inject</span>
+│   │   │   ├── apiLifecycle.ts <span class="token comment"># 生命周期</span>
 │   │   │   ├── apiSetupHelpers.ts
-│   │   │   ├── apiWatch.ts
-│   │   │   ├── component.ts
+│   │   │   ├── apiWatch.ts <span class="token comment"># watch watchEffect</span>
+│   │   │   ├── compat <span class="token comment"># 兼容</span>
+│   │   │   │   ├── attrsFallthrough.ts
+│   │   │   │   ├── compatConfig.ts
+│   │   │   │   ├── component.ts
+│   │   │   │   ├── customDirective.ts
+│   │   │   │   ├── data.ts
+│   │   │   │   ├── filter.ts
+│   │   │   │   ├── global.ts
+│   │   │   │   ├── globalConfig.ts
+│   │   │   │   ├── instance.ts
+│   │   │   │   ├── instanceChildren.ts
+│   │   │   │   ├── instanceEventEmitter.ts
+│   │   │   │   ├── instanceListeners.ts
+│   │   │   │   ├── props.ts
+│   │   │   │   ├── ref.ts
+│   │   │   │   ├── renderFn.ts
+│   │   │   │   ├── renderHelpers.ts
+│   │   │   │   └── vModel.ts
+│   │   │   ├── component.ts <span class="token comment"># 组件相关（创建组件、执行 setup 安装组件、渲染组件、更新组件）</span>
 │   │   │   ├── componentEmits.ts
 │   │   │   ├── componentOptions.ts
 │   │   │   ├── componentProps.ts
@@ -406,10 +298,10 @@
 │   │   │   │   └── Teleport.ts
 │   │   │   ├── customFormatter.ts
 │   │   │   ├── devtools.ts
-│   │   │   ├── directives.ts
+│   │   │   ├── directives.ts <span class="token comment"># 指令</span>
 │   │   │   ├── errorHandling.ts
 │   │   │   ├── featureFlags.ts
-│   │   │   ├── h.ts
+│   │   │   ├── h.ts <span class="token comment"># 渲染函数</span>
 │   │   │   ├── helpers
 │   │   │   │   ├── createSlots.ts
 │   │   │   │   ├── renderList.ts
@@ -422,32 +314,15 @@
 │   │   │   ├── hydration.ts
 │   │   │   ├── index.ts
 │   │   │   ├── profiling.ts
-│   │   │   ├── renderer.ts
+│   │   │   ├── renderer.ts <span class="token comment"># 核心 (用于渲染、更新组件，并且  createApp 也是由该文件返回)</span>
 │   │   │   ├── scheduler.ts
-│   │   │   ├── vnode.ts
+│   │   │   ├── vnode.ts <span class="token comment"># vnode 相关</span>
 │   │   │   └── warning.ts
 │   │   └── types
 │   │       └── refBail.d.ts
-│   ├── runtime-dom
+│   ├── runtime-dom <span class="token comment"># 运行 dom 生成 vnode 后，会掉用这块的函数用来创建标签 节点、渲染你等</span>
 │   │   ├── LICENSE
 │   │   ├── README.md
-│   │   ├── __tests__
-│   │   │   ├── createApp.spec.ts
-│   │   │   ├── customizedBuiltIn.spec.ts
-│   │   │   ├── directives
-│   │   │   │   ├── vCloak.spec.ts
-│   │   │   │   ├── vModel.spec.ts
-│   │   │   │   ├── vOn.spec.ts
-│   │   │   │   └── vShow.spec.ts
-│   │   │   ├── helpers
-│   │   │   │   ├── useCssModule.spec.ts
-│   │   │   │   └── useCssVars.spec.ts
-│   │   │   ├── patchAttrs.spec.ts
-│   │   │   ├── patchClass.spec.ts
-│   │   │   ├── patchEvents.spec.ts
-│   │   │   ├── patchProps.spec.ts
-│   │   │   ├── patchStyle.spec.ts
-│   │   │   └── rendererStaticNode.spec.ts
 │   │   ├── api-extractor.json
 │   │   ├── index.js
 │   │   ├── package.json
@@ -462,7 +337,7 @@
 │   │   │   ├── helpers
 │   │   │   │   ├── useCssModule.ts
 │   │   │   │   └── useCssVars.ts
-│   │   │   ├── index.ts
+│   │   │   ├── index.ts <span class="token comment"># createApp 的入口，Vue 会在这里获取挂在节点，创建createRenderer，并调用 createApp.mount 方法进行渲染</span>
 │   │   │   ├── modules
 │   │   │   │   ├── attrs.ts
 │   │   │   │   ├── class.ts
@@ -477,8 +352,6 @@
 │   ├── runtime-test
 │   │   ├── LICENSE
 │   │   ├── README.md
-│   │   ├── __tests__
-│   │   │   └── testRuntime.spec.ts
 │   │   ├── api-extractor.json
 │   │   ├── index.js
 │   │   ├── package.json
@@ -488,21 +361,9 @@
 │   │       ├── patchProp.ts
 │   │       ├── serialize.ts
 │   │       └── triggerEvent.ts
-│   ├── server-renderer
+│   ├── server-renderer <span class="token comment"># SSR</span>
 │   │   ├── LICENSE
 │   │   ├── README.md
-│   │   ├── __tests__
-│   │   │   ├── render.spec.ts
-│   │   │   ├── ssrAttrFallthrough.spec.ts
-│   │   │   ├── ssrDirectives.spec.ts
-│   │   │   ├── ssrDynamicComponent.spec.ts
-│   │   │   ├── ssrInterpolate.spec.ts
-│   │   │   ├── ssrRenderAttrs.spec.ts
-│   │   │   ├── ssrRenderList.spec.ts
-│   │   │   ├── ssrScopeId.spec.ts
-│   │   │   ├── ssrSuspense.spec.ts
-│   │   │   ├── ssrTeleport.spec.ts
-│   │   │   └── ssrVModelHelpers.spec.ts
 │   │   ├── api-extractor.json
 │   │   ├── index.js
 │   │   ├── package.json
@@ -521,17 +382,46 @@
 │   │       ├── render.ts
 │   │       ├── renderToStream.ts
 │   │       └── renderToString.ts
-│   ├── shared
-│   │   ├── LICENSE
+│   ├── sfc-playground
+│   │   ├── index.html
+│   │   ├── package-lock.json
+│   │   ├── package.json
+│   │   ├── public
+│   │   │   └── logo.svg
+│   │   ├── src
+│   │   │   ├── App.vue
+│   │   │   ├── Header.vue
+│   │   │   ├── Message.vue
+│   │   │   ├── SplitPane.vue
+│   │   │   ├── codemirror
+│   │   │   │   ├── CodeMirror.vue
+│   │   │   │   ├── codemirror.css
+│   │   │   │   └── codemirror.ts
+│   │   │   ├── download
+│   │   │   │   ├── download.ts
+│   │   │   │   └── template
+│   │   │   │       ├── README.md
+│   │   │   │       ├── index.html
+│   │   │   │       ├── main.js
+│   │   │   │       ├── package.json
+│   │   │   │       └── vite.config.js
+│   │   │   ├── editor
+│   │   │   │   ├── Editor.vue
+│   │   │   │   └── FileSelector.vue
+│   │   │   ├── main.ts
+│   │   │   ├── output
+│   │   │   │   ├── Output.vue
+│   │   │   │   ├── Preview.vue
+│   │   │   │   ├── PreviewProxy.ts
+│   │   │   │   ├── moduleCompiler.ts
+│   │   │   │   └── srcdoc.html
+│   │   │   ├── sfcCompiler.ts
+│   │   │   ├── store.ts
+│   │   │   ├── utils.ts
+│   │   │   └── vue-dev-proxy.ts
+│   │   └── vite.config.ts
+│   ├── shared <span class="token comment"># dalao 的工具函数</span>
 │   │   ├── README.md
-│   │   ├── __tests__
-│   │   │   ├── __snapshots__
-│   │   │   │   └── codeframe.spec.ts.snap
-│   │   │   ├── codeframe.spec.ts
-│   │   │   ├── escapeHtml.spec.ts
-│   │   │   ├── looseEqual.spec.ts
-│   │   │   ├── normalizeProp.spec.ts
-│   │   │   └── toDisplayString.spec.ts
 │   │   ├── api-extractor.json
 │   │   ├── index.js
 │   │   ├── package.json
@@ -564,49 +454,26 @@
 │   │   │   ├── options.ts
 │   │   │   └── theme.ts
 │   │   └── style.css
-│   └── vue
-│       ├── LICENSE
+│   ├── vue
+│   │   ├── LICENSE
+│   │   ├── README.md
+│   │   ├── api-extractor.json
+│   │   ├── index.js
+│   │   ├── package.json
+│   │   └── src
+│   │       ├── dev.ts
+│   │       ├── index.ts
+│   │       └── runtime.ts
+│   └── vue-compat
 │       ├── README.md
-│       ├── __tests__
-│       │   ├── Transition.spec.ts
-│       │   ├── TransitionGroup.spec.ts
-│       │   ├── e2eUtils.ts
-│       │   ├── index.spec.ts
-│       │   ├── svgNamespace.spec.ts
-│       │   └── transition.html
 │       ├── api-extractor.json
-│       ├── dist
-│       │   └── vue.global.js
-│       ├── examples
-│       │   ├── __tests__
-│       │   │   ├── commits.mock.ts
-│       │   │   ├── commits.spec.ts
-│       │   │   ├── grid.spec.ts
-│       │   │   ├── markdown.spec.ts
-│       │   │   ├── svg.spec.ts
-│       │   │   ├── todomvc.spec.ts
-│       │   │   └── tree.spec.ts
-│       │   ├── classic
-│       │   │   ├── commits.html
-│       │   │   ├── grid.html
-│       │   │   ├── markdown.html
-│       │   │   ├── svg.html
-│       │   │   ├── todomvc.html
-│       │   │   └── tree.html
-│       │   ├── composition
-│       │   │   ├── commits.html
-│       │   │   ├── grid.html
-│       │   │   ├── markdown.html
-│       │   │   ├── svg.html
-│       │   │   ├── todomvc.html
-│       │   │   └── tree.html
-│       │   └── transition
-│       │       ├── list.html
-│       │       └── modal.html
 │       ├── index.js
 │       ├── package.json
 │       └── src
+│           ├── createCompatVue.ts
 │           ├── dev.ts
+│           ├── esm-index.ts
+│           ├── esm-runtime.ts
 │           ├── index.ts
 │           └── runtime.ts
 ├── rollup.config.js
@@ -614,41 +481,16 @@
 │   ├── bootstrap.js
 │   ├── build.js
 │   ├── checkYarn.js
+│   ├── copy.js
 │   ├── dev.js
 │   ├── release.js
 │   ├── setupJestEnv.ts
 │   ├── utils.js
 │   └── verifyCommit.js
-├── test-dts
-│   ├── README.md
-│   ├── component.test-d.ts
-│   ├── componentTypeExtensions.test-d.tsx
-│   ├── defineComponent.test-d.tsx
-│   ├── functionalComponent.test-d.tsx
-│   ├── h.test-d.ts
-│   ├── index.d.ts
-│   ├── inject.test-d.ts
-│   ├── reactivity.test-d.ts
-│   ├── ref.test-d.ts
-│   ├── setupHelpers.test-d.ts
-│   ├── tsconfig.build.json
-│   ├── tsconfig.json
-│   ├── tsx.test-d.tsx
-│   └── watch.test-d.ts
 ├── tsconfig.json
 └── yarn.lock
-</code></pre></div><h2 id="生成目录树"><a class="header-anchor" href="#生成目录树" aria-hidden="true">#</a> 生成目录树</h2><p>只要通过<code>tree</code>命令，就可以生成目录树，具体操作如下</p><div class="language-bash"><pre><code><span class="token function">sudo</span> <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> tree
-
-// 生成目录树
-tree
-
-// 过滤掉node_modules
-tree -I <span class="token string">&quot;node_modules&quot;</span>
-
-// 生成指定层级的目录tree
-tree -L <span class="token number">2</span>
-</code></pre></div><p>该命令需要在<code>wsl</code>下执行，如果在cmd下执行会报参数过长，其他命令自行执行<code>tree --help</code></p></div></div><footer class="page-footer" data-v-d36a7fda data-v-5a019cc9><div class="edit" data-v-5a019cc9><div class="edit-link" data-v-5a019cc9 data-v-3ae295f1><!----></div></div><div class="updated" data-v-5a019cc9><!----></div></footer><div class="next-and-prev-link" data-v-d36a7fda data-v-6683615c><div class="container" data-v-6683615c><div class="prev" data-v-6683615c><a class="link" href="/vue-next-analysis/page/base" data-v-6683615c><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" class="icon icon-prev" data-v-6683615c><path d="M19,11H7.4l5.3-5.3c0.4-0.4,0.4-1,0-1.4s-1-0.4-1.4,0l-7,7c-0.1,0.1-0.2,0.2-0.2,0.3c-0.1,0.2-0.1,0.5,0,0.8c0.1,0.1,0.1,0.2,0.2,0.3l7,7c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3c0.4-0.4,0.4-1,0-1.4L7.4,13H19c0.6,0,1-0.4,1-1S19.6,11,19,11z"></path></svg><span class="text" data-v-6683615c>☆ 一些基本知识</span></a></div><div class="next" data-v-6683615c><a class="link" href="/vue-next-analysis/page/bitOperators" data-v-6683615c><span class="text" data-v-6683615c>☆ 位运算</span><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" class="icon icon-next" data-v-6683615c><path d="M19.9,12.4c0.1-0.2,0.1-0.5,0-0.8c-0.1-0.1-0.1-0.2-0.2-0.3l-7-7c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l5.3,5.3H5c-0.6,0-1,0.4-1,1s0.4,1,1,1h11.6l-5.3,5.3c-0.4,0.4-0.4,1,0,1.4c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3l7-7C19.8,12.6,19.9,12.5,19.9,12.4z"></path></svg></a></div></div></div><!--[--><!--]--></div></main></div><!----><!--]--></div>
-    <script>__VP_HASH_MAP__ = JSON.parse("{\"index.md\":\"3aca3d70\",\"compiler_ast.md\":\"d4f9ccd1\",\"compiler_basecompile.md\":\"958e260f\",\"compiler_createrootcodegen.md\":\"43d5d43f\",\"compiler_createtransformcontext.md\":\"aa410389\",\"compiler_createvnodecall.md\":\"a514d5dd\",\"compiler_generateend.md\":\"a4f09266\",\"compiler_generatefunction.md\":\"34cd91b0\",\"compiler_generateone.md\":\"1f88ac30\",\"compiler_generatethree.md\":\"4b31a15e\",\"compiler_generatetwo.md\":\"e62fd994\",\"compiler_parse.md\":\"7efa1ecd\",\"compiler_parseattribute.md\":\"7523fb4e\",\"compiler_parsechildren.md\":\"25fe3578\",\"compiler_parseelement.md\":\"ca82b816\",\"compiler_parseend.md\":\"07b13a40\",\"compiler_parsetag.md\":\"1b968600\",\"compiler_parsetext.md\":\"938a955c\",\"compiler_statichoist.md\":\"2e4e80f3\",\"compiler_transform.md\":\"92a5cee6\",\"compiler_transformelement.md\":\"9febf112\",\"compiler_transformend.md\":\"7d2888c8\",\"compiler_transformutils.md\":\"62bfa91b\",\"compiler_traversenode.md\":\"eb0e4e6b\",\"compiler_utils.md\":\"6241c674\",\"compiler_v-modal.md\":\"4b7a6847\",\"components_createapp.md\":\"b0d9fe29\",\"components_keepalive.md\":\"bb95d3c6\",\"components_suspense.md\":\"182727c6\",\"components_teleport.md\":\"842d38fa\",\"components_vnode.md\":\"5e539113\",\"directive_v-for.md\":\"e5bc026d\",\"directive_v-if.md\":\"71dbc9a8\",\"directive_v-on.md\":\"1322fb01\",\"directive_v-show.md\":\"416a6894\",\"page_base.md\":\"28d6d539\",\"page_bitoperators.md\":\"f5fd6739\",\"page_browserrender.md\":\"416b4d8e\",\"page_components.md\":\"40f96579\",\"page_createapp.md\":\"b0a6442a\",\"page_debug.md\":\"e26d0242\",\"page_flow.md\":\"fb0ded39\",\"page_lifecycle.md\":\"8729330e\",\"page_mount.md\":\"a877e7de\",\"page_mountcomponent.md\":\"388ab96e\",\"page_my.md\":\"4bc47c46\",\"page_render.md\":\"4d5f0045\",\"page_setupcomponent.md\":\"c8689e83\",\"page_setuprendereffect.md\":\"3338d8af\",\"page_vnode.md\":\"9eb4c3a6\",\"render_patch.md\":\"9829fbfe\"}")</script>
+</code></pre></div></div></div><footer class="page-footer" data-v-d36a7fda data-v-5a019cc9><div class="edit" data-v-5a019cc9><div class="edit-link" data-v-5a019cc9 data-v-3ae295f1><!----></div></div><div class="updated" data-v-5a019cc9><!----></div></footer><div class="next-and-prev-link" data-v-d36a7fda data-v-6683615c><div class="container" data-v-6683615c><div class="prev" data-v-6683615c><a class="link" href="/vue-next-analysis/page/base" data-v-6683615c><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" class="icon icon-prev" data-v-6683615c><path d="M19,11H7.4l5.3-5.3c0.4-0.4,0.4-1,0-1.4s-1-0.4-1.4,0l-7,7c-0.1,0.1-0.2,0.2-0.2,0.3c-0.1,0.2-0.1,0.5,0,0.8c0.1,0.1,0.1,0.2,0.2,0.3l7,7c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3c0.4-0.4,0.4-1,0-1.4L7.4,13H19c0.6,0,1-0.4,1-1S19.6,11,19,11z"></path></svg><span class="text" data-v-6683615c>☆ 一些基本知识</span></a></div><div class="next" data-v-6683615c><a class="link" href="/vue-next-analysis/page/bitOperators" data-v-6683615c><span class="text" data-v-6683615c>☆ 位运算</span><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" class="icon icon-next" data-v-6683615c><path d="M19.9,12.4c0.1-0.2,0.1-0.5,0-0.8c-0.1-0.1-0.1-0.2-0.2-0.3l-7-7c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l5.3,5.3H5c-0.6,0-1,0.4-1,1s0.4,1,1,1h11.6l-5.3,5.3c-0.4,0.4-0.4,1,0,1.4c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3l7-7C19.8,12.6,19.9,12.5,19.9,12.4z"></path></svg></a></div></div></div><!--[--><!--]--></div></main></div><!----><!--]--></div>
+    <script>__VP_HASH_MAP__ = JSON.parse("{\"index.md\":\"50cb0c88\",\"components_createapp.md\":\"38c1caa3\",\"components_keepalive.md\":\"2cc739f5\",\"components_suspense.md\":\"e6f282c8\",\"components_teleport.md\":\"5a00ccfe\",\"components_vnode.md\":\"4daa1bff\",\"directive_v-for.md\":\"90074fbb\",\"directive_v-if.md\":\"2844f64d\",\"directive_v-on.md\":\"e76f494d\",\"directive_v-show.md\":\"2803a5cc\",\"compiler_ast.md\":\"cef7cdaf\",\"compiler_basecompile.md\":\"8b91aa05\",\"compiler_createrootcodegen.md\":\"3792f570\",\"compiler_createtransformcontext.md\":\"d37f62e2\",\"compiler_createvnodecall.md\":\"377ce0a0\",\"compiler_generateend.md\":\"a2660d83\",\"compiler_generatefunction.md\":\"b1cfb2cf\",\"compiler_generateone.md\":\"f38fde88\",\"compiler_generatethree.md\":\"48933130\",\"compiler_generatetwo.md\":\"493512e5\",\"compiler_parse.md\":\"fdbb4303\",\"compiler_parseattribute.md\":\"c9e53666\",\"compiler_parsechildren.md\":\"53863519\",\"compiler_parseelement.md\":\"0fad4e69\",\"compiler_parseend.md\":\"5a60b409\",\"compiler_parsetag.md\":\"85ec5fd8\",\"compiler_parsetext.md\":\"226f31ef\",\"compiler_statichoist.md\":\"15c33aed\",\"compiler_transform.md\":\"1b4ff295\",\"compiler_transformelement.md\":\"312c2e27\",\"compiler_transformend.md\":\"b34b1fb1\",\"compiler_transformutils.md\":\"2a6977ae\",\"compiler_traversenode.md\":\"77ec8ca0\",\"compiler_utils.md\":\"32ef0629\",\"compiler_v-modal.md\":\"71cb500e\",\"page_base.md\":\"b43b9f4b\",\"page_bitoperators.md\":\"a54f47ae\",\"page_browserrender.md\":\"60575c39\",\"page_components.md\":\"3ee796be\",\"page_createapp.md\":\"b71f9b5e\",\"page_debug.md\":\"1441bece\",\"page_flow.md\":\"3d180a12\",\"page_lifecycle.md\":\"5fb449c1\",\"page_mount.md\":\"d2d89ee6\",\"page_mountcomponent.md\":\"dfbdc14f\",\"page_my.md\":\"3411b0a7\",\"page_render.md\":\"0bd6cc4c\",\"page_setupcomponent.md\":\"628f4794\",\"page_setuprendereffect.md\":\"93a5cea4\",\"page_vnode.md\":\"1547592b\",\"render_patch.md\":\"43b77200\"}")</script>
     <script type="module" async src="/vue-next-analysis/assets/app.547ab472.js"></script>
   </body>
 </html>

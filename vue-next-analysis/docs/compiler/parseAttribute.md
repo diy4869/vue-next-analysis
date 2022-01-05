@@ -230,7 +230,7 @@ function parseAttributes(
   context: ParserContext,
   type: TagType
 ): (AttributeNode | DirectiveNode)[] {
-  debugger
+  // debugger
   const props = []
   const attributeNames = new Set<string>()
   while (
