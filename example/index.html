@@ -22,28 +22,12 @@
 </head>
 <body>
     <div id="app">
-        <span 
-            :class="count % 2 === 0 ? 'red' : 'blue'"
-            :style="'font-size: 14px; font-weight: bold;'"
-        >{{ count }}</span>
-        <input ref="inputRef" v-model="inputVal"/>
-        <button @click="add" :style="{
-            color: 'red'
-        }">增加</button>
-        <test :count="count"></test>
         <ul>
-            <li v-for="item in list">
+            <li v-for="(item, index) in list" key="index">
                 <span>第{{item}}个span</span>
                 <button @click="remove(index)">删除</button>
             </li>
         </ul>
-        <render></render>
-        <suspense>
-            <div id="suspense">supense组件</div>
-        </suspense>
-        <teleport to="body #suspense">
-            <div>telport组件</div>
-        </teleport>
     </div>
 
 </body>
@@ -86,7 +70,15 @@
         console.log('------', data)
     })
 
-    const { createApp, reactive, ref, onBeforeMount, onMounted } = Vue
+    const { 
+        createApp, 
+        reactive, 
+        ref, 
+        onBeforeMount, 
+        onMounted, 
+        onBeforeUpdate, 
+        onUpdated  
+    } = Vue
 
     const children = {
         props: {
@@ -139,6 +131,13 @@
             })
             onMounted(() => {
                 console.log('渲染完成')
+            })
+
+            onBeforeUpdate(() => {
+                console.log("更新之前")
+            })
+            onUpdated(() => {
+                console.log("更新之后")
             })
 
             const remove = index => {

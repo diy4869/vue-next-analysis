@@ -20,7 +20,15 @@ module.exports = {
         children: [
           {
             text: '☆ vue-next 渲染流程',
-            link: '/page/flow'
+            link: '/page/flow/render'
+          },
+          {
+            text: 'vue-next 编译流程',
+            link: '/page/flow/compiler'
+          },
+          {
+            text: 'vue-next diff 流程',
+            link: '/page/flow/diff'
           }
         ]
       },

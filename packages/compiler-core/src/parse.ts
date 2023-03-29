@@ -144,7 +144,7 @@ function parseChildren(
   const parent = last(ancestors)
   const ns = parent ? parent.ns : Namespaces.HTML // 0
   const nodes: TemplateChildNode[] = []
-
+  // debugger
   while (!isEnd(context, mode, ancestors)) {
     // 测试
     __TEST__ && assert(context.source.length > 0)

@@ -264,7 +264,6 @@ export function createAppAPI<HostElement>(
         isHydrate?: boolean,
         isSVG?: boolean
       ): any {
-        debugger
         if (!isMounted) {
           // 创建Vnode
           const vnode = createVNode(

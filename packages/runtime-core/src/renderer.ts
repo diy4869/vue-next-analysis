@@ -1076,9 +1076,13 @@ function baseCreateRenderer(
     isSVG,
     slotScopeIds
   ) => {
+    // debugger
     for (let i = 0; i < newChildren.length; i++) {
       const oldVNode = oldChildren[i]
       const newVNode = newChildren[i]
+      // debugger
+
+      // if (i == )
       // Determine the container (parent element) for the patch.
       const container =
         // - In the case of a Fragment, we need to provide the actual parent
@@ -1428,6 +1432,7 @@ function baseCreateRenderer(
     optimized
   ) => {
     // create reactive effect for rendering
+
     instance.update = effect(function componentEffect() {
       // 如果没有渲染
       if (!instance.isMounted) {
@@ -1564,6 +1569,7 @@ function baseCreateRenderer(
         }
 
         // beforeUpdate hook
+        console.log('调用 beforeUpdate')
         if (bu) {
           invokeArrayFns(bu)
         }
@@ -1592,7 +1598,6 @@ function baseCreateRenderer(
         if (__DEV__) {
           startMeasure(instance, `patch`)
         }
-        debugger
         patch(
           prevTree,
           nextTree,
@@ -1704,7 +1709,7 @@ function baseCreateRenderer(
         )
         return
       } else if (patchFlag & PatchFlags.UNKEYED_FRAGMENT) {
-        // unkeyed
+        // unkeyed 没有 key 的情况
         patchUnkeyedChildren(
           c1 as VNode[],
           c2 as VNodeArrayChildren,
@@ -1783,6 +1788,9 @@ function baseCreateRenderer(
     slotScopeIds: string[] | null,
     optimized: boolean
   ) => {
+    /**
+     * 在不存在 key 的情况下，vue 会把 数组中的 第一个给删掉，并且后面的vnode的值，会被赋值给上一个 vnode
+     */
     c1 = c1 || EMPTY_ARR
     c2 = c2 || EMPTY_ARR
     const oldLength = c1.length
@@ -1805,6 +1813,7 @@ function baseCreateRenderer(
         optimized
       )
     }
+
     if (oldLength > newLength) {
       // remove old
       unmountChildren(
@@ -1848,6 +1857,7 @@ function baseCreateRenderer(
     let e1 = c1.length - 1 // prev ending index
     let e2 = l2 - 1 // next ending index
 
+    // debugger
     // 1. sync from start
     // (a b) c
     // (a b) d e
@@ -1856,6 +1866,7 @@ function baseCreateRenderer(
       const n2 = (c2[i] = optimized
         ? cloneIfMounted(c2[i] as VNode)
         : normalizeVNode(c2[i]))
+
       if (isSameVNodeType(n1, n2)) {
         patch(
           n1,
@@ -1877,6 +1888,7 @@ function baseCreateRenderer(
     // 2. sync from end
     // a (b c)
     // d e (b c)
+    // debugger
     while (i <= e1 && i <= e2) {
       const n1 = c1[e1]
       const n2 = (c2[e2] = optimized
@@ -1950,6 +1962,7 @@ function baseCreateRenderer(
     // [i ... e2 + 1]: a b [e d c h] f g
     // i = 2, e1 = 4, e2 = 5
     else {
+      debugger
       const s1 = i // prev starting index
       const s2 = i // next starting index
 

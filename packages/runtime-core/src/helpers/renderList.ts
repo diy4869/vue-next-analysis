@@ -54,6 +54,7 @@ export function renderList(
   source: any,
   renderItem: (...args: any[]) => VNodeChild
 ): VNodeChild[] {
+  // debugger
   let ret: VNodeChild[]
   if (isArray(source) || isString(source)) {
     ret = new Array(source.length)

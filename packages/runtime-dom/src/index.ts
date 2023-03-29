@@ -70,10 +70,7 @@ export const createApp = ((...args) => {
     if (!container) return
 
     const component = app._component
-    //
-    // console.log(!isFunction(component), !component.render, !component.template)
 
-    // return
     // component不是函数，且不存在render和template
     if (!isFunction(component) && !component.render && !component.template) {
       // __UNSAFE__
