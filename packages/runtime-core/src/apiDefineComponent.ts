@@ -6,7 +6,9 @@ import {
   ComponentOptionsWithObjectProps,
   ComponentOptionsMixin,
   RenderFunction,
-  ComponentOptionsBase
+  ComponentOptionsBase,
+  ComponentInjectOptions,
+  ComponentOptions
 } from './componentOptions'
 import {
   SetupContext,
@@ -16,10 +18,11 @@ import {
 import {
   ExtractPropTypes,
   ComponentPropsOptions,
-  ExtractDefaultPropTypes
+  ExtractDefaultPropTypes,
+  ComponentObjectPropsOptions
 } from './componentProps'
-import { EmitsOptions } from './componentEmits'
-import { isFunction } from '@vue/shared'
+import { EmitsOptions, EmitsToProps } from './componentEmits'
+import { extend, isFunction } from '@vue/shared'
 import { VNodeProps } from './vnode'
 import {
   CreateComponentPublicInstance,
@@ -38,10 +41,15 @@ export type DefineComponent<
   M extends MethodOptions = MethodOptions,
   Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
   Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
-  E extends EmitsOptions = Record<string, any>,
+  E extends EmitsOptions = {},
   EE extends string = string,
   PP = PublicProps,
-  Props = Readonly<ExtractPropTypes<PropsOrPropOptions>>,
+  Props = Readonly<
+    PropsOrPropOptions extends ComponentPropsOptions
+      ? ExtractPropTypes<PropsOrPropOptions>
+      : PropsOrPropOptions
+  > &
+    ({} extends E ? {} : EmitsToProps<E>),
   Defaults = ExtractDefaultPropTypes<PropsOrPropOptions>
 > = ComponentPublicInstanceConstructor<
   CreateComponentPublicInstance<
@@ -80,12 +88,34 @@ export type DefineComponent<
 
 // overload 1: direct setup function
 // (uses user defined props interface)
-export function defineComponent<Props, RawBindings = object>(
+export function defineComponent<
+  Props extends Record<string, any>,
+  E extends EmitsOptions = {},
+  EE extends string = string
+>(
   setup: (
-    props: Readonly<Props>,
-    ctx: SetupContext
-  ) => RawBindings | RenderFunction
-): DefineComponent<Props, RawBindings>
+    props: Props,
+    ctx: SetupContext<E>
+  ) => RenderFunction | Promise<RenderFunction>,
+  options?: Pick<ComponentOptions, 'name' | 'inheritAttrs'> & {
+    props?: (keyof Props)[]
+    emits?: E | EE[]
+  }
+): (props: Props & EmitsToProps<E>) => any
+export function defineComponent<
+  Props extends Record<string, any>,
+  E extends EmitsOptions = {},
+  EE extends string = string
+>(
+  setup: (
+    props: Props,
+    ctx: SetupContext<E>
+  ) => RenderFunction | Promise<RenderFunction>,
+  options?: Pick<ComponentOptions, 'name' | 'inheritAttrs'> & {
+    props?: ComponentObjectPropsOptions<Props>
+    emits?: E | EE[]
+  }
+): (props: Props & EmitsToProps<E>) => any
 
 // overload 2: object format with no props
 // (uses user defined props interface)
@@ -98,8 +128,10 @@ export function defineComponent<
   M extends MethodOptions = {},
   Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
   Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
-  E extends EmitsOptions = EmitsOptions,
-  EE extends string = string
+  E extends EmitsOptions = {},
+  EE extends string = string,
+  I extends ComponentInjectOptions = {},
+  II extends string = string
 >(
   options: ComponentOptionsWithoutProps<
     Props,
@@ -110,7 +142,9 @@ export function defineComponent<
     Mixin,
     Extends,
     E,
-    EE
+    EE,
+    I,
+    II
   >
 ): DefineComponent<Props, RawBindings, D, C, M, Mixin, Extends, E, EE>
 
@@ -125,8 +159,10 @@ export function defineComponent<
   M extends MethodOptions = {},
   Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
   Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
-  E extends EmitsOptions = Record<string, any>,
-  EE extends string = string
+  E extends EmitsOptions = {},
+  EE extends string = string,
+  I extends ComponentInjectOptions = {},
+  II extends string = string
 >(
   options: ComponentOptionsWithArrayProps<
     PropNames,
@@ -137,7 +173,9 @@ export function defineComponent<
     Mixin,
     Extends,
     E,
-    EE
+    EE,
+    I,
+    II
   >
 ): DefineComponent<
   Readonly<{ [key in PropNames]?: any }>,
@@ -163,8 +201,10 @@ export function defineComponent<
   M extends MethodOptions = {},
   Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
   Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
-  E extends EmitsOptions = Record<string, any>,
-  EE extends string = string
+  E extends EmitsOptions = {},
+  EE extends string = string,
+  I extends ComponentInjectOptions = {},
+  II extends string = string
 >(
   options: ComponentOptionsWithObjectProps<
     PropsOptions,
@@ -175,11 +215,18 @@ export function defineComponent<
     Mixin,
     Extends,
     E,
-    EE
+    EE,
+    I,
+    II
   >
 ): DefineComponent<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE>
 
 // implementation, close to no-op
-export function defineComponent(options: unknown) {
-  return isFunction(options) ? { setup: options, name: options.name } : options
+export function defineComponent(
+  options: unknown,
+  extraOptions?: ComponentOptions
+) {
+  return isFunction(options)
+    ? extend({}, extraOptions, { setup: options, name: options.name })
+    : options
 }

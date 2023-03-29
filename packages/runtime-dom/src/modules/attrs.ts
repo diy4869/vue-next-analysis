@@ -1,4 +1,14 @@
-import { isSpecialBooleanAttr } from '@vue/shared'
+import {
+  includeBooleanAttr,
+  isSpecialBooleanAttr,
+  makeMap,
+  NOOP
+} from '@vue/shared'
+import {
+  compatUtils,
+  ComponentInternalInstance,
+  DeprecationTypes
+} from '@vue/runtime-core'
 
 export const xlinkNS = 'http://www.w3.org/1999/xlink'
 
@@ -6,7 +16,8 @@ export function patchAttr(
   el: Element,
   key: string,
   value: any,
-  isSVG: boolean
+  isSVG: boolean,
+  instance?: ComponentInternalInstance | null
 ) {
   if (isSVG && key.startsWith('xlink:')) {
     if (value == null) {
@@ -15,14 +26,14 @@ export function patchAttr(
       el.setAttributeNS(xlinkNS, key, value)
     }
   } else {
-    if (__COMPAT__ && compatCoerceAttr(el, key, value)) {
+    if (__COMPAT__ && compatCoerceAttr(el, key, value, instance)) {
       return
     }
 
     // note we are only checking boolean attributes that don't have a
     // corresponding dom prop of the same name here.
     const isBoolean = isSpecialBooleanAttr(key)
-    if (value == null || (isBoolean && value === false)) {
+    if (value == null || (isBoolean && !includeBooleanAttr(value))) {
       el.removeAttribute(key)
     } else {
       el.setAttribute(key, isBoolean ? '' : value)
@@ -31,9 +42,6 @@ export function patchAttr(
 }
 
 // 2.x compat
-import { makeMap, NOOP } from '@vue/shared'
-import { compatUtils, DeprecationTypes } from '@vue/runtime-core'
-
 const isEnumeratedAttr = __COMPAT__
   ? /*#__PURE__*/ makeMap('contenteditable,draggable,spellcheck')
   : NOOP
@@ -41,26 +49,27 @@ const isEnumeratedAttr = __COMPAT__
 export function compatCoerceAttr(
   el: Element,
   key: string,
-  value: unknown
+  value: unknown,
+  instance: ComponentInternalInstance | null = null
 ): boolean {
   if (isEnumeratedAttr(key)) {
-    const v2CocercedValue =
+    const v2CoercedValue =
       value === null
         ? 'false'
         : typeof value !== 'boolean' && value !== undefined
-          ? 'true'
-          : null
+        ? 'true'
+        : null
     if (
-      v2CocercedValue &&
+      v2CoercedValue &&
       compatUtils.softAssertCompatEnabled(
-        DeprecationTypes.ATTR_ENUMERATED_COERSION,
-        null,
+        DeprecationTypes.ATTR_ENUMERATED_COERCION,
+        instance,
         key,
         value,
-        v2CocercedValue
+        v2CoercedValue
       )
     ) {
-      el.setAttribute(key, v2CocercedValue)
+      el.setAttribute(key, v2CoercedValue)
       return true
     }
   } else if (
@@ -68,7 +77,7 @@ export function compatCoerceAttr(
     !isSpecialBooleanAttr(key) &&
     compatUtils.softAssertCompatEnabled(
       DeprecationTypes.ATTR_FALSE_VALUE,
-      null,
+      instance,
       key
     )
   ) {

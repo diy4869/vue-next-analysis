@@ -37,9 +37,7 @@ import {
   DeprecationTypes,
   isCompatEnabled
 } from './compatConfig'
-import { compatModelEventPrefix } from './vModel'
-
-const v3CompiledRenderFnRE = /^(?:function \w+)?\(_ctx, _cache/
+import { compatModelEventPrefix } from './componentVModel'
 
 export function convertLegacyRenderFn(instance: ComponentInternalInstance) {
   const Component = instance.type as ComponentOptions
@@ -50,8 +48,10 @@ export function convertLegacyRenderFn(instance: ComponentInternalInstance) {
     return
   }
 
-  if (v3CompiledRenderFnRE.test(render.toString())) {
-    // v3 pre-compiled function
+  if (render.length >= 2) {
+    // v3 pre-compiled function, since v2 render functions never need more than
+    // 2 arguments, and v2 functional render functions would have already been
+    // normalized into v3 functional components
     render._compatChecked = true
     return
   }
@@ -113,7 +113,7 @@ export function compatH(
 ): VNode
 export function compatH(
   type: string | Component,
-  props?: LegacyVNodeProps,
+  props?: Data & LegacyVNodeProps,
   children?: LegacyVNodeChildren
 ): VNode
 
@@ -177,7 +177,7 @@ const skipLegacyRootLevelProps = /*#__PURE__*/ makeMap(
 function convertLegacyProps(
   legacyProps: LegacyVNodeProps | undefined,
   type: any
-): Data & VNodeProps | null {
+): (Data & VNodeProps) | null {
   if (!legacyProps) {
     return null
   }
@@ -190,16 +190,12 @@ function convertLegacyProps(
     } else if (key === 'on' || key === 'nativeOn') {
       const listeners = legacyProps[key]
       for (const event in listeners) {
-        const handlerKey = convertLegacyEventKey(event)
+        let handlerKey = convertLegacyEventKey(event)
+        if (key === 'nativeOn') handlerKey += `Native`
         const existing = converted[handlerKey]
         const incoming = listeners[event]
         if (existing !== incoming) {
           if (existing) {
-            // for the rare case where the same handler is attached
-            // twice with/without .native modifier...
-            if (key === 'nativeOn' && String(existing) === String(incoming)) {
-              continue
-            }
             converted[handlerKey] = [].concat(existing as any, incoming as any)
           } else {
             converted[handlerKey] = incoming
@@ -285,6 +281,7 @@ function convertLegacySlots(vnode: VNode): VNode {
       for (const key in slots) {
         const slotChildren = slots[key]
         slots[key] = () => slotChildren
+        slots[key]._ns = true /* non-scoped slot */
       }
     }
   }
@@ -307,19 +304,25 @@ function convertLegacySlots(vnode: VNode): VNode {
 }
 
 export function defineLegacyVNodeProperties(vnode: VNode) {
+  /* istanbul ignore if */
   if (
     isCompatEnabled(
       DeprecationTypes.RENDER_FUNCTION,
-      currentRenderingInstance
+      currentRenderingInstance,
+      true /* enable for built-ins */
     ) &&
-    isCompatEnabled(DeprecationTypes.PRIVATE_APIS, currentRenderingInstance)
+    isCompatEnabled(
+      DeprecationTypes.PRIVATE_APIS,
+      currentRenderingInstance,
+      true /* enable for built-ins */
+    )
   ) {
     const context = currentRenderingInstance
     const getInstance = () => vnode.component && vnode.component.proxy
     let componentOptions: any
     Object.defineProperties(vnode, {
       tag: { get: () => vnode.type },
-      data: { get: () => vnode.props, set: p => (vnode.props = p) },
+      data: { get: () => vnode.props || {}, set: p => (vnode.props = p) },
       elm: { get: () => vnode.el },
       componentInstance: { get: getInstance },
       child: { get: getInstance },

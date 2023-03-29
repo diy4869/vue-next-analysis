@@ -10,15 +10,14 @@ import {
   isFunction,
   extend,
   NOOP,
-  EMPTY_OBJ,
   isArray,
   isObject,
-  isString
+  isString,
+  invokeArrayFns
 } from '@vue/shared'
 import { warn } from '../warning'
 import { cloneVNode, createVNode } from '../vnode'
 import { RootRenderFunction } from '../renderer'
-import { RootHydrateFunction } from '../hydration'
 import {
   App,
   AppConfig,
@@ -34,13 +33,21 @@ import {
   isRuntimeOnly,
   setupComponent
 } from '../component'
-import { RenderFunction, mergeOptions } from '../componentOptions'
+import {
+  RenderFunction,
+  mergeOptions,
+  internalOptionMergeStrats
+} from '../componentOptions'
 import { ComponentPublicInstance } from '../componentPublicInstance'
 import { devtoolsInitApp, devtoolsUnmountApp } from '../devtools'
 import { Directive } from '../directives'
 import { nextTick } from '../scheduler'
 import { version } from '..'
-import { LegacyConfig, legacyOptionMergeStrats } from './globalConfig'
+import {
+  installLegacyConfigWarnings,
+  installLegacyOptionMergeStrats,
+  LegacyConfig
+} from './globalConfig'
 import { LegacyDirective } from './customDirective'
 import {
   warnDeprecation,
@@ -68,7 +75,6 @@ export type CompatVue = Pick<App, 'version' | 'component' | 'directive'> & {
   version: string
   config: AppConfig & LegacyConfig
 
-  extend: (options?: ComponentOptions) => CompatVue
   nextTick: typeof nextTick
 
   use(plugin: Plugin, ...options: any[]): CompatVue
@@ -81,6 +87,10 @@ export type CompatVue = Pick<App, 'version' | 'component' | 'directive'> & {
 
   compile(template: string): RenderFunction
 
+  /**
+   * @deprecated Vue 3 no longer supports extending constructors.
+   */
+  extend: (options?: ComponentOptions) => CompatVue
   /**
    * @deprecated Vue 3 no longer needs set() for adding new properties.
    */
@@ -96,7 +106,7 @@ export type CompatVue = Pick<App, 'version' | 'component' | 'directive'> & {
   /**
    * @deprecated filters have been removed from Vue 3.
    */
-  filter(name: string, arg: any): null
+  filter(name: string, arg?: any): null
   /**
    * @internal
    */
@@ -108,20 +118,31 @@ export type CompatVue = Pick<App, 'version' | 'component' | 'directive'> & {
   /**
    * @internal
    */
+  util: any
+  /**
+   * @internal
+   */
   super: CompatVue
 }
 
 export let isCopyingConfig = false
 
+// exported only for test
+export let singletonApp: App
+let singletonCtor: CompatVue
+
 // Legacy global Vue constructor
 export function createCompatVue(
-  createApp: CreateAppFunction<Element>
+  createApp: CreateAppFunction<Element>,
+  createSingletonApp: CreateAppFunction<Element>
 ): CompatVue {
-  const Vue: CompatVue = function Vue(options: ComponentOptions = {}) {
-    return createCompatApp(options, Vue)
-  } as any
+  singletonApp = createSingletonApp({})
 
-  const singletonApp = createApp({})
+  const Vue: CompatVue = (singletonCtor = function Vue(
+    options: ComponentOptions = {}
+  ) {
+    return createCompatApp(options, Vue)
+  } as any)
 
   function createCompatApp(options: ComponentOptions = {}, Ctor: any) {
     assertCompatEnabled(DeprecationTypes.GLOBAL_MOUNT, null)
@@ -137,53 +158,8 @@ export function createCompatVue(
 
     const app = createApp(options)
 
-    // copy over asset registries and deopt flag
-    ;['mixins', 'components', 'directives', 'deopt'].forEach(key => {
-      // @ts-ignore
-      app._context[key] = singletonApp._context[key]
-    })
-
-    // copy over global config mutations
-    isCopyingConfig = true
-    for (const key in singletonApp.config) {
-      if (key === 'isNativeTag') continue
-      if (
-        isRuntimeOnly() &&
-        (key === 'isCustomElement' || key === 'compilerOptions')
-      ) {
-        continue
-      }
-      const val = singletonApp.config[key as keyof AppConfig]
-      // @ts-ignore
-      app.config[key] = val
-
-      // compat for runtime ignoredElements -> isCustomElement
-      if (
-        key === 'ignoredElements' &&
-        isCompatEnabled(DeprecationTypes.CONFIG_IGNORED_ELEMENTS, null) &&
-        !isRuntimeOnly() &&
-        isArray(val)
-      ) {
-        app.config.compilerOptions.isCustomElement = tag => {
-          return val.some(v => (isString(v) ? v === tag : v.test(tag)))
-        }
-      }
-    }
-    isCopyingConfig = false
-
-    // copy prototype augmentations as config.globalProperties
-    if (isCompatEnabled(DeprecationTypes.GLOBAL_PROTOTYPE, null)) {
-      app.config.globalProperties = Ctor.prototype
-    }
-    let hasPrototypeAugmentations = false
-    for (const key in Ctor.prototype) {
-      if (key !== 'constructor') {
-        hasPrototypeAugmentations = true
-        break
-      }
-    }
-    if (__DEV__ && hasPrototypeAugmentations) {
-      warnDeprecation(DeprecationTypes.GLOBAL_PROTOTYPE, null)
+    if (Ctor !== Vue) {
+      applySingletonPrototype(app, Ctor)
     }
 
     const vm = app._createRoot!(options)
@@ -194,91 +170,8 @@ export function createCompatVue(
     }
   }
 
-  Vue.version = __VERSION__
+  Vue.version = `2.6.14-compat:${__VERSION__}`
   Vue.config = singletonApp.config
-  Vue.nextTick = nextTick
-  Vue.options = { _base: Vue }
-
-  let cid = 1
-  Vue.cid = cid
-
-  const extendCache = new WeakMap()
-
-  function extendCtor(this: any, extendOptions: ComponentOptions = {}) {
-    assertCompatEnabled(DeprecationTypes.GLOBAL_EXTEND, null)
-    if (isFunction(extendOptions)) {
-      extendOptions = extendOptions.options
-    }
-
-    if (extendCache.has(extendOptions)) {
-      return extendCache.get(extendOptions)
-    }
-
-    const Super = this
-    function SubVue(inlineOptions?: ComponentOptions) {
-      if (!inlineOptions) {
-        return createCompatApp(SubVue.options, SubVue)
-      } else {
-        return createCompatApp(
-          mergeOptions(
-            extend({}, SubVue.options),
-            inlineOptions,
-            null,
-            legacyOptionMergeStrats as any
-          ),
-          SubVue
-        )
-      }
-    }
-    SubVue.super = Super
-    SubVue.prototype = Object.create(Vue.prototype)
-    SubVue.prototype.constructor = SubVue
-
-    // clone non-primitive base option values for edge case of mutating
-    // extended options
-    const mergeBase: any = {}
-    for (const key in Super.options) {
-      const superValue = Super.options[key]
-      mergeBase[key] = isArray(superValue)
-        ? superValue.slice()
-        : isObject(superValue)
-          ? extend(Object.create(null), superValue)
-          : superValue
-    }
-
-    SubVue.options = mergeOptions(
-      mergeBase,
-      extendOptions,
-      null,
-      legacyOptionMergeStrats as any
-    )
-
-    SubVue.options._base = SubVue
-    SubVue.extend = extendCtor.bind(SubVue)
-    SubVue.mixin = Super.mixin
-    SubVue.use = Super.use
-    SubVue.cid = ++cid
-
-    extendCache.set(extendOptions, SubVue)
-    return SubVue
-  }
-
-  Vue.extend = extendCtor.bind(Vue) as any
-
-  Vue.set = (target, key, value) => {
-    assertCompatEnabled(DeprecationTypes.GLOBAL_SET, null)
-    target[key] = value
-  }
-
-  Vue.delete = (target, key) => {
-    assertCompatEnabled(DeprecationTypes.GLOBAL_DELETE, null)
-    delete target[key]
-  }
-
-  Vue.observable = (target: any) => {
-    assertCompatEnabled(DeprecationTypes.GLOBAL_OBSERVABLE, null)
-    return reactive(target)
-  }
 
   Vue.use = (p, ...options) => {
     if (p && isFunction(p.install)) {
@@ -312,9 +205,96 @@ export function createCompatVue(
     }
   }) as any
 
-  Vue.filter = ((name: string, filter: any) => {
-    // TODO deprecation warning
-    // TODO compiler warning for filters (maybe behavior compat?)
+  Vue.options = { _base: Vue }
+
+  let cid = 1
+  Vue.cid = cid
+
+  Vue.nextTick = nextTick
+
+  const extendCache = new WeakMap()
+
+  function extendCtor(this: any, extendOptions: ComponentOptions = {}) {
+    assertCompatEnabled(DeprecationTypes.GLOBAL_EXTEND, null)
+    if (isFunction(extendOptions)) {
+      extendOptions = extendOptions.options
+    }
+
+    if (extendCache.has(extendOptions)) {
+      return extendCache.get(extendOptions)
+    }
+
+    const Super = this
+    function SubVue(inlineOptions?: ComponentOptions) {
+      if (!inlineOptions) {
+        return createCompatApp(SubVue.options, SubVue)
+      } else {
+        return createCompatApp(
+          mergeOptions(
+            extend({}, SubVue.options),
+            inlineOptions,
+            internalOptionMergeStrats as any
+          ),
+          SubVue
+        )
+      }
+    }
+    SubVue.super = Super
+    SubVue.prototype = Object.create(Vue.prototype)
+    SubVue.prototype.constructor = SubVue
+
+    // clone non-primitive base option values for edge case of mutating
+    // extended options
+    const mergeBase: any = {}
+    for (const key in Super.options) {
+      const superValue = Super.options[key]
+      mergeBase[key] = isArray(superValue)
+        ? superValue.slice()
+        : isObject(superValue)
+        ? extend(Object.create(null), superValue)
+        : superValue
+    }
+
+    SubVue.options = mergeOptions(
+      mergeBase,
+      extendOptions,
+      internalOptionMergeStrats as any
+    )
+
+    SubVue.options._base = SubVue
+    SubVue.extend = extendCtor.bind(SubVue)
+    SubVue.mixin = Super.mixin
+    SubVue.use = Super.use
+    SubVue.cid = ++cid
+
+    extendCache.set(extendOptions, SubVue)
+    return SubVue
+  }
+
+  Vue.extend = extendCtor.bind(Vue) as any
+
+  Vue.set = (target, key, value) => {
+    assertCompatEnabled(DeprecationTypes.GLOBAL_SET, null)
+    target[key] = value
+  }
+
+  Vue.delete = (target, key) => {
+    assertCompatEnabled(DeprecationTypes.GLOBAL_DELETE, null)
+    delete target[key]
+  }
+
+  Vue.observable = (target: any) => {
+    assertCompatEnabled(DeprecationTypes.GLOBAL_OBSERVABLE, null)
+    return reactive(target)
+  }
+
+  Vue.filter = ((name: string, filter?: any) => {
+    if (filter) {
+      singletonApp.filter!(name, filter)
+      return Vue
+    } else {
+      return singletonApp.filter!(name)
+    }
   }) as any
 
   // internal utils - these are technically internal but some plugins use it.
@@ -325,8 +305,7 @@ export function createCompatVue(
       mergeOptions(
         parent,
         child,
-        vm && vm.$,
-        vm ? undefined : (legacyOptionMergeStrats as any)
+        vm ? undefined : (internalOptionMergeStrats as any)
       ),
     defineReactive
   }
@@ -342,11 +321,131 @@ export function createCompatVue(
   return Vue
 }
 
-export function installCompatMount(
+export function installAppCompatProperties(
   app: App,
   context: AppContext,
-  render: RootRenderFunction,
-  hydrate?: RootHydrateFunction
+  render: RootRenderFunction<any>
+) {
+  installFilterMethod(app, context)
+  installLegacyOptionMergeStrats(app.config)
+
+  if (!singletonApp) {
+    // this is the call of creating the singleton itself so the rest is
+    // unnecessary
+    return
+  }
+
+  installCompatMount(app, context, render)
+  installLegacyAPIs(app)
+  applySingletonAppMutations(app)
+  if (__DEV__) installLegacyConfigWarnings(app.config)
+}
+
+function installFilterMethod(app: App, context: AppContext) {
+  context.filters = {}
+  app.filter = (name: string, filter?: Function): any => {
+    assertCompatEnabled(DeprecationTypes.FILTERS, null)
+    if (!filter) {
+      return context.filters![name]
+    }
+    if (__DEV__ && context.filters![name]) {
+      warn(`Filter "${name}" has already been registered.`)
+    }
+    context.filters![name] = filter
+    return app
+  }
+}
+
+function installLegacyAPIs(app: App) {
+  // expose global API on app instance for legacy plugins
+  Object.defineProperties(app, {
+    // so that app.use() can work with legacy plugins that extend prototypes
+    prototype: {
+      get() {
+        __DEV__ && warnDeprecation(DeprecationTypes.GLOBAL_PROTOTYPE, null)
+        return app.config.globalProperties
+      }
+    },
+    nextTick: { value: nextTick },
+    extend: { value: singletonCtor.extend },
+    set: { value: singletonCtor.set },
+    delete: { value: singletonCtor.delete },
+    observable: { value: singletonCtor.observable },
+    util: {
+      get() {
+        return singletonCtor.util
+      }
+    }
+  })
+}
+
+function applySingletonAppMutations(app: App) {
+  // copy over asset registries and deopt flag
+  app._context.mixins = [...singletonApp._context.mixins]
+  ;['components', 'directives', 'filters'].forEach(key => {
+    // @ts-ignore
+    app._context[key] = Object.create(singletonApp._context[key])
+  })
+
+  // copy over global config mutations
+  isCopyingConfig = true
+  for (const key in singletonApp.config) {
+    if (key === 'isNativeTag') continue
+    if (
+      isRuntimeOnly() &&
+      (key === 'isCustomElement' || key === 'compilerOptions')
+    ) {
+      continue
+    }
+    const val = singletonApp.config[key as keyof AppConfig]
+    // @ts-ignore
+    app.config[key] = isObject(val) ? Object.create(val) : val
+
+    // compat for runtime ignoredElements -> isCustomElement
+    if (
+      key === 'ignoredElements' &&
+      isCompatEnabled(DeprecationTypes.CONFIG_IGNORED_ELEMENTS, null) &&
+      !isRuntimeOnly() &&
+      isArray(val)
+    ) {
+      app.config.compilerOptions.isCustomElement = tag => {
+        return val.some(v => (isString(v) ? v === tag : v.test(tag)))
+      }
+    }
+  }
+  isCopyingConfig = false
+  applySingletonPrototype(app, singletonCtor)
+}
+
+function applySingletonPrototype(app: App, Ctor: Function) {
+  // copy prototype augmentations as config.globalProperties
+  const enabled = isCompatEnabled(DeprecationTypes.GLOBAL_PROTOTYPE, null)
+  if (enabled) {
+    app.config.globalProperties = Object.create(Ctor.prototype)
+  }
+  let hasPrototypeAugmentations = false
+  const descriptors = Object.getOwnPropertyDescriptors(Ctor.prototype)
+  for (const key in descriptors) {
+    if (key !== 'constructor') {
+      hasPrototypeAugmentations = true
+      if (enabled) {
+        Object.defineProperty(
+          app.config.globalProperties,
+          key,
+          descriptors[key]
+        )
+      }
+    }
+  }
+  if (__DEV__ && hasPrototypeAugmentations) {
+    warnDeprecation(DeprecationTypes.GLOBAL_PROTOTYPE, null)
+  }
+}
+
+function installCompatMount(
+  app: App,
+  context: AppContext,
+  render: RootRenderFunction
 ) {
   let isMounted = false
 
@@ -373,6 +472,7 @@ export function installCompatMount(
     }
     setupComponent(instance)
     vnode.component = instance
+    vnode.isCompatRoot = true
 
     // $mount & $destroy
     // these are defined on ctx and picked up by the $mount/$destroy
@@ -463,8 +563,26 @@ export function installCompatMount(
           devtoolsUnmountApp(app)
         }
         delete app._container.__vue_app__
-      } else if (__DEV__) {
-        warn(`Cannot unmount an app that is not mounted.`)
+      } else {
+        const { bum, scope, um } = instance
+        // beforeDestroy hooks
+        if (bum) {
+          invokeArrayFns(bum)
+        }
+        if (isCompatEnabled(DeprecationTypes.INSTANCE_EVENT_HOOKS, instance)) {
+          instance.emit('hook:beforeDestroy')
+        }
+        // stop effects
+        if (scope) {
+          scope.stop()
+        }
+        // unmounted hook
+        if (um) {
+          invokeArrayFns(um)
+        }
+        if (isCompatEnabled(DeprecationTypes.INSTANCE_EVENT_HOOKS, instance)) {
+          instance.emit('hook:destroyed')
+        }
       }
     }
 
@@ -485,7 +603,7 @@ const methodsToPatch = [
 const patched = new WeakSet<object>()
 
 function defineReactive(obj: any, key: string, val: any) {
-  // it's possible for the orignial object to be mutated after being defined
+  // it's possible for the original object to be mutated after being defined
   // and expecting reactivity... we are covering it here because this seems to
   // be a bit more common.
   if (isObject(val) && !isReactive(val) && !patched.has(val)) {
@@ -502,18 +620,15 @@ function defineReactive(obj: any, key: string, val: any) {
       Object.keys(val).forEach(key => {
         try {
           defineReactiveSimple(val, key, val[key])
-        } catch (e) {}
+        } catch (e: any) {}
       })
     }
   }
 
   const i = obj.$
   if (i && obj === i.proxy) {
-    // Vue instance, add it to data
-    if (i.data === EMPTY_OBJ) {
-      i.data = reactive({})
-    }
-    i.data[key] = val
+    // target is a Vue instance - define on instance.ctx
+    defineReactiveSimple(i.ctx, key, val)
     i.accessCache = Object.create(null)
   } else if (isReactive(obj)) {
     obj[key] = val

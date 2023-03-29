@@ -1,11 +1,11 @@
 {
   "name": "@vue/size-check",
-  "version": "3.0.11",
+  "version": "3.3.0-alpha.5",
   "private": true,
-  "buildOptions": {
-    "name": "Vue",
-    "formats": [
-      "global"
-    ]
+  "scripts": {
+    "build": "vite build"
+  },
+  "dependencies": {
+    "vue": "workspace:*"
   }
 }

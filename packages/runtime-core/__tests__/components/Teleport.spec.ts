@@ -1,3 +1,7 @@
+/**
+ * @vitest-environment jsdom
+ */
+import { vi } from 'vitest'
 import {
   nodeOps,
   serializeInner,
@@ -106,7 +110,10 @@ describe('renderer: teleport', () => {
     const root = nodeOps.createElement('div')
     const children = ref([h('div', 'teleported')])
 
-    render(h(Teleport, { to: target }, children.value), root)
+    render(
+      h(() => h(Teleport, { to: target }, children.value)),
+      root
+    )
     expect(serializeInner(target)).toMatchInlineSnapshot(
       `"<div>teleported</div>"`
     )
@@ -114,16 +121,12 @@ describe('renderer: teleport', () => {
     children.value = []
     await nextTick()
 
-    expect(serializeInner(target)).toMatchInlineSnapshot(
-      `"<div>teleported</div>"`
-    )
+    expect(serializeInner(target)).toMatchInlineSnapshot(`""`)
 
     children.value = [createVNode(Text, null, 'teleported')]
     await nextTick()
 
-    expect(serializeInner(target)).toMatchInlineSnapshot(
-      `"<div>teleported</div>"`
-    )
+    expect(serializeInner(target)).toMatchInlineSnapshot(`"teleported"`)
   })
 
   test('should remove children when unmounted', () => {
@@ -441,8 +444,8 @@ describe('renderer: teleport', () => {
     const root = nodeOps.createElement('div')
     const toggle = ref(true)
     const dir = {
-      mounted: jest.fn(),
-      unmounted: jest.fn()
+      mounted: vi.fn(),
+      unmounted: vi.fn()
     }
 
     const app = createApp({

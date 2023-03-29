@@ -8,12 +8,14 @@ const seen = new WeakSet()
 export const transformOnce: NodeTransform = (node, context) => {
   // 如果node.type === 1 并且node上存在once指令
   if (node.type === NodeTypes.ELEMENT && findDir(node, 'once', true)) {
-    if (seen.has(node)) {
+    if (seen.has(node) || context.inVOnce) {
       return
     }
     seen.add(node)
+    context.inVOnce = true
     context.helper(SET_BLOCK_TRACKING)
     return () => {
+      context.inVOnce = false
       const cur = context.currentNode as ElementNode | IfNode | ForNode
       if (cur.codegenNode) {
         cur.codegenNode = context.cache(cur.codegenNode, true /* isVNode */)

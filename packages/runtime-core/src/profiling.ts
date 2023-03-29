@@ -1,7 +1,9 @@
+/* eslint-disable no-restricted-globals */
 import { ComponentInternalInstance, formatComponentName } from './component'
+import { devtoolsPerfEnd, devtoolsPerfStart } from './devtools'
 
 let supported: boolean
-let perf: any
+let perf: Performance
 
 // 开始性能统计
 export function startMeasure(
@@ -10,6 +12,10 @@ export function startMeasure(
 ) {
   if (instance.appContext.config.performance && isSupported()) {
     perf.mark(`vue-${type}-${instance.uid}`)
+  }
+
+  if (__DEV__ || __FEATURE_PROD_DEVTOOLS__) {
+    devtoolsPerfStart(instance, type, isSupported() ? perf.now() : Date.now())
   }
 }
 
@@ -26,6 +32,10 @@ export function endMeasure(instance: ComponentInternalInstance, type: string) {
     perf.clearMarks(startTag)
     perf.clearMarks(endTag)
   }
+
+  if (__DEV__ || __FEATURE_PROD_DEVTOOLS__) {
+    devtoolsPerfEnd(instance, type, isSupported() ? perf.now() : Date.now())
+  }
 }
 
 // 是否支持performance
@@ -33,13 +43,11 @@ function isSupported() {
   if (supported !== undefined) {
     return supported
   }
-  /* eslint-disable no-restricted-globals */
   if (typeof window !== 'undefined' && window.performance) {
     supported = true
     perf = window.performance
   } else {
     supported = false
   }
-  /* eslint-enable no-restricted-globals */
   return supported
 }

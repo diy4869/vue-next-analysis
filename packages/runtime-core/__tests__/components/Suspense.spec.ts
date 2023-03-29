@@ -1,3 +1,7 @@
+/**
+ * @vitest-environment jsdom
+ */
+import { vi } from 'vitest'
 import {
   h,
   ref,
@@ -69,6 +73,70 @@ describe('Suspense', () => {
     expect(serializeInner(root)).toBe(`<div>async</div>`)
   })
 
+  test('emits events', async () => {
+    const Async = defineAsyncComponent({
+      render() {
+        return h('div', 'async')
+      }
+    })
+
+    const onFallback = vi.fn()
+    const onResolve = vi.fn()
+    const onPending = vi.fn()
+
+    const show = ref(true)
+    const Comp = {
+      setup() {
+        return () =>
+          h(
+            Suspense,
+            {
+              onFallback,
+              onResolve,
+              onPending,
+              // force displaying the fallback right away
+              timeout: 0
+            },
+            {
+              default: () => (show.value ? h(Async) : null),
+              fallback: h('div', 'fallback')
+            }
+          )
+      }
+    }
+
+    const root = nodeOps.createElement('div')
+    render(h(Comp), root)
+    expect(onFallback).toHaveBeenCalledTimes(1)
+    expect(onPending).toHaveBeenCalledTimes(1)
+    expect(onResolve).toHaveBeenCalledTimes(0)
+
+    await Promise.all(deps)
+    await nextTick()
+    expect(onFallback).toHaveBeenCalledTimes(1)
+    expect(onPending).toHaveBeenCalledTimes(1)
+    expect(onResolve).toHaveBeenCalledTimes(1)
+
+    show.value = false
+    await nextTick()
+    expect(onFallback).toHaveBeenCalledTimes(1)
+    expect(onPending).toHaveBeenCalledTimes(2)
+    expect(onResolve).toHaveBeenCalledTimes(2)
+
+    deps.length = 0
+    show.value = true
+    await nextTick()
+    expect(onFallback).toHaveBeenCalledTimes(2)
+    expect(onPending).toHaveBeenCalledTimes(3)
+    expect(onResolve).toHaveBeenCalledTimes(2)
+
+    await Promise.all(deps)
+    await nextTick()
+    expect(onFallback).toHaveBeenCalledTimes(2)
+    expect(onPending).toHaveBeenCalledTimes(3)
+    expect(onResolve).toHaveBeenCalledTimes(3)
+  })
+
   test('nested async deps', async () => {
     const calls: string[] = []
 
@@ -126,7 +194,7 @@ describe('Suspense', () => {
       }
     })
 
-    const onResolve = jest.fn()
+    const onResolve = vi.fn()
 
     const Comp = {
       setup() {
@@ -387,7 +455,7 @@ describe('Suspense', () => {
 
   test('unmount suspense after resolve', async () => {
     const toggle = ref(true)
-    const unmounted = jest.fn()
+    const unmounted = vi.fn()
 
     const Async = defineAsyncComponent({
       setup() {
@@ -425,8 +493,8 @@ describe('Suspense', () => {
 
   test('unmount suspense before resolve', async () => {
     const toggle = ref(true)
-    const mounted = jest.fn()
-    const unmounted = jest.fn()
+    const mounted = vi.fn()
+    const unmounted = vi.fn()
 
     const Async = defineAsyncComponent({
       setup() {
@@ -620,6 +688,49 @@ describe('Suspense', () => {
                 default: h(Async),
                 fallback: h('div', 'fallback')
               })
+      }
+    }
+
+    const root = nodeOps.createElement('div')
+    render(h(Comp), root)
+    expect(serializeInner(root)).toBe(`<div>fallback</div>`)
+
+    await Promise.all(deps)
+    await nextTick()
+    expect(serializeInner(root)).toBe(`<div>oops</div>`)
+  })
+
+  // #3857
+  test('error handling w/ template optimization', async () => {
+    const Async = {
+      async setup() {
+        throw new Error('oops')
+      }
+    }
+
+    const Comp = {
+      template: `
+      <div v-if="errorMessage">{{ errorMessage }}</div>
+      <Suspense v-else>
+        <div>
+          <Async />
+        </div>
+        <template #fallback>
+          <div>fallback</div>
+        </template>
+      </Suspense>
+      `,
+      components: { Async },
+      setup() {
+        const errorMessage = ref<string | null>(null)
+        onErrorCaptured(err => {
+          errorMessage.value =
+            err instanceof Error
+              ? err.message
+              : `A non-Error value thrown: ${err}`
+          return false
+        })
+        return { errorMessage }
       }
     }
 
@@ -925,7 +1036,7 @@ describe('Suspense', () => {
     await nextTick()
     expect(deps.length).toBe(2)
 
-    // switch before two resovles
+    // switch before two resolves
     view.value = Three
     await nextTick()
     expect(deps.length).toBe(3)
@@ -991,7 +1102,7 @@ describe('Suspense', () => {
     await nextTick()
     expect(deps.length).toBe(2)
 
-    // switch back before two resovles
+    // switch back before two resolves
     view.value = One
     await nextTick()
     expect(deps.length).toBe(2)
@@ -1124,5 +1235,26 @@ describe('Suspense', () => {
     toggle.value = false
     await nextTick()
     expect(serializeInner(root)).toBe(`<div>parent<!----></div>`)
+  })
+
+  test('warn if using async setup when not in a Suspense boundary', () => {
+    const Child = {
+      name: 'Child',
+      async setup() {
+        return () => h('div', 'child')
+      }
+    }
+    const Parent = {
+      setup() {
+        return () => h('div', [h(Child)])
+      }
+    }
+
+    const root = nodeOps.createElement('div')
+    render(h(Parent), root)
+
+    expect(
+      `A component with async setup() must be nested in a <Suspense>`
+    ).toHaveBeenWarned()
   })
 })

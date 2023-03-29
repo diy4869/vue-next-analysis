@@ -46,18 +46,20 @@ function compileToFunction(
     template = el ? el.innerHTML : ``
   }
 
-  // 编译模板，生成代码
-  const { code } = compile(
-    template,
-    extend(
-      {
-        hoistStatic: true,
-        onError: __DEV__ ? onError : undefined,
-        onWarn: __DEV__ ? e => onError(e, true) : NOOP
-      } as CompilerOptions,
-      options
-    )
+  const opts = extend(
+    {
+      hoistStatic: true,
+      onError: __DEV__ ? onError : undefined,
+      onWarn: __DEV__ ? e => onError(e, true) : NOOP
+    } as CompilerOptions,
+    options
   )
+
+  if (!opts.isCustomElement && typeof customElements !== 'undefined') {
+    opts.isCustomElement = tag => !!customElements.get(tag)
+  }
+
+  const { code } = compile(template, opts)
 
   function onError(err: CompilerError, asWarning = false) {
     const message = asWarning
@@ -77,10 +79,9 @@ function compileToFunction(
   // with keys that cannot be mangled, and can be quite heavy size-wise.
   // In the global build we know `Vue` is available globally so we can avoid
   // the wildcard object.
-  // 生成的代码通过new Function进行包装
-  const render = (__GLOBAL__
-    ? new Function(code)()
-    : new Function('Vue', code)(runtimeDom)) as RenderFunction
+  const render = (
+    __GLOBAL__ ? new Function(code)() : new Function('Vue', code)(runtimeDom)
+  ) as RenderFunction
 
   // mark the function as runtime compiled
   ;(render as InternalRenderFunction)._rc = true

@@ -1,3 +1,4 @@
+import { vi } from 'vitest'
 import {
   baseParse as parse,
   transform,
@@ -12,6 +13,7 @@ import {
 } from '../../src'
 import { transformIf } from '../../src/transforms/vIf'
 import { transformExpression } from '../../src/transforms/transformExpression'
+import { PatchFlagNames, PatchFlags } from '../../../shared/src'
 
 function parseWithExpressionTransform(
   template: string,
@@ -395,11 +397,38 @@ describe('compiler: expression transform', () => {
   })
 
   test('should handle parse error', () => {
-    const onError = jest.fn()
+    const onError = vi.fn()
     parseWithExpressionTransform(`{{ a( }}`, { onError })
     expect(onError.mock.calls[0][0].message).toMatch(
       `Error parsing JavaScript expression: Unexpected token`
     )
+  })
+
+  test('should prefix in assignment', () => {
+    const node = parseWithExpressionTransform(
+      `{{ x = 1 }}`
+    ) as InterpolationNode
+    expect(node.content).toMatchObject({
+      type: NodeTypes.COMPOUND_EXPRESSION,
+      children: [{ content: `_ctx.x` }, ` = 1`]
+    })
+  })
+
+  test('should prefix in assignment pattern', () => {
+    const node = parseWithExpressionTransform(
+      `{{ { x, y: [z] } = obj }}`
+    ) as InterpolationNode
+    expect(node.content).toMatchObject({
+      type: NodeTypes.COMPOUND_EXPRESSION,
+      children: [
+        `{ x: `,
+        { content: `_ctx.x` },
+        `, y: [`,
+        { content: `_ctx.z` },
+        `] } = `,
+        { content: `_ctx.obj` }
+      ]
+    })
   })
 
   describe('ES Proposals support', () => {
@@ -466,7 +495,9 @@ describe('compiler: expression transform', () => {
       setup: BindingTypes.SETUP_MAYBE_REF,
       setupConst: BindingTypes.SETUP_CONST,
       data: BindingTypes.DATA,
-      options: BindingTypes.OPTIONS
+      options: BindingTypes.OPTIONS,
+      reactive: BindingTypes.SETUP_REACTIVE_CONST,
+      literal: BindingTypes.LITERAL_CONST
     }
 
     function compileWithBindingMetadata(
@@ -503,6 +534,26 @@ describe('compiler: expression transform', () => {
       expect(code).toMatch(`_ctx.data`)
       expect(code).toMatch(`_ctx.options`)
       expect(code).toMatchSnapshot()
+    })
+
+    test('literal const handling', () => {
+      const { code } = compileWithBindingMetadata(`<div>{{ literal }}</div>`, {
+        inline: true
+      })
+      // #7973 should skip patch for literal const
+      expect(code).not.toMatch(
+        `${PatchFlags.TEXT} /* ${PatchFlagNames[PatchFlags.TEXT]} */`
+      )
+    })
+
+    test('reactive const handling', () => {
+      const { code } = compileWithBindingMetadata(`<div>{{ reactive }}</div>`, {
+        inline: true
+      })
+      // #7973 should not skip patch for reactive const
+      expect(code).toMatch(
+        `${PatchFlags.TEXT} /* ${PatchFlagNames[PatchFlags.TEXT]} */`
+      )
     })
   })
 })
